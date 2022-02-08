@@ -1,13 +1,14 @@
 {
   "defaultAccounts": [
-    { "firstName": "Admin", "lastName": "Adler", "userName": "Adder", "phone": "123-456-7891", "email": "admin@foo.com", "password": "changeme", "role": "admin" },
-    { "firstName": "John", "lastName": "Euser", "userName": "jeuser", "phone": "987-654-3210", "email": "john@foo.com", "password": "changeme" }
+    { "firstName": "Admin", "lastName": "Adler", "userName": "Adder", "phone": "123-456-7891", "email": "admin@gidplanner.com", "password": "giditdone", "role": "admin" },
+    { "firstName": "Sue", "lastName": "Flay", "userName": "SooFlay", "phone": "987-654-3210", "email": "sue@gidplanner.com", "password": "giditdone" },
+    { "firstName": "Obi", "lastName": "Juan", "userName": "ObiWan", "phone": "555-555-5555", "email": "obi@gidplanner.com", "password": "giditdone" }
   ],
 
   "defaultData": [
-    { "name": "Basket", "quantity": 3, "owner": "john@foo.com", "condition": "excellent" },
-    { "name": "Bicycle", "quantity": 2, "owner": "john@foo.com", "condition": "poor" },
-    { "name": "Banana", "quantity": 2, "owner": "admin@foo.com", "condition": "good" },
-    { "name": "Boogie Board", "quantity": 2, "owner": "admin@foo.com", "condition": "excellent" }
+    { "name": "Basket", "quantity": 3, "owner": "sue@gidplanner.com", "condition": "excellent" },
+    { "name": "Bicycle", "quantity": 2, "owner": "obi@gidplanner.com", "condition": "poor" },
+    { "name": "Banana", "quantity": 2, "owner": "admin@gidplanner.com", "condition": "good" },
+    { "name": "Boogie Board", "quantity": 2, "owner": "admin@gidplanner.com", "condition": "excellent" }
   ]
 }
