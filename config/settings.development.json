@@ -9,5 +9,8 @@
     { "name": "Bicycle", "quantity": 2, "owner": "john@foo.com", "condition": "poor" },
     { "name": "Banana", "quantity": 2, "owner": "admin@foo.com", "condition": "good" },
     { "name": "Boogie Board", "quantity": 2, "owner": "admin@foo.com", "condition": "excellent" }
+  ],
+  "defaultTasks": [
+    { "title": "Buy groceries", "date":1615334399999, "time": "113412", "description": "Buy groceries for tomorrow's dinner", "tags": "personal", "owner": "admin@foo.com" }
   ]
 }
