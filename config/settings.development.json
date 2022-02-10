@@ -11,6 +11,6 @@
     { "name": "Boogie Board", "quantity": 2, "owner": "admin@foo.com", "condition": "excellent" }
   ],
   "defaultTasks": [
-    { "title": "Buy groceries", "date":1615334399999, "time": "113412", "description": "Buy groceries for tomorrow's dinner", "tags": "personal", "owner": "admin@foo.com" }
+    { "task": "Buy groceries", "listName": "Whole Foods", "date":1615334399999, "notes": "Buy groceries for tomorrow's dinner", "tags": "personal", "owner": "admin@foo.com" }
   ]
 }

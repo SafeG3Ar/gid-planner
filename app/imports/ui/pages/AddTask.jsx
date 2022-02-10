@@ -1,7 +1,8 @@
 import React from 'react';
 import { AutoForm, ErrorsField, SubmitField } from 'uniforms-material';
 import { Box, TextField } from '@mui/material';
-import { AdapterDateFns, LocalizationProvider } from '@mui/lab';
+import AdapterDateFns from '@mui/lab/AdapterDateFns';
+import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import DatePicker from '@mui/lab/DatePicker';
 import swal from 'sweetalert';
 import { Meteor } from 'meteor/meteor';
@@ -11,18 +12,22 @@ import { taskDefineMethod } from '../../api/task/TaskCollection.methods';
 
 
 const formSchema = new SimpleSchema({
-    title: { type: String },
+    task: { type: String },
+    listName: { type: Array },
+    'listName.$': String,
     date: { type: Date },
-    time: { type: String },
-    description: { type: String, optional: true },
-    tags: { type: String, optional: true },
+    notes: { type: String, optional: true },
+    // tags: { type: String, optional: true },
 });
 
+const [dateValue, setDateValue] = React.useState(new Date());
+
 class AddTask extends React.Component {
+
     submit(data, formRef) {
-        const { title, date, time, description, tags } = data;
+        const { task,  listName, date, notes } = data;
         const owner = Meteor.user().username;
-        taskDefineMethod.call({ title, date, time, description, tags, owner },
+        taskDefineMethod.call({ task, listName, date, notes, owner },
             (error) => {
                 if (error) {
                     swal('Error', error.message, 'error');
@@ -35,8 +40,7 @@ class AddTask extends React.Component {
 
     render() {
         let fRef = null;
-        const [dateValue, setDateValue] = React.useState(null);
-        const [TimeValue, setTimeValue] = React.useState(new Date());
+
         return (
             <Grid container>
                 <AutoForm ref={ref => { fRef = ref; }} schema={formSchema} onSubmit={data => this.submit(data, fRef)} >
@@ -49,10 +53,11 @@ class AddTask extends React.Component {
                         autoComplete='off'
                     >
                         <div className='add-task-form'>
-                            <TextField>
-                                title
-                                id='task-title'
-                                label='Title'
+                            <TextField
+                                task
+                                id='task'
+                                label='Task'
+                            >
                             </TextField>
                             <LocalizationProvider dateAdapter={AdapterDateFns}>
                                 <DatePicker
@@ -65,16 +70,18 @@ class AddTask extends React.Component {
                                 />
                             </LocalizationProvider>
 
-                            <TextField>
-                                description
-                                id='task-description'
-                                label='Description'
+                            <TextField
+                                notes
+                                id='task-notes'
+                                label='Notes'
+                            >
                             </TextField>
-                            <TextField>
+                            {/* <TextField
                                 tags
                                 id='task-tags'
                                 label='Tags'
-                            </TextField>
+                            >
+                            </TextField> */}
                             <SubmitField value='Submit'/>
                             <ErrorsField/>
 

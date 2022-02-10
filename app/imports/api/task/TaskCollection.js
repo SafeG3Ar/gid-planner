@@ -14,59 +14,56 @@ export const taskPublications = {
 class TaskCollection extends BaseCollection {
     constructor() {
         super('Tasks', new SimpleSchema({
-            title: { type: String} ,
-            date: { type: Date },
-            time: { type: String },
-            description: { type: String, optional: true },
-            tags: { type: String, optional: true },
+            task: { type: String} ,
+            listName: { type: Array },
+            'listName.$': String,
+            date: { type: Date, optional: true },
+            notes: { type: String, optional: true },
+            // tags: { type: String, optional: true },
             owner: { type: String },
         }));
     }
 
-    define({ title, date, time, description, tags, owner }) {
+    define({ task, listName, date, notes, owner }) {
         const docID = this._collection.insert({
-            title,
+            task,
+            listName,
             date,
-            time,
-            description,
-            tags,
+            notes,
             owner,
         });
         return docID;
     }
 
-    update(docID, { title, date, time, description, tags }) {
-        const updateData = {};
-        if (title) {
-            updateData.title = title;
-        }
-        if (date) {
-            updateData.date = date;
-        }
-        if (time) {
-            updateData.time = time;
-        }
-        if (description) {
-            updateData.description = description;
-        }
-        if (tags) {
-            updateData.tags = tags;
-        }
-        this._collection.update(docID, { $set: updateData });
+  /**
+   * Updates the given document.
+   * @param docID the id of the document to update.
+   * @param data the unfiltered updateData object.
+   */
+   update(docID, data) {
+    const updateData = {};
+
+    function addString(name) {
+      if (data[name]) { // if not undefined or empty String
+        updateData[name] = data[name];
+      }
     }
 
+    addString('task');
+    // check if listName is not undefined && every list type is not undefined
+    if (data.listName && data.listName.every(elem => elem)) {
+      updateData.listName = data.listName;
+    }
+    addString('date');
+    addString('notes');
+    this._collection.update(docID, { $set: updateData });
+  }
+
     removeIt(name) {
-        //super.removeIt(docID);
         const doc = this.findDoc(name);
         check(doc, Object);
         this._collection.remove(doc._id);
         return true;
-    }
-
-    dumpOne(docID) {
-        const doc = this.findDoc(docID);
-        const { title, date, time, description, tags, owner } = doc;
-        return { title, date, time, description, tags, owner };
     }
 
     publish() {
@@ -102,6 +99,10 @@ class TaskCollection extends BaseCollection {
         }
         return null;
     }
+
+    assertValidRoleForMethod(userId) {
+        this.assertRole(userId, [ROLE.ADMIN, ROLE.USER]);
+      }
 
 }
 export const Tasks = new TaskCollection();
