@@ -1,8 +1,8 @@
 import React from 'react';
 import { AutoForm, ErrorsField, SubmitField } from 'uniforms-material';
 import { Box, TextField } from '@mui/material';
-import { AdapterDateFns, LocalizationProvider, StaticTimePicker } from '@mui/lab';
-import {DatePicker} from 'material-ui/lib/date-picker';
+import { AdapterDateFns, LocalizationProvider } from '@mui/lab';
+import DatePicker from '@mui/lab/DatePicker';
 import swal from 'sweetalert';
 import { Meteor } from 'meteor/meteor';
 import 'uniforms-bridge-simple-schema-2'; // required for Uniforms
@@ -61,15 +61,6 @@ class AddTask extends React.Component {
                                     onChange={(newDateValue) => {
                                         setDateValue(newDateValue);
                                     }}
-                                    renderInput={(params) => <TextField {...params} />}
-                                />
-                                <StaticTimePicker
-                                    displayStaticWrapperAs='desktop'
-                                    value={timeValue}
-                                    onChange={(newTimeValue) => {
-                                        setTimeValue(newTimeValue);
-                                    }}
-                                    label='Time'
                                     renderInput={(params) => <TextField {...params} />}
                                 />
                             </LocalizationProvider>
