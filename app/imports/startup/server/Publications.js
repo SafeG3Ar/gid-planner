@@ -1,6 +1,10 @@
 import { Meteor } from 'meteor/meteor';
 import { Roles } from 'meteor/alanning:roles';
 import { Stuffs } from '../../api/stuff/Stuff';
+import { Tasks } from '../../api/task/TaskCollection';
+
+/** Publish Tasks Collection you need. */
+Tasks.publish();
 
 // User-level publication.
 // If logged in, then publish documents owned by this user. Otherwise publish nothing.
