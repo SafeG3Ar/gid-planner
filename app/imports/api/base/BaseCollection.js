@@ -1,6 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
 import _ from 'lodash';
+// import { _ } from 'meteor/underscore';
 import { check } from 'meteor/check';
 import { Roles } from 'meteor/alanning:roles';
 import { ROLE } from '../role/Role';
@@ -80,9 +81,9 @@ class BaseCollection {
       throw new Meteor.Error(`${name} is not a defined ${this.type}`);
     }
     const doc = (
-        this._collection.findOne(name)
-        || this._collection.findOne({ name })
-        || this._collection.findOne({ _id: name }));
+      this._collection.findOne(name)
+      || this._collection.findOne({ name })
+      || this._collection.findOne({ _id: name }));
     // console.log(name, doc);
     if (!doc) {
       if (typeof name !== 'string') {
@@ -148,9 +149,9 @@ class BaseCollection {
       return false;
     }
     return (
-        !!this._collection.findOne(name)
-        || !!this._collection.findOne({ name })
-        || !!this._collection.findOne({ _id: name }));
+      !!this._collection.findOne(name)
+      || !!this._collection.findOne({ name })
+      || !!this._collection.findOne({ _id: name }));
   }
 
   /**
@@ -195,7 +196,7 @@ class BaseCollection {
     const dumpObject = {
       name: this._collectionName,
       contents: this.find()
-          .map(docID => this.dumpOne(docID)),
+        .map(docID => this.dumpOne(docID)),
     };
     // If a collection doesn't want to be dumped, it can just return null from dumpOne.
     dumpObject.contents = _.without(dumpObject.contents, null);
