@@ -13,6 +13,7 @@ class ListNameCollection extends BaseCollection {
   constructor() {
     super('ListNames', new SimpleSchema({
       listNames: String,
+      owner: String,
     }));
   }
 

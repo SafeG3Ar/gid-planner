@@ -33,6 +33,7 @@ class TaskCollection extends BaseCollection {
         type: String,
         optional: true,
       },
+      owner: String,
     }));
   }
 
