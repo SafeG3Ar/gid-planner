@@ -17,6 +17,8 @@ class TaskCollection extends BaseCollection {
       task: String,
       listName: Array,
       'listName.$': String,
+      tags: Array,
+      'tags.$': String,
       /*
       tags: {
         type: String,
