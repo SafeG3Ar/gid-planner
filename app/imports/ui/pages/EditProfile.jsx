@@ -1,17 +1,25 @@
 import React from 'react';
-import { Grid, Loader, Header, Segment } from 'semantic-ui-react';
+import { Menu, Loader, Tab, Container } from 'semantic-ui-react';
 import swal from 'sweetalert';
-import { AutoForm, ErrorsField, HiddenField, NumField, SelectField, SubmitField, TextField } from 'uniforms-semantic';
+// import { AutoForm, ErrorsField, HiddenField, NumField, SelectField, SubmitField, TextField, Menu, Tab } from 'uniforms-semantic';
 import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
-import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
+// import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import { Stuffs } from '../../api/stuff/Stuff';
+import PersonalInfo from '../components/PersonalInfo';
+// import StuffItem from '../components/StuffItem';
 
-const bridge = new SimpleSchema2Bridge(Stuffs.schema);
+//  = new SimpleSchema2Bridge(Stuffs.schema);
+const personalInfo = () => <PersonalInfo />;
+const panes = [
+  { menuItem: <Menu.Item key='personalInfo' id='personalInfo'>Personal Info</Menu.Item>, render: personalInfo },
+  { menuItem: <Menu.Item key='Security' id='Security'>Security</Menu.Item> },
+  { menuItem: <Menu.Item key='Manage' id='Manage'>Manage</Menu.Item> },
+];
 
 /** Renders the Page for editing a single document. */
-class EditStuff extends React.Component {
+class EditProfile extends React.Component {
 
   // On successful submit, insert the data.
   submit(data) {
@@ -29,27 +37,17 @@ class EditStuff extends React.Component {
   // Render the form. Use Uniforms: https://github.com/vazco/uniforms
   renderPage() {
     return (
-      <Grid container centered>
-        <Grid.Column>
-          <Header as="h2" textAlign="center">Edit Stuff</Header>
-          <AutoForm schema={bridge} onSubmit={data => this.submit(data)} model={this.props.doc}>
-            <Segment>
-              <TextField name='name'/>
-              <NumField name='quantity' decimal={false}/>
-              <SelectField name='condition'/>
-              <SubmitField value='Submit'/>
-              <ErrorsField/>
-              <HiddenField name='owner' />
-            </Segment>
-          </AutoForm>
-        </Grid.Column>
-      </Grid>
+      <div>
+        <Container>
+          <Tab menu={{ fluid: true, vertical: true, tabular: true }} panes={panes} id = 'tabs'/>
+        </Container>
+      </div>
     );
   }
 }
 
 // Require the presence of a Stuff document in the props object. Uniforms adds 'model' to the props, which we use.
-EditStuff.propTypes = {
+EditProfile.propTypes = {
   doc: PropTypes.object,
   model: PropTypes.object,
   ready: PropTypes.bool.isRequired,
@@ -69,4 +67,4 @@ export default withTracker(({ match }) => {
     doc,
     ready,
   };
-})(EditStuff);
+})(EditProfile);
