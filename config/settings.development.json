@@ -1,14 +1,35 @@
 {
   "defaultAccounts": [
-    { "firstName": "Admin", "lastName": "Adler", "userName": "Adder", "phone": "123-456-7891", "email": "admin@gidplanner.com", "password": "giditdone", "role": "admin" },
-    { "firstName": "Sue", "lastName": "Flay", "userName": "SooFlay", "phone": "987-654-3210", "email": "sue@gidplanner.com", "password": "giditdone" },
-    { "firstName": "Obi", "lastName": "Juan", "userName": "ObiWan", "phone": "555-555-5555", "email": "obi@gidplanner.com", "password": "giditdone" }
+    { "email": "admin@gidplanner.com", "password": "giditdone", "userName": "Adder", "role": "admin" },
+    { "email": "sue@gidplanner.com", "userName": "SooFlay", "password": "giditdone" },
+    { "email": "obi@gidplanner.com", "userName": "ObiWan", "password": "giditdone" }
+  ],
+
+  "defaultLists": [
+    {"listNames": "Shopping", "owner": "SooFlay"},
+    {"listNames": "Shopping", "owner": "SooFlay"}
+  ],
+
+  "defaultProfiles": [
+    {"email": "admin@gidplanner.com", "firstName": "Admin", "lastName": "Adler", "phone": "123-456-7891", "owner": "Adder"},
+    {"email": "sue@gidplanner.com", "firstName": "Sue", "lastName": "Flay", "phone": "987-654-3210", "owner": "SooFlay"},
+    {"email": "obi@gidplanner.com", "firstName": "Obi", "lastName": "Juan", "phone": "555-555-5555", "owner": "ObiWan"}
+  ],
+
+  "defaultTags": [
+    {"tagName": "Important"},
+    {"tagName": "Critical"}
+  ],
+
+  "defaultTasks": [
+    {"task": "Buy Oranges", "listName": [{"listName": "Shopping"}], "tags": [{"tags": "Important"}], "owner": "SooFlay"},
+    {"task": "Buy Beer", "listName": [{"listName": "Shopping"}], "tags": [{"tags": "Important"}], "owner": "ObiWan"}
   ],
 
   "defaultData": [
-    { "name": "Basket", "quantity": 3, "owner": "sue@gidplanner.com", "condition": "excellent" },
-    { "name": "Bicycle", "quantity": 2, "owner": "obi@gidplanner.com", "condition": "poor" },
-    { "name": "Banana", "quantity": 2, "owner": "admin@gidplanner.com", "condition": "good" },
-    { "name": "Boogie Board", "quantity": 2, "owner": "admin@gidplanner.com", "condition": "excellent" }
+    { "name": "Basket", "quantity": 3, "owner": "SooFlay", "condition": "excellent" },
+    { "name": "Bicycle", "quantity": 2, "owner": "ObiWan", "condition": "poor" },
+    { "name": "Banana", "quantity": 2, "owner": "Adder", "condition": "good" },
+    { "name": "Boogie Board", "quantity": 2, "owner": "Adder", "condition": "excellent" }
   ]
 }
