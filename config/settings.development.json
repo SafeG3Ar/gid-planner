@@ -1,11 +1,24 @@
 {
   "defaultAccounts": [
-    { "email": "admin@foo.com", "password": "changeme", "role": "admin" },
-    { "email": "john@foo.com", "password": "changeme" }
+    { "email": "admin@gidplanner.com", "password": "giditdone", "userName": "Adder", "role": "admin" },
+    { "email": "sue@gidplanner.com", "userName": "SooFlay", "password": "giditdone" },
+    { "email": "obi@gidplanner.com", "userName": "ObiWan", "password": "giditdone" }
   ],
 
   "defaultProfiles": [
-    {}
+    {"email": "admin@gidplanner.com", "firstName": "Admin", "lastName": "Adler", "phone": "123-456-7891", "owner": "Adder"},
+    {"email": "sue@gidplanner.com", "firstName": "Sue", "lastName": "Flay", "phone": "987-654-3210", "owner": "SooFlay"},
+    {"email": "obi@gidplanner.com", "firstName": "Obi", "lastName": "Juan", "phone": "555-555-5555", "owner": "ObiWan"}
+  ],
+
+  "defaultTags": [
+    {"tagName": "Important"},
+    {"tagName": "Critical"}
+  ],
+
+  "defaultTasks": [
+    {"task": "Important" },
+    {"TagName": "Critical"}
   ],
 
   "defaultData": [
