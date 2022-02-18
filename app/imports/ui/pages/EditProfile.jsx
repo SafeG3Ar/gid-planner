@@ -1,5 +1,5 @@
 import React from 'react';
-import { Menu, Loader, Tab, Container } from 'semantic-ui-react';
+import { Menu, Loader, Tab } from 'semantic-ui-react';
 import swal from 'sweetalert';
 // import { AutoForm, ErrorsField, HiddenField, NumField, SelectField, SubmitField, TextField, Menu, Tab } from 'uniforms-semantic';
 import { Meteor } from 'meteor/meteor';
@@ -38,9 +38,7 @@ class EditProfile extends React.Component {
   renderPage() {
     return (
       <div>
-        <Container>
-          <Tab menu={{ fluid: true, vertical: true, tabular: true }} panes={panes} id = 'tabs'/>
-        </Container>
+        <Tab menu={{ fluid: true, vertical: true, tabular: true }} panes={panes} id = 'tabs'/>
       </div>
     );
   }

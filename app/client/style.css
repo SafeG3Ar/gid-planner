@@ -1,0 +1,10 @@
+#headers {
+    font-family: "Roboto", serif;
+    font-size: large;
+    text-align: center;
+}
+
+.cardStyle {
+    padding: 25px;
+    margin: 20px;
+}

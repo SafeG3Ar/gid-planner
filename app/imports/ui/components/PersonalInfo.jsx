@@ -1,6 +1,6 @@
 import React from 'react';
-import { Header } from 'semantic-ui-react';
-import { Container, Button } from '@material-ui/core';
+// import { Header, Segment } from 'semantic-ui-react';
+import { Container, Card } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 
@@ -8,10 +8,13 @@ import { withRouter } from 'react-router-dom';
 class PersonalInfo extends React.Component {
   render() {
     return (
-      <Container>
-        <Header as="h2" textAlign="center">Personal Info</Header>
-        <Button>Testing</Button>
-      </Container>
+      <div>
+        <Container>
+          <Card className='cardStyle'>
+            <p id='headers'>Personal Info</p>
+          </Card>
+        </Container>
+      </div>
 
     );
   }
