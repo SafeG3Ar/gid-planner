@@ -19,12 +19,14 @@ class ListNameCollection extends BaseCollection {
 
   /**
    * Defines a new List Name.
-   * @param listName.
+   * @param listNames.
+   * @param owner.
    * @return {String} the docID of the new document.
    */
-  define({ listName }) {
+  define({ listNames, owner }) {
     const docID = this._collection.insert({
-      listName,
+      listNames,
+      owner,
     });
     return docID;
   }

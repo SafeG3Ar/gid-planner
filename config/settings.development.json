@@ -5,6 +5,11 @@
     { "email": "obi@gidplanner.com", "userName": "ObiWan", "password": "giditdone" }
   ],
 
+  "defaultLists": [
+    {"listNames": "Shopping", "owner": "SooFlay"},
+    {"listNames": "Shopping", "owner": "SooFlay"}
+  ],
+
   "defaultProfiles": [
     {"email": "admin@gidplanner.com", "firstName": "Admin", "lastName": "Adler", "phone": "123-456-7891", "owner": "Adder"},
     {"email": "sue@gidplanner.com", "firstName": "Sue", "lastName": "Flay", "phone": "987-654-3210", "owner": "SooFlay"},

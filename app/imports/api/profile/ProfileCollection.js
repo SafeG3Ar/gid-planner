@@ -27,12 +27,23 @@ class ProfileCollection extends BaseCollection {
 
   /**
    * Defines a new List Name.
-   * @param profile.
+   * @param email.
+   * @param firstName.
+   * @param lastName.
+   * @param phone.
+   * @param twoFactor.
+   * @param owner.
    * @return {String} the docID of the new document.
    */
-  define({ profile }) {
+  define({ email, firstName, lastName, phone, twoFactor, owner }) {
     const docID = this._collection.insert({
-      profile,
+      email,
+      firstName,
+      lastName,
+      phone,
+      twoFactor,
+      owner,
+
     });
     return docID;
   }

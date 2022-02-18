@@ -39,11 +39,17 @@ class TaskCollection extends BaseCollection {
 
   /**
    * Defines a new Task.
+   * @param task.
+   * @param listName.
+   * @param tags.
+   * @param date.
+   * @param notes.
+   * @param owner.
    * @return {String} the docID of the new document.
    */
-  define({ task, listName, date, notes }) {
+  define({ task, listName, tags, date, notes, owner }) {
     const docID = this._collection.insert({
-      task, listName, date, notes,
+      task, listName, tags, date, notes, owner,
     });
     return docID;
   }
