@@ -8,15 +8,17 @@ import { Button, makeStyles } from '@material-ui/core';
 // import Person from '@mui/icons-material/Person';
 import { Person } from '@material-ui/icons';
 // import { Roles } from 'meteor/alanning:roles';
+// import { theme } from './theme';
 
 const useStyles = makeStyles({
   button: {
     color: 'white',
-    backgroundColor: 'black',
+    // backgroundColor: theme.palette.primary.main,
   },
 });
 /** The NavBar appears at the top of every page. Rendered by the App Layout component. */
 const MuiTest = () => {
+  /** instance to use the style from makeStyles */
   const classes = useStyles();
   return (
     <Button
