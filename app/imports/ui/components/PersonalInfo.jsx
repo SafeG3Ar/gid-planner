@@ -1,7 +1,8 @@
 import React from 'react';
-// import { Header, Segment } from 'semantic-ui-react';
-import { Container, Card } from '@material-ui/core';
-import PropTypes from 'prop-types';
+import { Divider, Segment } from 'semantic-ui-react';
+import { Container, IconButton } from '@material-ui/core';
+import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
+// import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 
 /** Renders a single row in the List Stuff table. See pages/ListStuff.jsx. */
@@ -9,10 +10,16 @@ class PersonalInfo extends React.Component {
   render() {
     return (
       <div>
-        <Container>
-          <Card className='cardStyle'>
+        <Container fluid='true' style={{ width: '1000px' }}>
+          <Segment className='cardStyle' padded>
             <p id='headers'>Personal Info</p>
-          </Card>
+            <p style={{ textAlign: 'center' }}>Name: (first name prop) (second name prop) <IconButton><ArrowForwardIosIcon fontSize="small" className='muiButtons'/></IconButton></p>
+            <Divider/>
+            <p style={{ textAlign: 'center' }}>Phone: phone number <IconButton><ArrowForwardIosIcon fontSize="small" className='muiButtons'/></IconButton></p>
+            <Divider/>
+            <p style={{ textAlign: 'center' }}>Email: email <IconButton><ArrowForwardIosIcon fontSize="small" className='muiButtons'/></IconButton></p>
+            <Divider/>
+          </Segment>
         </Container>
       </div>
 
@@ -21,6 +28,7 @@ class PersonalInfo extends React.Component {
 }
 
 // Require a document to be passed to this component.
+/*
 PersonalInfo.propTypes = {
   stuff: PropTypes.shape({
     name: PropTypes.string,
@@ -29,6 +37,6 @@ PersonalInfo.propTypes = {
     _id: PropTypes.string,
   }).isRequired,
 };
-
+*/
 // Wrap this component in withRouter since we use the <Link> React Router element.
 export default withRouter(PersonalInfo);

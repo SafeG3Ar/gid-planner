@@ -1,26 +1,31 @@
 import React from 'react';
-import { Table } from 'semantic-ui-react';
+import { Container, Segment, Divider } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
-import { withRouter, Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 
 /** Renders a single row in the List Stuff table. See pages/ListStuff.jsx. */
-class StuffItem extends React.Component {
+class Manage extends React.Component {
   render() {
     return (
-      <Table.Row>
-        <Table.Cell>{this.props.stuff.name}</Table.Cell>
-        <Table.Cell>{this.props.stuff.quantity}</Table.Cell>
-        <Table.Cell>{this.props.stuff.condition}</Table.Cell>
-        <Table.Cell>
-          <Link to={`/edit/${this.props.stuff._id}`}>Edit</Link>
-        </Table.Cell>
-      </Table.Row>
+      <div>
+        <Container fluid='true' style={{ width: '1000px' }}>
+          <Segment className='cardStyle' padded>
+            <p id='headers'>Manage</p>
+            <p>Tasks</p>
+            <Divider />
+            <p>Lists</p>
+            <Divider />
+            <Divider />
+            <p>Tags</p>
+          </Segment>
+        </Container>
+      </div>
     );
   }
 }
 
 // Require a document to be passed to this component.
-StuffItem.propTypes = {
+Manage.propTypes = {
   stuff: PropTypes.shape({
     name: PropTypes.string,
     quantity: PropTypes.number,
@@ -30,4 +35,4 @@ StuffItem.propTypes = {
 };
 
 // Wrap this component in withRouter since we use the <Link> React Router element.
-export default withRouter(StuffItem);
+export default withRouter(Manage);

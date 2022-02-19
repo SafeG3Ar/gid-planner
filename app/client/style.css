@@ -1,10 +1,17 @@
 #headers {
-    font-family: "Roboto", serif;
     font-size: large;
     text-align: center;
+    padding: 25px;
 }
 
 .cardStyle {
+    font-family: "Roboto", serif;
     padding: 25px;
-    margin: 20px;
+    margin: 25px;
+    text-align: left;
+}
+
+.muiButtons {
+    float: right;
+    position: relative;
 }
