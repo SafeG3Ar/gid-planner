@@ -1,9 +1,9 @@
 import { Meteor } from 'meteor/meteor';
 import { Stuffs } from '../../api/stuff/Stuff.js';
-import { Profiles } from '../../api/profile/ProfileCollection';
-import { Tags } from '../../api/tag/TagCollection';
-import { ListNames } from '../../api/listName/ListName';
-import { Tasks } from '../../api/task/TaskCollection';
+import { Profiles } from '../../api/profile/ProfileCollection.js';
+import { Tags } from '../../api/tag/TagCollection.js';
+import { Lists } from '../../api/listName/ListName.js';
+import { Tasks } from '../../api/task/TaskCollection.js';
 
 /* eslint-disable no-console */
 
@@ -15,22 +15,22 @@ function addData(data) {
 
 function addLists(data) {
   console.log(`  Adding: (${data.owner}) list`);
-  ListNames.define(data);
+  Lists.collection.insert(data);
 }
 
 function addProfiles(data) {
   console.log(`  Adding:(${data.owner}) profile`);
-  Profiles.define(data);
+  Profiles.collection.insert(data);
 }
 
 function addTags(data) {
   console.log(`  Adding: (${data.tagName}) tag`);
-  Tags.define(data);
+  Tags.collection.insert(data);
 }
 
 function addTasks(data) {
   console.log(`  Adding: tasks for (${data.owner})`);
-  Tasks.define(data);
+  Tasks.collection.insert(data);
 }
 
 // Initialize the StuffsCollection if empty.
@@ -41,28 +41,28 @@ if (Stuffs.collection.find().count() === 0) {
   }
 }
 
-if (ListNames.count() === 0) {
+if (Lists.collection.find().count() === 0) {
   if (Meteor.settings.defaultLists) {
     console.log('Creating default lists.');
     Meteor.settings.defaultLists.map(data => addLists(data));
   }
 }
 
-if (Profiles.count() === 0) {
+if (Profiles.collection.find().count() === 0) {
   if (Meteor.settings.defaultProfiles) {
     console.log('Creating default profiles.');
     Meteor.settings.defaultProfiles.map(data => addProfiles(data));
   }
 }
 
-if (Tags.count() === 0) {
+if (Tags.collection.find().count() === 0) {
   if (Meteor.settings.defaultTags) {
     console.log('Creating default tags.');
     Meteor.settings.defaultTags.map(data => addTags(data));
   }
 }
 
-if (Tasks.count() === 0) {
+if (Tasks.collection.find().count() === 0) {
   if (Meteor.settings.defaultTasks) {
     console.log('Creating default tasks.');
     Meteor.settings.defaultTasks.map(data => addTasks(data));

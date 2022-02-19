@@ -4,6 +4,7 @@ import { Roles } from 'meteor/alanning:roles';
 
 /* eslint-disable no-console */
 
+
 function createUser(email, password, firstName, lastName, phone, userName, role) {
   console.log(`  Creating user ${email}.`);
   const userID = Accounts.createUser({
@@ -26,6 +27,7 @@ function createUser(email, password, firstName, lastName, phone, userName, role)
 if (Meteor.users.find().count() === 0) {
   if (Meteor.settings.defaultAccounts) {
     console.log('Creating the default user(s)');
+
     Meteor.settings.defaultAccounts.map(({ email, password, firstName, lastName, phone, userName, role }) => createUser(
       email,
       password,
