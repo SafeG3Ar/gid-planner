@@ -3,7 +3,7 @@ import { Container, Segment, Divider } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 
-/** Renders a single row in the List Stuff table. See pages/ListStuff.jsx. */
+/** Renders a segment for the manage settings See pages/EditProfile.jsx. */
 class Manage extends React.Component {
   render() {
     return (
@@ -11,12 +11,12 @@ class Manage extends React.Component {
         <Container fluid='true' style={{ width: '1000px' }}>
           <Segment className='cardStyle' padded>
             <p id='headers'>Manage</p>
-            <p>Tasks</p>
+            <p className='settingsFont'>Tasks</p>
             <Divider />
-            <p>Lists</p>
+            <p className='settingsFont'>Lists</p>
             <Divider />
             <Divider />
-            <p>Tags</p>
+            <p className='settingsFont'>Tags</p>
           </Segment>
         </Container>
       </div>

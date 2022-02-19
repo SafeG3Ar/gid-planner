@@ -5,7 +5,7 @@ import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 // import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 
-/** Renders a single row in the List Stuff table. See pages/ListStuff.jsx. */
+/** Renders a segment for the personal information settings See pages/EditProfile.jsx. */
 class PersonalInfo extends React.Component {
   render() {
     return (
@@ -13,12 +13,12 @@ class PersonalInfo extends React.Component {
         <Container fluid='true' style={{ width: '1000px' }}>
           <Segment className='cardStyle' padded>
             <p id='headers'>Personal Info</p>
-            <p style={{ textAlign: 'center' }}>Name: (first name prop) (second name prop) <IconButton><ArrowForwardIosIcon fontSize="small" className='muiButtons'/></IconButton></p>
-            <Divider/>
-            <p style={{ textAlign: 'center' }}>Phone: phone number <IconButton><ArrowForwardIosIcon fontSize="small" className='muiButtons'/></IconButton></p>
-            <Divider/>
-            <p style={{ textAlign: 'center' }}>Email: email <IconButton><ArrowForwardIosIcon fontSize="small" className='muiButtons'/></IconButton></p>
-            <Divider/>
+            <p className='settingsFont'>Name: (first name prop) (second name prop) <IconButton><ArrowForwardIosIcon fontSize="small" className='muiButtons' /></IconButton></p>
+            <Divider />
+            <p className='settingsFont'>Phone: phone number <IconButton><ArrowForwardIosIcon fontSize="small" className='muiButtons' /></IconButton></p>
+            <Divider />
+            <p className='settingsFont'>Email: email <IconButton><ArrowForwardIosIcon fontSize="small" className='muiButtons' /></IconButton></p>
+            <Divider />
           </Segment>
         </Container>
       </div>
