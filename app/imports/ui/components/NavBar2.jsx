@@ -5,12 +5,16 @@ import React from 'react';
 // import { withTracker } from 'meteor/react-meteor-data';
 // import { withRouter } from 'react-router-dom';
 // import { withRouter, NavLink } from 'react-router-dom';
-import { alpha, AppBar, makeStyles, Toolbar, Typography, InputBase } from '@material-ui/core';
+import { alpha, AppBar, makeStyles, Toolbar, Typography, InputBase, IconButton, MenuList, Menu } from '@material-ui/core';
 // import Person from '@mui/icons-material/Person';
-import { Home, Search } from '@material-ui/icons';
+import { Search } from '@material-ui/icons';
+import SettingsIcon from '@material-ui/icons/Settings';
+import LoopIcon from '@material-ui/icons/Loop';
+import AddIcon from '@material-ui/icons/Add';
+import PersonIcon from '@material-ui/icons/Person';
 // import { Roles } from 'meteor/alanning:roles';
 import { grey } from '@material-ui/core/colors';
-import { Button, Menu } from 'semantic-ui-react';
+import { useState } from 'react';
 
 const useStyles = makeStyles((theme) => ({
   toolbar: {
@@ -44,17 +48,25 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: alpha(theme.palette.common.black, 0.25),
         },
         borderRadius: theme.shape.borderRadius,
-    },
-        icons: {
-            color: '#3f51b5',
-            display: 'flex',
-    },
+  },
 }));
 /** The NavBar appears at the top of every page. Rendered by the App Layout component. */
 const NavBar2 = () => {
   /** instance to use the style from makeStyles */
   const classes = useStyles();
+  // Anchors for the dropdown menu
+  const [anchorEl, setAnchorEl] = useState(null);
+  const open = (anchorEl);
+  const handleClick = (event) => {
+    setAnchor(event.currentTarget);
+  };
+    const handleClose = () => {
+    setAnchor(null);
+  };
+ // const [value, setValue] = useState(0);
+
   return (
+    <>
     <AppBar
       className={classes.app_bar}
     >
@@ -73,13 +85,36 @@ const NavBar2 = () => {
                   <Search />
                   <InputBase placeholder='Search...'/>
               </div>
-              <div className={classes.icons}>
-                  <Button>
-                      <Menu />
-                  </Button>
-                </div>
+        <div className='navbar2-icons'>
+          {/* TO ADD BUTTON: +CALENDAR +TO DO */}
+          <IconButton
+            // mouse over the button and the menu will drop down
+            onMouseOver={handleClick}>
+            <AddIcon fontSize='medium' />
+          </IconButton>
+          {/* TO REFRESH BUTTON */}
+          <IconButton onMouseOver={handleClick}>
+            <LoopIcon fontSize='medium'/>
+          </IconButton>
+          <IconButton
+          onMouseOver={handleClick}>
+            <SettingsIcon fontSize='medium'/>
+          </IconButton>
+          <IconButton
+            onMouseOver={handleClick}
+            aria-controls='user-menu'>
+            <PersonIcon fontSize='medium'/>
+          </IconButton>
+              </div>
       </Toolbar>
-    </AppBar>
+      </AppBar>
+      <Menu id='user-menu'
+        anchorEl={anchorEl}
+        open={true}
+      >
+        <MenuList>Sign In</MenuList>
+    </Menu>
+    </>
   );
 };
 export default NavBar2;
