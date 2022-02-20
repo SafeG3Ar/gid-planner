@@ -32,6 +32,8 @@ const UserCalendar = () => {
             onChange={date => setSelectedDate(date)
             } />
         </LocalizationProvider>
+        { /* Current Date or Select Date Shown Here */ }
+        { /* Here the scheduled to do tasks will be shown in accordance to the selected date */ }
       </Paper>
     </Box>
   );
