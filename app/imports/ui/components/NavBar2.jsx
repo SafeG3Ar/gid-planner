@@ -1,5 +1,5 @@
 /* eslint-disable indent */
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 // import PropTypes from 'prop-types';
 // import { Meteor } from 'meteor/meteor';
 // import { withTracker } from 'meteor/react-meteor-data';
@@ -14,7 +14,6 @@ import AddIcon from '@material-ui/icons/Add';
 import PersonIcon from '@material-ui/icons/Person';
 // import { Roles } from 'meteor/alanning:roles';
 import { grey } from '@material-ui/core/colors';
-import { useState } from 'react';
 
 const useStyles = makeStyles((theme) => ({
   toolbar: {
@@ -54,15 +53,18 @@ const useStyles = makeStyles((theme) => ({
 const NavBar2 = () => {
   /** instance to use the style from makeStyles */
   const classes = useStyles();
+  // For logging in
+    // const { currentUser, isAdmin } = useTracker(() => ({
+    // currentUser: Meteor.user()?.username,
+    // isAdmin: Roles.userIsInRole(Meteor.userId(), 'admin'),
+    // }), []);
   // Anchors for the dropdown menu
-  const [anchorEl, setAnchorEl] = useState(null);
-  const open = (anchorEl);
-  const handleClick = (event) => {
-    setAnchor(event.currentTarget);
-  };
-    const handleClose = () => {
-    setAnchor(null);
-  };
+  const [visible, setVisible] = useState(false);
+  const [show, setShow] = useState(false);
+
+  useEffect(() => {
+    setVisible(show);
+  }, [show]);
  // const [value, setValue] = useState(0);
 
   return (
@@ -89,19 +91,19 @@ const NavBar2 = () => {
           {/* TO ADD BUTTON: +CALENDAR +TO DO */}
           <IconButton
             // mouse over the button and the menu will drop down
-            onMouseOver={handleClick}>
+            onMouseOver={setVisible}>
             <AddIcon fontSize='medium' />
           </IconButton>
           {/* TO REFRESH BUTTON */}
-          <IconButton onMouseOver={handleClick}>
+          <IconButton onMouseOver={setVisible}>
             <LoopIcon fontSize='medium'/>
           </IconButton>
           <IconButton
-          onMouseOver={handleClick}>
+          onMouseOver={setVisible}>
             <SettingsIcon fontSize='medium'/>
           </IconButton>
           <IconButton
-            onMouseOver={handleClick}
+            onMouseOver={() => setShow(!show)}
             aria-controls='user-menu'>
             <PersonIcon fontSize='medium'/>
           </IconButton>
@@ -109,10 +111,10 @@ const NavBar2 = () => {
       </Toolbar>
       </AppBar>
       <Menu id='user-menu'
-        anchorEl={anchorEl}
-        open={true}
+        anchorEl={visible}
+        open={Boolean(visible)}
       >
-        <MenuList>Sign In</MenuList>
+        <MenuList >Sign In</MenuList>
     </Menu>
     </>
   );
