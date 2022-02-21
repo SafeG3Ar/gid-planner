@@ -59,6 +59,33 @@ Meteor.publish(Stuffs.adminPublicationName, function () {
   return this.ready();
 });
 
+Meteor.publish(Tasks.adminPublicationName, function () {
+  if (this.userId && Roles.userIsInRole(this.userId, 'admin')) {
+    return Tasks.collection.find();
+  }
+  return this.ready();
+});
+
+Meteor.publish(Lists.adminPublicationName, function () {
+  if (this.userId && Roles.userIsInRole(this.userId, 'admin')) {
+    return Lists.collection.find();
+  }
+  return this.ready();
+});
+
+Meteor.publish(Profiles.adminPublicationName, function () {
+  if (this.userId && Roles.userIsInRole(this.userId, 'admin')) {
+    return Profiles.collection.find();
+  }
+  return this.ready();
+});
+
+Meteor.publish(Tags.adminPublicationName, function () {
+  if (this.userId && Roles.userIsInRole(this.userId, 'admin')) {
+    return Tags.collection.find();
+  }
+  return this.ready();
+});
 // alanning:roles publication
 // Recommended code to publish roles for each user.
 Meteor.publish(null, function () {
