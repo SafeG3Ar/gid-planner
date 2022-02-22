@@ -1,19 +1,26 @@
 /* eslint-disable indent */
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 // import PropTypes from 'prop-types';
 // import { Meteor } from 'meteor/meteor';
 // import { withTracker } from 'meteor/react-meteor-data';
 // import { withRouter } from 'react-router-dom';
 // import { withRouter, NavLink } from 'react-router-dom';
-import { alpha, AppBar, makeStyles, Toolbar, Typography, InputBase, IconButton, MenuList, Menu } from '@material-ui/core';
+import {
+  alpha, AppBar, Toolbar, Typography,
+  InputBase, IconButton, ListItemButton, Collapse,
+  List, ListItemText, ListItemIcon,
+} from '@mui/material';
+import { makeStyles } from '@mui/styles';
 // import Person from '@mui/icons-material/Person';
-import { Search } from '@material-ui/icons';
-import SettingsIcon from '@material-ui/icons/Settings';
-import LoopIcon from '@material-ui/icons/Loop';
-import AddIcon from '@material-ui/icons/Add';
-import PersonIcon from '@material-ui/icons/Person';
+import { Search } from '@mui/icons-material/Search';
+import SettingsIcon from '@mui/icons-material/Settings';
+import LoopIcon from '@mui/icons-material/Loop';
+import AddIcon from '@mui/icons-material/Add';
+import PersonIcon from '@mui/icons-material/Person';
 // import { Roles } from 'meteor/alanning:roles';
-import { grey } from '@material-ui/core/colors';
+import { ExpandLess } from '@mui/icons-material/ExpandLess';
+import ExpandMore from '@mui/icons-material/ExpandMore';
+import { grey } from '@mui/material/colors';
 
 const useStyles = makeStyles((theme) => ({
   toolbar: {
@@ -58,14 +65,11 @@ const NavBar2 = () => {
     // currentUser: Meteor.user()?.username,
     // isAdmin: Roles.userIsInRole(Meteor.userId(), 'admin'),
     // }), []);
-  // Anchors for the dropdown menu
-  const [visible, setVisible] = useState(false);
-  const [show, setShow] = useState(false);
+  const [open, setOpen] = useState(true);
 
-  useEffect(() => {
-    setVisible(show);
-  }, [show]);
- // const [value, setValue] = useState(0);
+  const handleClick = () => {
+    setOpen(!open);
+  };
 
   return (
     <>
@@ -91,31 +95,42 @@ const NavBar2 = () => {
           {/* TO ADD BUTTON: +CALENDAR +TO DO */}
           <IconButton
             // mouse over the button and the menu will drop down
-            onMouseOver={setVisible}>
+            >
             <AddIcon fontSize='medium' />
           </IconButton>
           {/* TO REFRESH BUTTON */}
-          <IconButton onMouseOver={setVisible}>
+          <IconButton>
             <LoopIcon fontSize='medium'/>
           </IconButton>
           <IconButton
-          onMouseOver={setVisible}>
+              // onClick={setVisible}
+            >
             <SettingsIcon fontSize='medium'/>
           </IconButton>
-          <IconButton
-            onMouseOver={() => setShow(!show)}
-            aria-controls='user-menu'>
-            <PersonIcon fontSize='medium'/>
-          </IconButton>
+          <ListItemButton
+            onClick={handleClick}>
+              <PersonIcon fontSize='medium' />
+              {open ? <ExpandLess /> : <ExpandMore />}
+            </ListItemButton>
+            <Collapse in={open} timeout="auto" unmountOnExit>
+        <List component="div" disablePadding>
+          <ListItemButton sx={{ pl: 4 }}>
+            <ListItemIcon>
+              <PersonIcon />
+            </ListItemIcon>
+            <ListItemText primary="Starred" />
+          </ListItemButton>
+        </List>
+      </Collapse>
               </div>
       </Toolbar>
       </AppBar>
-      <Menu id='user-menu'
+      {/* <Menu id='user-menu'
         anchorEl={visible}
         open={Boolean(visible)}
       >
         <MenuList >Sign In</MenuList>
-    </Menu>
+    </Menu> */}
     </>
   );
 };
