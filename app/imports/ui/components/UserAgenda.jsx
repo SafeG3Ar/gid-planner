@@ -4,16 +4,18 @@ import AppBar from '@mui/material/AppBar';
 import IconButton from '@mui/material/IconButton';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
+import ListItemText from '@mui/material/ListItemText';
 import Paper from '@mui/material/Paper';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 
 const UserAgenda = () => (
+  /** This is the TODAY List  */
   <Paper elevation={8}>
     <AppBar position="static" style={{ background: '#3f51b5' }}>
-      <div align="right">
+      <div align="left">
         <IconButton
-          size="large"
+          size="right"
           color="inherit"
         >
           <AddCircleIcon />
@@ -30,14 +32,61 @@ const UserAgenda = () => (
         </List>
       </Toolbar>
     </AppBar>
-    {/* This is the Tomorrow List */}
+    <List
+      sx={{
+        width: '100%',
+        maxWidth: 400,
+        bgcolor: 'background.paper',
+        position: 'relative',
+        overflow: 'auto',
+        maxHeight: 265,
+        '& ul': { padding: 0 },
+      }}
+      subheader={<li />}
+    >
+      {[0, 1, 2, 3, 4].map((sectionId) => (
+        <li key={`section-${sectionId}`}>
+          <ul>
+            {[0, 1, 2].map((item) => (
+              <ListItem key={`item-${sectionId}-${item}`}>
+                <ListItemText primary={`Item ${item}`} />
+              </ListItem>
+            ))}
+          </ul>
+        </li>
+      ))}
+    </List>
+
+    {/* This is the TOMORROW List */}
     <AppBar position="static" style={{ background: '#3f51b5' }}>
       <Toolbar>
         <Typography variant="h5">Tomorrow</Typography>
       </Toolbar>
     </AppBar>
-    {/* Current Date or Select Date Shown Here */}
-    {/* Here the scheduled to do tasks will be shown in accordance to the selected date */}
+    <List
+      sx={{
+        width: '100%',
+        maxWidth: 400,
+        bgcolor: 'background.paper',
+        position: 'relative',
+        overflow: 'auto',
+        maxHeight: 265,
+        '& ul': { padding: 0 },
+      }}
+      subheader={<li />}
+    >
+      {[0, 1, 2, 3, 4].map((sectionId) => (
+        <li key={`section-${sectionId}`}>
+          <ul>
+            {[0, 1, 2].map((item) => (
+              <ListItem key={`item-${sectionId}-${item}`}>
+                <ListItemText primary={`Item ${item}`} />
+              </ListItem>
+            ))}
+          </ul>
+        </li>
+      ))}
+    </List>
   </Paper>
 );
 
