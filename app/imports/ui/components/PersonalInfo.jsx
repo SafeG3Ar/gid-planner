@@ -1,4 +1,5 @@
 import React from 'react';
+import { Meteor } from 'meteor/meteor';
 import { Divider, Segment } from 'semantic-ui-react';
 import { Container, IconButton, Modal, Box, Typography } from '@mui/material';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
@@ -6,6 +7,8 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 // import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 // import NameModal from '../components/NameModal';
+
+// const userProfile = Profile.findOne({});
 
 const style = {
   position: 'absolute',
@@ -51,7 +54,7 @@ class PersonalInfo extends React.Component {
         <Container fluid='true' style={{ width: '1000px' }}>
           <Segment className='cardStyle' padded>
             <p id='headers'>Personal Info</p>
-            <p className='settingsFont'>Name: (first name prop) (second name prop) <IconButton onClick={handleOpen}><ArrowForwardIosIcon fontSize="small" className='muiButtons' /></IconButton>
+            <p className='settingsFont'>Name: {Meteor.user().username} <IconButton onClick={handleOpen}><ArrowForwardIosIcon fontSize="small" className='muiButtons' /></IconButton>
               <Modal
                 open={this.state.open}
                 onClose={handleClose}
