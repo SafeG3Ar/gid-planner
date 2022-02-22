@@ -4,22 +4,27 @@ import { Button, Container } from '@mui/material';
 // import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 
-const handleCheck = (e) => {
-  console.log(e);
-};
-
-const onSubmit = (e) => {
-  console.log(e);
-};
-
 /** Renders a segment for the security settings See pages/EditProfile.jsx. */
 class Security extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { value: '' };
+    this.state = { value: false };
   }
 
   render() {
+    // sets state variable to a boolean depending on which box is checked
+    const handleCheck = () => {
+      this.setState({ value: document.getElementById('htmlRadio1').checked });
+    };
+
+    // Submit method that will lead to another page that will allow two-factor authentication
+    const onSubmit = () => {
+      if (this.state.value) {
+        // console.log(this.state.value);
+      } else {
+        // console.log(this.state.value);
+      }
+    };
     return (
       <div>
         <Container fluid='true' style={{ width: '1000px' }}>
@@ -29,11 +34,11 @@ class Security extends React.Component {
               <p className='settingsFont'>Two-Factor Authentication</p>
               <p>Would you like to enable two-factor authentication?</p>
               <FormGroup grouped>
-                <FormField control='input' label='Yes' type='radio' name='htmlRadios' checked={handleCheck} onChange={handleCheck(this.state.value)} />
-                <FormField control='input' label='No' type='radio' name='htmlRadios' checked={handleCheck} onChange={handleCheck(this.state.value)} />
+                <FormField control='input' label='Yes' type='radio' name='htmlRadios' id='htmlRadio1' onChange={handleCheck} />
+                <FormField control='input' label='No' type='radio' name='htmlRadios' id='htmlRadio2' onChange={handleCheck} />
               </FormGroup>
               <div style={{ textAlign: 'center' }}>
-                <Button variant="outlined" onClick={(e) => { onSubmit(e); }}>Submit</Button>
+                <Button variant="outlined" onClick={onSubmit}>Submit</Button>
               </div>
             </Form>
           </Segment>
