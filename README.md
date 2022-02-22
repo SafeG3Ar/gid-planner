@@ -11,7 +11,7 @@ GID the Planner will run on the following tech stack:
 - React
 - Material UI
 
-The team has familiarized themselves with the new user interface framework *Material UI*. The mock up pages of the app have been discusssed and created. The user interface outline of the app has been developed by the team. The following pages and components are completed:
+The team has familiarized themselves with the new user interface framework *Material UI*. The mock up pages of the app have been discussed and created. The user interface outline of the app has been developed by the team. The following pages and components are completed:
 - Task Form
 - Calendar
 - NavBar
@@ -27,32 +27,54 @@ The following components and pages will be worked on through the next assignment
 - Additional pages/components we decide to create
 
 ## Assigned Duties
-The current assigned duties are the following:
+Completed assigned duties:
 
 Anna:
 - Styling 
-- Sign In and Sign Up
-- Dashboard
+- Sign In and Sign Up mock up pages
+- Dashboard template
+
+Alyssandra:
+- Dashboard template
+- Creating collections
+- Calendar API template
+- Task Form template
+
+Glen:
+- Creating Collections
+- Creating of Settings/profile edit page
+- Updating Packages
+
+Angela:
+- Task Form template
+- Creating Collections
+
+The current/future assigned duties are the following:
+
+Anna:
+- Styling 
+- Implementing Sign In and Sign Up functionality
+- Implementing Dashboard functionality
 - Functionailty of each page
 
 Alyssandra:
-- Dashboard
-- Collections
-- Two-Factor Authentication
-- Calendar API
-- Task Form
+- Implementing Dashboard functionality
+- Managing Collections
+- Implementing Two-Factor Authentication
+- Implementing Calendar API functionality
+- Implementing Task Form functionality
 - Functionailty of each page
 
 Glen:
-- Collections
-- Two-Factor Authentication
-- Styling 
-- Managing Packages
+- Managing Collections
+- Implementing Two-Factor Authentication
+- Style pages 
+- Implement functionality of Settings/Edit Profile page
 - Functionailty of each page
 
 Angela:
-- Task Form
-- Collections
+- Implementing Task Form functionality
+- Managing Collections
 - Functionailty of each page
 
 
