@@ -1,0 +1,23 @@
+#headers {
+    font-size: x-large;
+    text-align: center;
+    padding: 25px;
+}
+
+.cardStyle {
+    font-family: 'Roboto';
+    padding: 25px;
+    margin: 25px;
+    text-align: left;
+}
+
+.muiButtons {
+    float: right;
+    position: relative;
+}
+
+.settingsFont {
+    font-size: medium;
+    text-align: center;
+    color: #484F52;
+}
