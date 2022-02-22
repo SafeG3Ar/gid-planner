@@ -5,6 +5,7 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 // import { Profile } from '../../api/profile/ProfileCollection';
 // import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
+// import NameModal from '../components/NameModal';
 
 const style = {
   position: 'absolute',
