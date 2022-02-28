@@ -2,7 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import { Roles } from 'meteor/alanning:roles';
 import { Stuffs } from '../../api/stuff/Stuff';
 import { Tasks } from '../../api/task/TaskCollection';
-import { Lists } from '../../api/listName/ListName';
+import { Lists } from '../../api/list/ListCollection';
 import { Tags } from '../../api/tag/TagCollection';
 import { Profiles } from '../../api/profile/ProfileCollection';
 

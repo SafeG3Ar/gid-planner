@@ -2,7 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import { Stuffs } from '../../api/stuff/Stuff.js';
 import { Profiles } from '../../api/profile/ProfileCollection.js';
 import { Tags } from '../../api/tag/TagCollection.js';
-import { Lists } from '../../api/listName/ListName.js';
+import { Lists } from '../../api/list/ListCollection.js';
 import { Tasks } from '../../api/task/TaskCollection.js';
 
 /* eslint-disable no-console */

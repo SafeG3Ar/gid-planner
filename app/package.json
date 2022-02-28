@@ -24,6 +24,7 @@
     "sweetalert": "^2.1.2",
     "uniforms": "^3.6.0",
     "uniforms-bridge-simple-schema-2": "^3.6.0",
+    "uniforms-material": "^3.8.1",
     "uniforms-semantic": "^3.6.0"
   },
   "devDependencies": {

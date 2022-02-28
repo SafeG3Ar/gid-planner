@@ -22,8 +22,8 @@
   ],
 
   "defaultTasks": [
-    {"task": "Buy Oranges", "listName": [{"listName": "Shopping"}], "tags": [{"tags": "Important"}], "owner": "SooFlay"},
-    {"task": "Buy Beer", "listName": [{"listName": "Shopping"}], "tags": [{"tags": "Important"}], "owner": "ObiWan"}
+    {"task": "Buy Oranges", "date": 1646073461014, "listName": [{"listName": "Shopping"}], "note": "Remember to buy organic", "tags": [{"tags": "Important"}], "owner": "SooFlay"},
+    {"task": "Buy Beer", "date": 1646073461014, "listName": [{"listName": "Shopping"}], "note": "Remember, Carol doesn't like IPAs", "tags": [{"tags": "Important"}], "owner": "ObiWan"}
   ],
 
   "defaultData": [
