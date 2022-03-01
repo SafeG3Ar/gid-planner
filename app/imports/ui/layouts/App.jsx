@@ -10,7 +10,7 @@ import Landing from '../pages/Landing';
 import ListStuff from '../pages/ListStuff';
 import ListStuffAdmin from '../pages/ListStuffAdmin';
 import AddStuff from '../pages/AddStuff';
-import AddTask from '../pages/AddTask';
+import AddTaskPage from '../pages/AddTaskPage';
 import EditStuff from '../pages/EditStuff';
 import NotFound from '../pages/NotFound';
 import Signin from '../pages/Signin';
@@ -29,10 +29,10 @@ class App extends React.Component {
             <Route exact path="/" component={Landing}/>
             <Route path="/signin" component={Signin}/>
             <Route path="/signup" component={Signup}/>
-            <Route path="/signout" component={Signout}/>
+            <Route path="/add" component={AddStuff}/>
+            <ProtectedRoute path="/signout" component={Signout}/>
             <ProtectedRoute path="/list" component={ListStuff}/>
-            <ProtectedRoute path="/add" component={AddStuff}/>
-            <ProtectedRoute path="/addtask" component={AddTask}/>
+            <ProtectedRoute path="/addtask" component={AddTaskPage}/>
             <ProtectedRoute path="/edit/:_id" component={EditStuff}/>
             <ProtectedRoute path="/edit-profile" component={EditProfile}/>
             <AdminProtectedRoute path="/admin" component={ListStuffAdmin}/>

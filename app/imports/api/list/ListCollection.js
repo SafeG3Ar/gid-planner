@@ -13,7 +13,9 @@ class ListCollection {
     this.collection = new Mongo.Collection(this.name);
     // Define the structure of each document in the collection.
     this.schema = new SimpleSchema({
-      listNames: { type: String },
+      name: { type: String },
+      items: { type: Array, optional: true },
+      'items.$': String,
       owner: { type: String },
     }, { tracker: Tracker });
     // Attach the schema to the collection, so all attempts to insert a document are checked against schema.
