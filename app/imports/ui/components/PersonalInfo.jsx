@@ -1,11 +1,13 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
-import { Divider, Segment } from 'semantic-ui-react';
+import { Divider, Segment, Loader } from 'semantic-ui-react';
+// import { _ } from 'meteor/underscore';
 import { Container, IconButton, Modal, Box, Typography } from '@mui/material';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-// import { Profile } from '../../api/profile/ProfileCollection';
-// import PropTypes from 'prop-types';
-import { withRouter } from 'react-router-dom';
+import { withTracker } from 'meteor/react-meteor-data';
+import PropTypes from 'prop-types';
+// import { withRouter } from 'react-router-dom';
+import { Profiles } from '../../api/profile/ProfileCollection';
 // import NameModal from '../components/NameModal';
 
 // const userProfile = Profile.findOne({});
@@ -32,29 +34,44 @@ class PersonalInfo extends React.Component {
     };
   }
 
+  // render the page once subscriptions have been received.
   render() {
+    return (this.props.ready) ? this.renderPage() : <Loader active>Getting Profile data</Loader>;
+  }
+
+  renderPage() {
+    // open function to handle the first modal.
     const handleOpen = () => {
       this.setState({ open: true });
     };
 
+    // close function to handle the first modal.
     const handleClose = () => {
       this.setState({ open: false });
     };
 
+    // open function to handle the second modal.
     const handleOpen2 = () => {
       this.setState({ open2: true });
     };
 
+    // close function to handle the second modal.
     const handleClose2 = () => {
       this.setState({ open2: false });
     };
+
+    // store profile that has an owner field that matches the username of the current user.
+    const profile = this.props.profiles.filter(user => user.owner === Meteor.user().username);
+
+    // store the profile object into variable. Object at the first index is the only object for the user, since there can be no duplicate usernames or emails.
+    const user = profile[0];
 
     return (
       <div>
         <Container fluid='true' style={{ width: '1000px' }}>
           <Segment className='cardStyle' padded>
             <p id='headers'>Personal Info</p>
-            <p className='settingsFont'>Name: {Meteor.user().username} <IconButton onClick={handleOpen}><ArrowForwardIosIcon fontSize="small" className='muiButtons' /></IconButton>
+            <p className='settingsFont'>Name: {user.firstName} {user.lastName} <IconButton onClick={handleOpen}><ArrowForwardIosIcon fontSize="small" className='muiButtons' /></IconButton>
               <Modal
                 open={this.state.open}
                 onClose={handleClose}
@@ -69,7 +86,7 @@ class PersonalInfo extends React.Component {
               </Modal>
             </p>
             <Divider />
-            <p className='settingsFont'>Phone: phone number <IconButton onClick={handleOpen2}><ArrowForwardIosIcon fontSize="small" className='muiButtons' /></IconButton>
+            <p className='settingsFont'> Phone Number: {user.phone} <IconButton onClick={handleOpen2}><ArrowForwardIosIcon fontSize="small" className='muiButtons' /></IconButton>
               <Modal
                 open={this.state.open2}
                 onClose={handleClose2}
@@ -84,7 +101,7 @@ class PersonalInfo extends React.Component {
               </Modal>
             </p>
             <Divider />
-            <p className='settingsFont'>Email: email
+            <p className='settingsFont'>Email: {user.email}
             </p>
             <Divider />
           </Segment>
@@ -96,15 +113,22 @@ class PersonalInfo extends React.Component {
 }
 
 // Require a document to be passed to this component.
-/*
+
 PersonalInfo.propTypes = {
-  stuff: PropTypes.shape({
-    name: PropTypes.string,
-    quantity: PropTypes.number,
-    condition: PropTypes.string,
-    _id: PropTypes.string,
-  }).isRequired,
+  profiles: PropTypes.array.isRequired,
+  ready: PropTypes.bool.isRequired,
 };
-*/
+
 // Wrap this component in withRouter since we use the <Link> React Router element.
-export default withRouter(PersonalInfo);
+export default withTracker(() => {
+  // Get access to Vendor documents.
+
+  const subscription = Meteor.subscribe(Profiles.userPublicationName);
+  const ready = subscription.ready();
+  // Get the Vendor documents
+  const profiles = Profiles.collection.find().fetch();
+  return {
+    profiles,
+    ready,
+  };
+})(PersonalInfo);
