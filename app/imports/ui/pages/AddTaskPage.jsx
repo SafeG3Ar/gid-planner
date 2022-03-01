@@ -14,6 +14,20 @@ import SimpleSchema from 'simpl-schema';
 import { Tasks } from '../../api/task/TaskCollection';
 import AddTask from '../components/AddTask';
 
+const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 400,
+    bgcolor: 'background.paper',
+    border: '2px solid #000',
+    boxShadow: 24,
+    pt: 2,
+    px: 4,
+    pb: 3,
+  };
+
 /** Create a schema to specify the structure of the data to appear in the form. */
 const formSchema = new SimpleSchema({
     task: { type: String },
@@ -28,15 +42,9 @@ const bridge = new SimpleSchema2Bridge(formSchema);
 
 /** Renders the Page for adding a document. */
 class AddTaskPage extends React.Component {
-    // constructor(props) {
-    //     super(props);
-    //     this.state = {
-    //         open: false,
-    //     };
-    // }
     state = {
         modalOpen: false,
-    };
+      };
 
     handleOpen = () => this.setState({ modalOpen: true });
 
@@ -69,8 +77,8 @@ class AddTaskPage extends React.Component {
                         {/* <SelectField id="task-list" name='listName'/> */}
                         <LongTextField id="task-note" name='note' />
                         <SelectField id="task-tags" name='tags' />
-                        <SubmitField id="task-submit" value='Submit' />
                         <ErrorsField />
+                        <SubmitField id="task-submit" value='Submit' />
                     </Box>
                 </AutoForm>
                 <div>
@@ -78,9 +86,11 @@ class AddTaskPage extends React.Component {
                     <Modal
                         open={this.state.modalOpen}
                         onClose={this.handleClose}
-                        // aria-labelledby="modal-modal-title"
                     >
-                        <AddTask handleClose={this.handleClose}/>
+                        <Box sx={{ ...style, width: 300 }}>
+                            <AddTask/>
+                            <Button onClick={this.handleClose}>Close</Button>
+                        </Box>
                     </Modal>
                 </div>
             </Container>

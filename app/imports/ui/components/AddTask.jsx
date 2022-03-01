@@ -24,16 +24,14 @@ const formSchema = new SimpleSchema({
 
 /** Renders the Page for adding a document. */
 class AddTask extends React.Component {
-
-    constructor(props) {
-        super(props);
-        this.state = {
-            selectedList: null,
-            selectedTags: null,
-        };
-        this.handleListChange = this.handleListChange.bind(this);
-        this.handleTagsChange = this.handleTagsChange.bind(this);
-    }
+    // constructor(props) {
+    //     super(props);
+    //     this.state = {
+    //         open: false,
+    //     };
+    //     this.handleListChange = this.handleListChange.bind(this);
+    //     this.handleTagsChange = this.handleTagsChange.bind(this);
+    // }
 
     /** On submit, insert the data. */
     submit = (data, formRef) => {
@@ -51,13 +49,13 @@ class AddTask extends React.Component {
     }
 
     /** Render the form. Use Uniforms: https://github.com/vazco/uniforms */
-    render() {
-        return (this.props.ready) ?
-            this.addTaskForm()
-            : <Loader active>Getting data</Loader>;
-    }
+    // render() {
+    //     return (this.props.ready) ?
+    //         this.addTaskForm()
+    //         : <Loader active>Getting data</Loader>;
+    // }
 
-    addTaskForm = () => {
+    render() {
         let fRef = null;
         const bridge = new SimpleSchema2Bridge(formSchema);
         return (
@@ -74,8 +72,8 @@ class AddTask extends React.Component {
                         {/* <SelectField id="task-list" name='listName'/> */}
                         <LongTextField id="task-note" name='note' />
                         <SelectField id="task-tags" name='tags' />
-                        <SubmitField id="task-submit" value='Submit' />
                         <ErrorsField />
+                        <SubmitField id="task-submit" value='Submit' />
                     </Box>
                 </AutoForm>
             </Container>
