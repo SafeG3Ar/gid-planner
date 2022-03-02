@@ -1,12 +1,11 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
-import { Divider, Segment, Loader } from 'semantic-ui-react';
+import { Divider, Segment, Loader, Button } from 'semantic-ui-react';
 // import { _ } from 'meteor/underscore';
-import { Container, IconButton } from '@mui/material';
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import { Container } from '@mui/material';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
-import { Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 // import NameModal from '../components/NameModal';
 // import { withRouter } from 'react-router-dom';
 import { Profiles } from '../../api/profile/ProfileCollection';
@@ -29,22 +28,12 @@ class PersonalInfo extends React.Component {
   // render the page once subscriptions have been received.
   render() {
     if (this.state.redirectToReferer1) {
-      return <Redirect to={'/edit-name'}/>;
+      // return <Redirect to={'/edit-name'}/>;
     }
     return (this.props.ready) ? this.renderPage() : <Loader active>Getting Profile data</Loader>;
   }
 
   renderPage() {
-    // open function to handle the first modal.
-    const handleClick = () => {
-      this.setState({ redirectToReferer1: true });
-    };
-
-    // open function to handle the second modal.
-    const handleClick2 = () => {
-      this.setState({ redirectToReferer2: true });
-    };
-
     // store profile that has an owner field that matches the username of the current user.
     const profile = this.props.profiles.filter(user => user.owner === Meteor.user().username);
 
@@ -57,10 +46,10 @@ class PersonalInfo extends React.Component {
           <Segment className='cardStyle' padded>
             <p id='headers'>Personal Info</p>
             <p className='settingsFont'>Name: {user.firstName} {user.lastName}
-              <IconButton onClick={handleClick}><ArrowForwardIosIcon fontSize="small" className='muiButtons' /></IconButton>
+              <Button as={Link} to={`/edit-name/${user._id}`} size="medium" circular icon='chevron right' inverted style={{ color: '#484F52' }}/>
             </p>
             <Divider />
-            <p className='settingsFont'> Phone Number: {user.phone} <IconButton onClick={handleClick2}><ArrowForwardIosIcon fontSize="small" className='muiButtons' /></IconButton>
+            <p className='settingsFont'> Phone Number: {user.phone} <Button as={Link} to={`/edit-name/${user._id}`} size="medium" circular icon='chevron right' inverted style={{ color: '#484F52' }}/>
             </p>
             <Divider />
             <p className='settingsFont'>Email: {user.email}
