@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Form } from 'semantic-ui-react';
+import { Container, Form, Segment } from 'semantic-ui-react';
 import swal from 'sweetalert';
 // import { IconButton } from '@mui/material';
 // import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
@@ -15,14 +15,26 @@ const EditName = ({ firstname, lastname }) => {
       swal('Error', error.message, 'error') :
       swal('Success', 'Item updated successfully', 'success')));
   };
+
+  const segmentStyle = {
+    borderRadius: '15px',
+    marginTop: '20px',
+    width: '60%',
+    marginLeft: '20%',
+    marginRightt: '20%',
+  };
+
   return (
     <div>
       <Container>
-        <Form>
-          <Form.Input defaultValue={firstname}></Form.Input>
-          <Form.Input defaultValue={lastname}></Form.Input>
-          <Form.Button onClick={submit}>Submit</Form.Button>
-        </Form>
+        <Segment style={segmentStyle}>
+          <p id='headers'>Name</p>
+          <Form className='formStyle'>
+            <Form.Input defaultValue={firstname} label='First name'></Form.Input>
+            <Form.Input defaultValue={lastname} label='Last name'></Form.Input>
+            <Form.Button onClick={submit}>Submit</Form.Button>
+          </Form>
+        </Segment>
       </Container>
     </div>
   );

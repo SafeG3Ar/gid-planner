@@ -11,6 +11,13 @@
     text-align: left;
 }
 
+.formStyle {
+    font-family: 'Roboto';
+    padding: 10px;
+    margin: 10px;
+    text-align: left;
+}
+
 .muiButtons {
     float: right;
     position: relative;
