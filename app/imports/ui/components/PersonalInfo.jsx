@@ -42,14 +42,14 @@ class PersonalInfo extends React.Component {
 
     return (
       <div>
-        <Container fluid='true' style={{ width: '1000px' }}>
+        <Container fluid='true' style={{ width: '50%' }}>
           <Segment className='cardStyle' padded>
             <p id='headers'>Personal Info</p>
             <p className='settingsFont'>Name: {user.firstName} {user.lastName}
               <Button as={Link} to={`/edit-name/${user._id}`} size="medium" circular icon='chevron right' inverted style={{ color: '#484F52' }}/>
             </p>
             <Divider />
-            <p className='settingsFont'> Phone Number: {user.phone} <Button as={Link} to={`/edit-name/${user._id}`} size="medium" circular icon='chevron right' inverted style={{ color: '#484F52' }}/>
+            <p className='settingsFont'> Phone Number: {user.phone} <Button as={Link} to={`/edit-phone/${user._id}`} size="medium" circular icon='chevron right' inverted style={{ color: '#484F52' }}/>
             </p>
             <Divider />
             <p className='settingsFont'>Email: {user.email}

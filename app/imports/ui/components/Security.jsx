@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, FormField, FormGroup, Segment } from 'semantic-ui-react';
+import { Divider, Form, FormField, FormGroup, Segment } from 'semantic-ui-react';
 import { Button, Container } from '@mui/material';
 // import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
@@ -30,6 +30,7 @@ class Security extends React.Component {
         <Container fluid='true' style={{ width: '1000px' }}>
           <Segment className='cardStyle' padded>
             <p id='headers'>Security</p>
+            <Divider/>
             <Form>
               <p className='settingsFont'>Two-Factor Authentication</p>
               <p>Would you like to enable two-factor authentication?</p>
@@ -38,7 +39,7 @@ class Security extends React.Component {
                 <FormField control='input' label='No' type='radio' name='htmlRadios' id='htmlRadio2' onChange={handleCheck} />
               </FormGroup>
               <div style={{ textAlign: 'center' }}>
-                <Button variant="outlined" onClick={onSubmit}>Submit</Button>
+                <Button variant="contained" onClick={onSubmit} sx={{ backgroundColor: '#1B66C9' }}>Submit</Button>
               </div>
             </Form>
           </Segment>

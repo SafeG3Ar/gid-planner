@@ -17,6 +17,7 @@ import Signup from '../pages/Signup';
 import Signout from '../pages/Signout';
 import EditProfile from '../pages/EditProfile';
 import EditName from '../components/EditName';
+import EditPhone from '../components/EditPhone';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 class App extends React.Component {
@@ -35,6 +36,7 @@ class App extends React.Component {
             <ProtectedRoute path="/edit/:_id" component={EditStuff}/>
             <ProtectedRoute path="/edit-profile" component={EditProfile}/>
             <ProtectedRoute path="/edit-name/:_id" component={EditName}/>
+            <ProtectedRoute path="/edit-phone/:_id" component={EditPhone}/>
             <AdminProtectedRoute path="/admin" component={ListStuffAdmin}/>
             <Route component={NotFound}/>
           </Switch>
