@@ -31,7 +31,7 @@ class Task extends React.Component {
 
   // Render the form. Use Uniforms: https://github.com/vazco/uniforms
   renderPage() {
-
+    /*
     const formStyle = {
       fontFamily: 'Roboto',
       padding: '15px',
@@ -41,6 +41,7 @@ class Task extends React.Component {
       borderRadius: '20px',
       width: '50%',
     };
+    */
 
     return (
       <Grid container centered>
