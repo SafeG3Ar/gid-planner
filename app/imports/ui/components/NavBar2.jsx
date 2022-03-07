@@ -10,7 +10,6 @@ import {
   InputBase, IconButton, ListItemButton, Collapse,
   List, ListItemText, ListItemIcon,
 } from '@mui/material';
-import { makeStyles } from '@mui/styles';
 // import Person from '@mui/icons-material/Person';
 import { Search } from '@mui/icons-material/Search';
 import SettingsIcon from '@mui/icons-material/Settings';
@@ -22,7 +21,20 @@ import { ExpandLess } from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 import { grey } from '@mui/material/colors';
 
-const useStyles = makeStyles((theme) => ({
+const logos = styled(Slider)(({ theme }) => ({
+  width: 300,
+  color: theme.palette.success.main,
+  '& .MuiSlider-thumb': {
+    '&:hover, &.Mui-focusVisible': {
+      boxShadow: `0px 0px 0px 8px ${alpha(theme.palette.success.main, 0.16)}`,
+    },
+    '&.Mui-active': {
+      boxShadow: `0px 0px 0px 14px ${alpha(theme.palette.success.main, 0.16)}`,
+    },
+  },
+}));
+
+const useStyles = styled((theme) => ({
   toolbar: {
     display: 'flex',
     justifyContent: 'space-between',
@@ -74,17 +86,22 @@ const NavBar2 = () => {
   return (
     <>
     <AppBar
-      className={classes.app_bar}
+        sx={{
+          color: 'white',
+          backgroundColor: grey[100],
+          border: '1px solid black',
+        }}
     >
-      <Toolbar className={classes.toolbar}>
+        <Toolbar sx={{
+          display: 'flex',
+          justifyContent: 'space-between',
+        }}>
         <Typography
           // variant is the type of style and component is the LABEL (like span or h2)
           className={classes.logoSm}
           variant='h6'>
                   GID</Typography>
-        <Typography
-          className={classes.logoLg}
-                  variant='h6'>
+        <Typography variant='h6'>
                   GID Planner
               </Typography>
               <div className={classes.search}>
