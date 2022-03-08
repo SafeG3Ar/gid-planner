@@ -22,7 +22,7 @@
   ],
 
   "defaultTasks": [
-    {"task": "Buy Oranges", "listName": [{"listName": "Shopping"}], "tags": [{"tags": "Important"}], "owner": "SooFlay"},
+    {"task": "Buy Oranges", "listName": ["Shopping"], "tags": ["Important"], "owner": "SooFlay"},
     {"task": "Buy Beer", "listName": [{"listName": "Shopping"}], "tags": [{"tags": "Important"}], "owner": "ObiWan"}
   ],
 

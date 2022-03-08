@@ -1,5 +1,5 @@
 import React from 'react';
-import { Loader, Grid, Table } from 'semantic-ui-react';
+import { Loader, Table, Container, Header } from 'semantic-ui-react';
 import swal from 'sweetalert';
 import { Meteor } from 'meteor/meteor';
 // import { AutoForm, ErrorsField, HiddenField, SubmitField, TextField } from 'uniforms-semantic';
@@ -10,6 +10,7 @@ import PropTypes from 'prop-types';
 import { withTracker } from 'meteor/react-meteor-data';
 // import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import { Tasks } from '../../api/task/TaskCollection';
+import TaskItem from '../components/TaskItem';
 
 // const bridge = new SimpleSchema2Bridge(Tasks.schema);
 
@@ -31,24 +32,24 @@ class Task extends React.Component {
 
   // Render the form. Use Uniforms: https://github.com/vazco/uniforms
   renderPage() {
-    /*
-    const formStyle = {
-      fontFamily: 'Roboto',
-      padding: '15px',
-      marginLeft: '25%',
-      marginRight: '25%',
-      marginTop: '15px',
-      borderRadius: '20px',
-      width: '50%',
-    };
-    */
-
     return (
-      <Grid container centered>
-        <Grid.Column>
-          <Table></Table>
-        </Grid.Column>
-      </Grid>
+      <Container>
+        <Header as="h2" textAlign="center">Tasks</Header>
+        <Table celled basic='very'>
+          <Table.Header>
+            <Table.Row>
+              <Table.HeaderCell>Task</Table.HeaderCell>
+              <Table.HeaderCell>Lists</Table.HeaderCell>
+              <Table.HeaderCell>Tags</Table.HeaderCell>
+              <Table.HeaderCell>Owner</Table.HeaderCell>
+              <Table.HeaderCell>Delete</Table.HeaderCell>
+            </Table.Row>
+          </Table.Header>
+          <Table.Body>
+            {this.props.tasks.map((task) => <TaskItem key={task._id} task={task} />)}
+          </Table.Body>
+        </Table>
+      </Container>
     );
   }
 }
@@ -57,8 +58,6 @@ class Task extends React.Component {
 
 Task.propTypes = {
   tasks: PropTypes.array.isRequired,
-  doc: PropTypes.object,
-  model: PropTypes.object,
   ready: PropTypes.bool.isRequired,
 };
 
