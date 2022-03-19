@@ -19,6 +19,7 @@ import EditProfile from '../pages/EditProfile';
 import EditName from '../components/EditName';
 import EditPhone from '../components/EditPhone';
 import Task from '../components/Tasks';
+import Verify from '../pages/Verify';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 class App extends React.Component {
@@ -30,6 +31,7 @@ class App extends React.Component {
           <Switch>
             <Route exact path="/" component={Landing}/>
             <Route path="/signin" component={Signin}/>
+            <Route path="/verify" component={Verify}/>
             <Route path="/signup" component={Signup}/>
             <Route path="/signout" component={Signout}/>
             <ProtectedRoute path="/list" component={ListStuff}/>

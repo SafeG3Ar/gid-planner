@@ -31,9 +31,5 @@
     { "name": "Bicycle", "quantity": 2, "owner": "ObiWan", "condition": "poor" },
     { "name": "Banana", "quantity": 2, "owner": "Adder", "condition": "good" },
     { "name": "Boogie Board", "quantity": 2, "owner": "Adder", "condition": "excellent" }
-  ],
-
-"MY_API_SID": "AC10a43edefe2f42dde0a190bbdb3f2ff4", 
-"MY_API_TOKEN": "d20d2bbe371cb6b64118befe92b8415d"
-
+  ]
 }
