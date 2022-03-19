@@ -1,9 +1,12 @@
 import React from 'react';
+import { Meteor } from 'meteor/meteor';
 import { Container, List, Segment } from 'semantic-ui-react';
 import otplib from 'otplib';
 import QRCode from 'qrcode.react';
 import { withRouter } from 'react-router-dom';
-import { generateSecret } from '../../api/methods/twoFactorAuth';
+import { generateSecret } from '../../api/methods/twoFactor/twoFactor.methods';
+
+// QRCode page that displays QR code to user. Resourced from https://blog.meteor.com/tutorial-two-factor-authentication-with-meteor-and-totp-21d4a2f9ee51
 
 const style = {
   font: 'roboto',
@@ -17,11 +20,15 @@ const seg = {
 };
 
 const Code = () => {
-  const secret = otplib.authenticator.keyuri(generateSecret);
+  const user = Meteor.user();
+  const secret = generateSecret.call();
+  console.log(secret);
+  const auth = otplib.authenticator.keyuri(user, 'gid%planner', secret);
+  console.log(auth);
   return (
     <Container textAlign='center' style={{ alignItems: 'centered' }}>
       <Segment style={seg}>
-        <List as='ui' bulleted style={style}>
+        <List bulleted style={style}>
           <List.Header id='headers2'>Scan QR Code with a one of the following 2FA applications:</List.Header>
           <List.Item>
             <a href=
@@ -37,8 +44,8 @@ const Code = () => {
               target='_blank' rel='noreferrer'>Authy</a>
           </List.Item>
         </List>
-        <QRCode value={secret} level="H" size={256} style={{ padding: '20px' }} />
       </Segment>
+      <QRCode value={auth} level="H" size={256} />
     </Container>
   );
 };

@@ -15,6 +15,7 @@ function createUser(email, password, firstName, lastName, phone, userName, role)
       lastName: lastName,
       phone: phone,
     },
+    twoFactorEnabled: false,
   });
   if (role === 'admin') {
     Roles.createRole(role, { unlessExists: true });
