@@ -19,17 +19,6 @@ class Verify extends React.Component {
 
     // Submit method that will lead to another page that will allow two-factor authentication
     const onSubmit = () => {
-      const accountSid = Meteor.settings.public.TWILIO_ACCOUNT_SID;
-      const authToken = Meteor.settings.public.TWILIO_ACCOUNT_SID;
-      const client = require('twilio')(accountSid, authToken);
-
-      client.messages
-        .create({
-          body: 'This is the ship that made the Kessel Run in fourteen parsecs?',
-          from: '+15139534563',
-          to: '+18087821617',
-        })
-        .then(message => console.log(message.sid));
     };
     return (
       <div>
@@ -45,7 +34,7 @@ class Verify extends React.Component {
                 <FormField control='input' label='No' type='radio' name='htmlRadios' id='htmlRadio2' onChange={handleCheck} />
               </FormGroup>
               <div style={{ textAlign: 'center' }}>
-                <Button variant="contained" onClick={onSubmit} sx={{ backgroundColor: '#1B66C9' }}>Submit</Button>
+                <Button variant="contained" type='submit' sx={{ backgroundColor: '#1B66C9' }}>Submit</Button>
               </div>
             </Form>
           </Segment>
