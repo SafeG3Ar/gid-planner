@@ -4,6 +4,12 @@
     padding: 15px;
 }
 
+#headers2 {
+    font-size: x-large;
+    text-align: center;
+    padding: 5px;
+}
+
 .cardStyle {
     font-family: 'Roboto';
     padding: 25px;
