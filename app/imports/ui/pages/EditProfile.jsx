@@ -1,6 +1,5 @@
 import React from 'react';
 import { Menu, Loader, Tab } from 'semantic-ui-react';
-import swal from 'sweetalert';
 // import { AutoForm, ErrorsField, HiddenField, NumField, SelectField, SubmitField, TextField, Menu, Tab } from 'uniforms-semantic';
 import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
@@ -24,14 +23,6 @@ const panes = [
 
 /** Renders the Page for editing a single document. */
 class EditProfile extends React.Component {
-
-  // On successful submit, insert the data.
-  submit(data) {
-    const { name, quantity, condition, _id } = data;
-    Stuffs.collection.update(_id, { $set: { name, quantity, condition } }, (error) => (error ?
-      swal('Error', error.message, 'error') :
-      swal('Success', 'Item updated successfully', 'success')));
-  }
 
   // If the subscription(s) have been received, render the page, otherwise show a loading icon.
   render() {
