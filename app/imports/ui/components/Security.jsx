@@ -1,6 +1,7 @@
 import React from 'react';
 import { Divider, Form, FormField, FormGroup, Segment } from 'semantic-ui-react';
 import { Button, Container } from '@mui/material';
+import { Meteor } from 'meteor/meteor';
 // import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 
@@ -19,11 +20,14 @@ class Security extends React.Component {
 
     // Submit method that will lead to another page that will allow two-factor authentication
     const onSubmit = () => {
-      if (this.state.value) {
-        // console.log(this.state.value);
-      } else {
-        // console.log(this.state.value);
-      }
+      Meteor.call(
+        'sendEmail',
+        'Glen <glarita@hawaii.edu>',
+        'glenjr@hawaii.rr.com',
+        'Hello from Meteor!',
+        'This is a test of Email.send.',
+      );
+      console.log('email sent');
     };
     return (
       <div>
