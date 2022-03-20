@@ -6,7 +6,7 @@ import { Meteor } from 'meteor/meteor';
 import { withRouter } from 'react-router-dom';
 
 /** Renders a segment for the security settings See pages/EditProfile.jsx. */
-class Security extends React.Component {
+class Verify extends React.Component {
   constructor(props) {
     super(props);
     this.state = { value: false };
@@ -54,7 +54,7 @@ class Security extends React.Component {
 }
 /*
 // Require a document to be passed to this component.
-Security.propTypes = {
+Verify.propTypes = {
   stuff: PropTypes.shape({
     name: PropTypes.string,
     quantity: PropTypes.number,
@@ -64,4 +64,4 @@ Security.propTypes = {
 };
 */
 // Wrap this component in withRouter since we use the <Link> React Router element.
-export default withRouter(Security);
+export default withRouter(Verify);
