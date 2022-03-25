@@ -4,6 +4,7 @@ import '/imports/startup/server/Mongo';
 import { Meteor } from 'meteor/meteor';
 import { Email } from 'meteor/email';
 import { check } from 'meteor/check';
+import { Accounts } from 'meteor/accounts-base';
 
 process.env.MAIL_URL = `smtps://${Meteor.settings.public.email}:${Meteor.settings.public.password}@smtp.gmail.com:465`;
 
@@ -17,5 +18,11 @@ Meteor.methods({
     this.unblock();
 
     Email.send({ to, from, subject, text });
+  },
+  sendVerificationEmail(email) {
+    check([email], [String]);
+
+    this.unblock();
+    Accounts.sendVerificationEmail({ email });
   },
 });

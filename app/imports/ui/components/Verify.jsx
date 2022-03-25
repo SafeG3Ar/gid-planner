@@ -2,6 +2,8 @@ import React from 'react';
 import { Divider, Form, FormField, FormGroup, Segment } from 'semantic-ui-react';
 import { Button, Container } from '@mui/material';
 import { Meteor } from 'meteor/meteor';
+import { Accounts } from 'meteor/accounts-base';
+import { Buffer } from 'buffer';
 // import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 
@@ -9,7 +11,26 @@ import { withRouter } from 'react-router-dom';
 class Verify extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { value: false };
+    this.state = {
+      value: false,
+      qrCode: null,
+    };
+  }
+
+  handleChange = (e, { name, value }) => {
+    // console.log(name, value);
+    this.setState({ [name]: value });
+    console.log(this.state.code);
+  }
+
+  // Handle Signin submission using Meteor's account mechanism.
+  submit = () => {
+    Accounts.has2faEnabled('SooFlay', (err) => {
+      if (err) { console.error(err); } else {}
+    });
+    Accounts.enableUser2fa(this.state.code, (err) => {
+      if (err) { console.error(err); }
+    });
   }
 
   render() {
@@ -34,7 +55,7 @@ class Verify extends React.Component {
         <Container fluid='true' style={{ width: '1000px' }}>
           <Segment className='cardStyle' padded>
             <p id='headers'>Security</p>
-            <Divider/>
+            <Divider />
             <Form>
               <p className='settingsFont'>Two-Factor Authentication</p>
               <p>Would you like to enable two-factor authentication?</p>
@@ -43,15 +64,40 @@ class Verify extends React.Component {
                 <FormField control='input' label='No' type='radio' name='htmlRadios' id='htmlRadio2' onChange={handleCheck} />
               </FormGroup>
               <div style={{ textAlign: 'center' }}>
-                <Button variant="contained" onClick={onSubmit} sx={{ backgroundColor: '#1B66C9' }}>Submit</Button>
+                <Button variant="contained" onClick={() => {
+                  Accounts.generate2faActivationQrCode('My app name', (err, svg) => {
+                    if (err) { console.error('...', err); return; }
+                    this.setState({ qrCode: Buffer.from(svg).toString('base64') });
+                  });
+                }} sx={{ backgroundColor: '#1B66C9' }}>Submit</Button>
               </div>
             </Form>
           </Segment>
+          {(this.state.qrCode != null) ? <img
+            width="200"
+            src={`data:image/svg+xml;base64,${this.state.qrCode}`}
+          /> : <p>no qr</p>}
+          <Form onSubmit={this.submit}>
+            <Segment stacked>
+              <Form.Input
+                label="Passcode"
+                id="passcode"
+                icon="user"
+                iconPosition="left"
+                name="code"
+                placeholder="code"
+                onChange={this.handleChange}
+              /><Form.Button id="signin-form-submit" content="Submit" />
+            </Segment>
+          </Form>
         </Container>
       </div>
     );
   }
 }
+
+// Buffer.from(svg).toString('base64')
+
 /*
 // Require a document to be passed to this component.
 Verify.propTypes = {
