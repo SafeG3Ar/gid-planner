@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { Link, Redirect } from 'react-router-dom';
 import { Meteor } from 'meteor/meteor';
 import swal from 'sweetalert';
-// import { Accounts } from 'meteor/accounts-base';
 import { Container, Form, Grid, Header, Message, Segment, Modal } from 'semantic-ui-react';
 
 /**
@@ -26,7 +25,6 @@ export default class Login extends React.Component {
 
   // Handle Signin submission using Meteor's account mechanism.
   submit = () => {
-    // console.log(Meteor.user.services);
     const { username, password } = this.state;
     Meteor.loginWithPassword(username, password, (error) => {
       if (error) {
@@ -48,10 +46,9 @@ export default class Login extends React.Component {
     const { username, password, code } = this.state;
     Meteor.loginWithPasswordAnd2faCode(username, password, code, error => {
       if (error) {
-        swal('Error', error.message, 'error');
+        swal('Error', error.message, 'Please try again.');
       }
-      swal('Success', 'Signed in Successfully!', 'success');
-      this.setState({ error: '', redirectToReferer: true });
+      this.setState({ open: false, error: '', redirectToReferer: true });
     });
   }
 
@@ -60,7 +57,6 @@ export default class Login extends React.Component {
     const { from } = this.props.location.state || { from: { pathname: '/' } };
     // if correct authentication, redirect to page instead of login screen
     if (this.state.redirectToReferer) {
-      swal('Success', 'Signed in Successfully!', 'success');
       return <Redirect to={from} />;
     }
     // Otherwise return the Login form.

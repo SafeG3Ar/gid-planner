@@ -27,12 +27,11 @@ class Security extends React.Component {
   profile = this.props.profiles.filter(user => user.owner === Meteor.user().username);
 
   // store the profile object into variable. Object at the first index is the only object for the user, since there can be no duplicate usernames or emails.
-  user = this.profile[0];
+  user = this.profile.find(prof => prof !== undefined);
 
   // submit function for enabling or disabling 2FA.
   onSubmit = () => {
     // declare variables for user to pass through update method.
-    // TODO: See if there is a better way of doing this.
     const email = Meteor.user().emails[0].address;
     const firstName = this.user.firstName;
     const lastName = this.user.lastName;
@@ -62,8 +61,6 @@ class Security extends React.Component {
   // submit method for enabling 2FA.
   onSubmit2 = () => {
     // declare variables for user to pass through update method.
-    // TODO: See if there is a better way of doing this.
-    this.setState({ email: Meteor.user().emails[0].address });
     const email = Meteor.user().emails[0].address;
     const firstName = this.user.firstName;
     const lastName = this.user.lastName;
@@ -133,7 +130,7 @@ class Security extends React.Component {
                 <p className='settingsFont'>Two-Factor Authentication</p>
                 <p>Would you like to enable two-factor authentication?</p>
                 <FormGroup grouped>
-                  <FormField control='input' label='Yes' type='radio' name='htmlRadios' id='htmlRadio1' onChange={handleCheck} disabled />
+                  <FormField control='input' label='Yes' type='radio' name='htmlRadios' id='htmlRadio1' onChange={handleCheck} disabled/>
                   <FormField control='input' label='No' type='radio' name='htmlRadios' id='htmlRadio2' onChange={handleCheck} />
                 </FormGroup>
                 <div style={{ textAlign: 'center' }}>

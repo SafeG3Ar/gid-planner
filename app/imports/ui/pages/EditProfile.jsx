@@ -9,17 +9,17 @@ import PropTypes from 'prop-types';
 import { Stuffs } from '../../api/stuff/Stuff';
 import PersonalInfo from '../components/PersonalInfo';
 import Security from '../components/Security';
-import Manage from '../components/Manage';
+// import Manage from '../components/Manage';
 // import StuffItem from '../components/StuffItem';
 
 //  = new SimpleSchema2Bridge(Stuffs.schema);
 const personalInfo = () => <PersonalInfo />;
 const securityInfo = () => <Security />;
-const manageInfo = () => <Manage />;
+// const manageInfo = () => <Manage />;
 const panes = [
   { menuItem: <Menu.Item key='personalInfo' id='personalInfo'>Personal Info</Menu.Item>, render: personalInfo },
   { menuItem: <Menu.Item key='Security' id='Security'>Security</Menu.Item>, render: securityInfo },
-  { menuItem: <Menu.Item key='Manage' id='Manage'>Manage</Menu.Item>, render: manageInfo },
+  // { menuItem: <Menu.Item key='Manage' id='Manage'>Manage</Menu.Item>, render: manageInfo },
 ];
 
 /** Renders the Page for editing a single document. */
@@ -42,7 +42,7 @@ class EditProfile extends React.Component {
   renderPage() {
     return (
       <div>
-        <Tab menu={{ tabular: true, size: 'large', borderless: true, pointing: true, secondary: true }} panes={panes} id='tabs'/>
+        <Tab menu={{ tabular: true, size: 'large', borderless: true, pointing: true, secondary: true }} panes={panes} id='tabs' />
       </div>
     );
   }
