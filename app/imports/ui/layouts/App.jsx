@@ -19,6 +19,9 @@ import EditProfile from '../pages/EditProfile';
 import EditName from '../components/EditName';
 import EditPhone from '../components/EditPhone';
 import Task from '../components/Tasks';
+import UserDashboard from '../pages/UserDashboard';
+import UserCalendar from '../components/UserCalendar';
+import UserAgenda from '../components/UserAgenda';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 class App extends React.Component {
@@ -39,6 +42,9 @@ class App extends React.Component {
             <ProtectedRoute path="/edit-name/:_id" component={EditName}/>
             <ProtectedRoute path="/edit-phone/:_id" component={EditPhone}/>
             <ProtectedRoute path="/tasks/" component={Task}/>
+            <ProtectedRoute path="/user-dashboard" component={UserDashboard}/>
+            <ProtectedRoute path="/user-agenda" component={UserAgenda}/>
+            <ProtectedRoute path="/user-calendar" component={UserCalendar}/>
             <AdminProtectedRoute path="/admin" component={ListStuffAdmin}/>
             <Route component={NotFound}/>
           </Switch>
