@@ -1,6 +1,6 @@
 /*UserDashboard Styling*/
 #user-dashboard{
-    padding: 1em 3em;
+    padding: 2em 2em 2em 2em;
 }
 
 /*UserCalendar Styling*/
@@ -29,7 +29,7 @@
     color: white;
     background-color: #3f51b5;
     position: relative;
-    margin-top: 0px;
+    margin-top: 0.5em;
 }
 
 #user-agenda .sub.header{
@@ -37,5 +37,18 @@
 }
 
 #user-agenda .list{
-    background-color: #F3F3F3;
+    padding: 0em 2em 0em 2em;
 }
+
+#user-agenda .button {
+    min-width: 120px;
+    border-radius: 500rem;
+    padding: 1em 1.5em;
+    background-color: white;
+    color: #3f51b5;
+}
+  #user-agenda .button:hover {
+    background-color: #3f51b5;
+    color: white;
+  }
+  
