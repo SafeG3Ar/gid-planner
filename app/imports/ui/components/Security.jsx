@@ -66,7 +66,7 @@ class Security extends React.Component {
     const lastName = this.user.lastName;
     const phone = this.user.phone;
     Accounts.enableUser2fa(this.state.code, (err) => {
-      if (err) { swal('Error', err.message, 'error'); } else {
+      if (err) { swal('Error. Please try again.', err.message, 'error'); } else {
         this.setState({ enabled: true });
         const auth = this.state.enabled;
         Profiles.collection.update(this.user._id, { $set: { email, firstName, lastName, phone, auth } }, (error) => (error ?
@@ -130,7 +130,7 @@ class Security extends React.Component {
                 <p className='settingsFont'>Two-Factor Authentication</p>
                 <p>Would you like to enable two-factor authentication?</p>
                 <FormGroup grouped>
-                  <FormField control='input' label='Yes' type='radio' name='htmlRadios' id='htmlRadio1' onChange={handleCheck} disabled/>
+                  <FormField control='input' label='Yes' type='radio' name='htmlRadios' id='htmlRadio1' onChange={handleCheck} disabled />
                   <FormField control='input' label='No' type='radio' name='htmlRadios' id='htmlRadio2' onChange={handleCheck} />
                 </FormGroup>
                 <div style={{ textAlign: 'center' }}>
