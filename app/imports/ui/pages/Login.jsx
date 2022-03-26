@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link, Redirect } from 'react-router-dom';
 import { Meteor } from 'meteor/meteor';
+import swal from 'sweetalert';
 // import { Accounts } from 'meteor/accounts-base';
-// import { Accounts } from 'meteor/accounts-base';
-import { Container, Form, Grid, Header, Message, Segment, Button, Modal, Image } from 'semantic-ui-react';
+import { Container, Form, Grid, Header, Message, Segment, Modal } from 'semantic-ui-react';
 
 /**
  * Signin page overrides the form’s submit event and call Meteor’s loginWithPassword().
@@ -21,7 +21,7 @@ export default class Login extends React.Component {
   // Update the form controls each time the user interacts with them.
   handleChange = (e, { name, value }) => {
     this.setState({ [name]: value });
-    console.log(this.state.code);
+    // console.log(this.state.code);
   }
 
   // Handle Signin submission using Meteor's account mechanism.
@@ -30,26 +30,27 @@ export default class Login extends React.Component {
     const { username, password } = this.state;
     Meteor.loginWithPassword(username, password, (error) => {
       if (error) {
+        // if user has 2FA enabled, have modal open to log code.
         if (error.error === 'no-2fa-code') {
           this.setState({ error2: error.error });
-          console.log(error.error);
           this.setState({ open: true });
         }
-        console.log(error);
         this.setState({ error: error.reason });
+        // otherwise, if 2FA not enabled, login as normal.
       } else {
         this.setState({ error: '', redirectToReferer: true });
       }
     });
   }
 
+  // Second submit for logging in after user enters the 2FA code.
   submit2 = () => {
     const { username, password, code } = this.state;
-    console.log(code);
     Meteor.loginWithPasswordAnd2faCode(username, password, code, error => {
       if (error) {
-        console.error('Error trying to log in (user with 2fa)', error);
+        swal('Error', error.message, 'error');
       }
+      swal('Success', 'Signed in Successfully!', 'success');
       this.setState({ error: '', redirectToReferer: true });
     });
   }
@@ -59,6 +60,7 @@ export default class Login extends React.Component {
     const { from } = this.props.location.state || { from: { pathname: '/' } };
     // if correct authentication, redirect to page instead of login screen
     if (this.state.redirectToReferer) {
+      swal('Success', 'Signed in Successfully!', 'success');
       return <Redirect to={from} />;
     }
     // Otherwise return the Login form.
@@ -78,7 +80,7 @@ export default class Login extends React.Component {
                   iconPosition="left"
                   name="username"
                   type="username"
-                  placeholder="Username"
+                  placeholder="Enter your username"
                   onChange={this.handleChange}
                 />
                 <Form.Input
@@ -87,11 +89,11 @@ export default class Login extends React.Component {
                   icon="lock"
                   iconPosition="left"
                   name="password"
-                  placeholder="Password"
+                  placeholder="Enter your password"
                   type="password"
                   onChange={this.handleChange}
                 />
-                <Form.Button id="signin-form-submit" content="Submit" />
+                <Form.Button id="signin-form-submit" content="Login" primary />
               </Segment>
             </Form>
             <Message>
@@ -117,38 +119,25 @@ export default class Login extends React.Component {
             open={this.state.open}
 
           >
-            <Modal.Header>Select a Photo</Modal.Header>
-            <Modal.Content image>
-              <Image size='medium' src='/images/avatar/large/rachel.png' wrapped />
+            <Modal.Content>
               <Modal.Description>
-                <Header>Please Enter Code</Header>
+                <Header>Enter your 2FA Code</Header>
+                <p className='settingsFont'>Make sure that you are able to enter your code before it expires, or you will not be signed in.</p>
                 <Form onSubmit={this.submit2}>
-                  <Segment stacked>
+                  <Segment stacked style={{ borderRadius: '10px', width: '50%', marginLeft: '25%', marginRight: '25%', boxShadow: '0' }}>
                     <Form.Input
-                      label="Passcode"
-                      id="passcode"
-                      icon="user"
+                      label="2FA Login Code"
+                      id="logincode"
+                      icon="barcode"
                       iconPosition="left"
                       name="code"
-                      placeholder="code"
+                      placeholder="Login Code"
                       onChange={this.handleChange}
-                    /><Form.Button id="signin-form-submit" content="Submit" />
+                    /><Form.Button id="signin-form-submit" content="Confirm" primary />
                   </Segment>
                 </Form>
               </Modal.Description>
             </Modal.Content>
-            <Modal.Actions>
-              <Button color='black' onClick={() => this.setState({ open: false })}>
-              Nope
-              </Button>
-              <Button
-                content="Yep, that's me"
-                labelPosition='right'
-                icon='checkmark'
-                onClick={() => this.setState({ open: false })}
-                positive
-              />
-            </Modal.Actions>
           </Modal>
         )}
       </Container>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Form, Segment } from 'semantic-ui-react';
 import { Container } from '@mui/material';
-import { Meteor } from 'meteor/meteor';
+// import { Meteor } from 'meteor/meteor';
 // import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 
@@ -17,10 +17,10 @@ class Verify extends React.Component {
   handleChange = (e, { name, value }) => {
     // console.log(name, value);
     this.setState({ [name]: value });
-    console.log(this.state.code);
   }
 
   // Handle Signin submission using Meteor's account mechanism.
+  /*
   submit = () => {
     const { code } = this.state;
     Meteor.loginWithPasswordAnd2faCode(username, password, code, error => {
@@ -29,7 +29,7 @@ class Verify extends React.Component {
       }
     });
   }
-
+*/
   render() {
     // sets state variable to a boolean depending on which box is checked
     // Submit method that will lead to another page that will allow two-factor authentication
