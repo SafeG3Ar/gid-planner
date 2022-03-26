@@ -19,7 +19,8 @@ import EditProfile from '../pages/EditProfile';
 import EditName from '../components/EditName';
 import EditPhone from '../components/EditPhone';
 import Task from '../components/Tasks';
-import NavBar2 from '../components/NavBar2';
+// import NavBarFix from '../components/NavBarFix';
+import NavBarClass from '../components/NavBarClass';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 class App extends React.Component {
@@ -27,7 +28,7 @@ class App extends React.Component {
     return (
       <Router>
         <div>
-          <NavBar2/>
+          <NavBarClass/>
           {/* <NavBar/> */}
           <Switch>
             <Route exact path="/" component={Landing}/>
