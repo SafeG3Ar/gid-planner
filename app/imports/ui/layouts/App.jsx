@@ -12,13 +12,14 @@ import ListStuffAdmin from '../pages/ListStuffAdmin';
 import AddStuff from '../pages/AddStuff';
 import EditStuff from '../pages/EditStuff';
 import NotFound from '../pages/NotFound';
-import Signin from '../pages/Signin';
+import Login from '../pages/Login';
 import Signup from '../pages/Signup';
 import Signout from '../pages/Signout';
 import EditProfile from '../pages/EditProfile';
 import EditName from '../components/EditName';
 import EditPhone from '../components/EditPhone';
 import Task from '../components/Tasks';
+// import VerifyCopy from '../components/VerifyCopy';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 class App extends React.Component {
@@ -29,7 +30,7 @@ class App extends React.Component {
           <NavBar/>
           <Switch>
             <Route exact path="/" component={Landing}/>
-            <Route path="/signin" component={Signin}/>
+            <Route path="/login" component={Login}/>
             <Route path="/signup" component={Signup}/>
             <Route path="/signout" component={Signout}/>
             <ProtectedRoute path="/list" component={ListStuff}/>
