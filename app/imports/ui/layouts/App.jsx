@@ -20,7 +20,7 @@ import EditName from '../components/EditName';
 import EditPhone from '../components/EditPhone';
 import Task from '../components/Tasks';
 // import NavBarFix from '../components/NavBarFix';
-import NavBarClass from '../components/NavBarClass';
+import NavBar from '../components/NavBar';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 class App extends React.Component {
@@ -28,8 +28,8 @@ class App extends React.Component {
     return (
       <Router>
         <div>
-          <NavBarClass/>
-          {/* <NavBar/> */}
+          {/* <NavBarClass/> */}
+          <NavBar/>
           <Switch>
             <Route exact path="/" component={Landing}/>
             <Route path="/signin" component={Signin}/>
