@@ -20,7 +20,7 @@ class Manage extends React.Component {
             </p>
             <Divider />
             <p className='settingsFont'>Tags
-              <Button as={Link} to={'/tags/'} size="medium" circular icon='chevron right' inverted style={{ color: '#484F52' }}/>
+              <Button as={Link} to={'/tags/3 '} size="medium" circular icon='chevron right' inverted style={{ color: '#484F52' }}/>
             </p>
           </Segment>
         </Container>
