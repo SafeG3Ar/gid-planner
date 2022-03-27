@@ -8,7 +8,6 @@ import PropTypes from 'prop-types';
 import { withTracker } from 'meteor/react-meteor-data';
 import swal from 'sweetalert';
 import { Profiles } from '../../api/profile/ProfileCollection';
-
 /** Renders a segment for the security settings See pages/EditProfile.jsx. */
 class Security extends React.Component {
   constructor(props) {
@@ -84,6 +83,17 @@ class Security extends React.Component {
   }
 
   render() {
+
+    // Iroh Dynamic Analysis testing to check if correct object is stored in user variable.
+    const code = 'let user = this.profile[0];';
+
+    const stage = new Iroh.Stage(code);
+    stage.addListener(Iroh.VAR).on('after', function (e) {
+      console.log(e.name, '=>', e.value);
+    });
+
+    eval(stage.script);
+
     // sets state variable to a boolean depending on which box is checked
     const handleCheck = () => {
       this.setState({ value: document.getElementById('htmlRadio1').checked });
