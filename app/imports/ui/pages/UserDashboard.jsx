@@ -11,6 +11,7 @@ const UserDashboard = () => (
         <Icon name='home' />
         <Header.Content>
       My Dashboard
+          {/* This will change in accordance to what navbar is selected */}
           <Header.Subheader>Agenda</Header.Subheader>
         </Header.Content>
       </Header>
