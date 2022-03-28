@@ -17,8 +17,7 @@ class NavBar extends React.Component {
         </Menu.Item>
         {this.props.currentUser ? (
           [<Menu.Item as={NavLink} activeClassName="active" exact to="/add" key='add'>Add Stuff</Menu.Item>,
-            <Menu.Item as={NavLink} activeClassName="active" exact to="/list" key='list'>List Stuff</Menu.Item>,
-            <Menu.Item key='search'> <Input icon='search' placeholder='Search...' /> </Menu.Item>]
+            <Menu.Item as={NavLink} activeClassName="active" exact to="/list" key='list'>List Stuff</Menu.Item>]
         ) : ''}
         {Roles.userIsInRole(Meteor.userId(), 'admin') ? (
           <Menu.Item as={NavLink} activeClassName="active" exact to="/admin" key='admin'>Admin</Menu.Item>
@@ -32,20 +31,21 @@ class NavBar extends React.Component {
               </Dropdown.Menu>
             </Dropdown>
           ) : (
-            [<div key='user-icon-links'>
-              <Icon link name='add' />
-            </div>,
-            <div key='user-icon-links'>
-              <Icon link name='refresh' />
-            </div>,
-            <div key='user-icon-links'>
-              <Icon link name='settings' />
-            </div>,
-            <Dropdown id="navbar-current-user" key='signout' text={this.props.currentUser} pointing="top right" icon={'user'}>
-              <Dropdown.Menu>
-                <Dropdown.Item id="navbar-sign-out" icon="sign out" text="Sign Out" as={NavLink} exact to="/signout"/>
-              </Dropdown.Menu>
-            </Dropdown>]
+            [<Menu.Item key='search'> <Input icon='search' placeholder='Search...' /> </Menu.Item>,
+              <div key='user-icon-add'>
+                <Icon link size='large' name='add' />
+              </div>,
+              <div key='user-icon-refresh'>
+                <Icon link size='large' name='refresh' />
+              </div>,
+              <div key='signoutdiv'>
+                <Dropdown id="navbar-current-user" key='signout' text={this.props.currentUser} pointing="top right" icon={'user'}>
+                  <Dropdown.Menu>
+                    <Dropdown.Item id="edit-settings" icon="settings" text="Settings" as={NavLink} exact to="/edit-profile"/>
+                    <Dropdown.Item id="navbar-sign-out" icon="sign out" text="Sign Out" as={NavLink} exact to="/signout"/>
+                  </Dropdown.Menu>
+                </Dropdown>
+              </div>]
           )}
         </Menu.Item>
       </Menu>
