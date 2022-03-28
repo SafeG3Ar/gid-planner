@@ -32,10 +32,13 @@ The following components and pages will be worked on through the next assignment
 - Complete functionality of all pages
 - Implement password check when user signs up
 - Additional pages/components we decide to create
+- Use mongoDB Atlas for collections
+- Implement Calendar 
+- Implement Task form
 
 ## Roles and Responsibilities
 
-### Completed Duties
+### Completed
 Completed assigned duties:
 
 Anna:
@@ -62,7 +65,7 @@ Angela:
 - Task Form template
 - Creating Collections
 
-## Current Duties
+### Current Duties
 
 Anna:
 - Styling 
@@ -86,11 +89,13 @@ Angela:
 - Functionailty of each page
 
 ### Next
+
 Anna:
 
 Alyssandra:
 
 Glen:
+- use mongoDB Atlas for collections.
 - Assist with implementing Calender API 
 - Assist with implementing Task Form
 - Managing collections 
