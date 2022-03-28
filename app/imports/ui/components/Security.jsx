@@ -83,16 +83,17 @@ class Security extends React.Component {
   }
 
   render() {
+    /*
+        // Iroh Dynamic Analysis testing to check if correct object is stored in user variable.
+        const code = 'let user = this.profile[0];';
 
-    // Iroh Dynamic Analysis testing to check if correct object is stored in user variable.
-    const code = 'let user = this.profile[0];';
+        const stage = new Iroh.Stage(code);
+        stage.addListener(Iroh.VAR).on('after', (e) => {
+          console.log(e.name, '=>', e.value);
+        });
 
-    const stage = new Iroh.Stage(code);
-    stage.addListener(Iroh.VAR).on('after', function (e) {
-      console.log(e.name, '=>', e.value);
-    });
-
-    eval(stage.script);
+        eval(stage.script);
+    */
 
     // sets state variable to a boolean depending on which box is checked
     const handleCheck = () => {

@@ -59,6 +59,7 @@ export default class Login extends React.Component {
     if (this.state.redirectToReferer) {
       return <Redirect to={from} />;
     }
+
     // Otherwise return the Login form.
     return (
       <Container id="signin-page">
