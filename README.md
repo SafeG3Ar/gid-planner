@@ -23,7 +23,6 @@ The main part of the app that needs to be finished is the functionality and styl
 The following components and pages will be worked on through the next assignment:
 - Functionality of all pages 
 - Two-Factor Authentication 
-- Sign In and Sign Up pages
 - Additional pages/components we decide to create
 
 ## Assigned Duties
@@ -31,8 +30,8 @@ Completed assigned duties:
 
 Anna:
 - Styling 
-- Sign In and Sign Up mock up pages
-- Dashboard template
+- Sign In and Sign Up pages
+- Dashboard components
 
 Alyssandra:
 - Dashboard template
@@ -53,8 +52,7 @@ The current/future assigned duties are the following:
 
 Anna:
 - Styling 
-- Implementing Sign In and Sign Up functionality
-- Implementing Dashboard functionality
+- Continue to Implement Dashboard functionality with Allysandra
 - Functionailty of each page
 
 Alyssandra:
