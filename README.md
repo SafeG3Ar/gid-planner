@@ -18,14 +18,24 @@ The team has familiarized themselves with the new user interface framework *Mate
 - Template for Two-Factor Authentication
 - All Collections
 
+## Progress
+
+From the last README.md update, we have created a "settings" page that enables users to edit their name and phone number if they wish to do so. We have also added a *Security* settings tab where the user is able to enable two-factor authentication if they choose to do so. The user also has the ability to disable two-factor authentication. The two-factor authentication implements Meteors accounts-2fa package, and also involves the use of third party 2FA applications such as DUO or Google Authenticator. To enable 2FA, the user must scan a QR code that is generated using a 2FA application. They will then be required to submit a code that the application provides them. Once submitted, 2FA for the user's account will be enabled, and the user is required to enter a code from the application every time they login.
+
+## Link
+
+The link to our current project repository is [here](https://github.com/SafeG3Ar/gid-planner).
+
 ## Pending
 The main part of the app that needs to be finished is the functionality and styling.
 The following components and pages will be worked on through the next assignment:
-- Functionality of all pages 
-- Two-Factor Authentication 
+- Complete functionality of all pages
+- Implement password check when user signs up
 - Additional pages/components we decide to create
 
-## Assigned Duties
+## Roles and Responsibilities
+
+### Completed Duties
 Completed assigned duties:
 
 Anna:
@@ -43,12 +53,16 @@ Glen:
 - Creating Collections
 - Creating of Settings/profile edit page
 - Updating Packages
+- Implemented Two-Factor Authentication
+- Implemented functionality of Settings/Edit Profile page
+- Style Settings page and Login pages for two-factor authentication 
+- Ran some tests with Iroh.js dynamic analysis
 
 Angela:
 - Task Form template
 - Creating Collections
 
-The current/future assigned duties are the following:
+## Current Duties
 
 Anna:
 - Styling 
@@ -64,16 +78,22 @@ Alyssandra:
 - Functionailty of each page
 
 Glen:
-- Managing Collections
-- Implementing Two-Factor Authentication
-- Style pages 
-- Implement functionality of Settings/Edit Profile page
-- Functionailty of each page
+- Implement Password Check when user signs up.
 
 Angela:
 - Implementing Task Form functionality
 - Managing Collections
 - Functionailty of each page
 
+### Next
+Anna:
 
+Alyssandra:
 
+Glen:
+- Assist with implementing Calender API 
+- Assist with implementing Task Form
+- Managing collections 
+- Assiting with functionality
+
+Angela:
