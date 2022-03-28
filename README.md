@@ -47,10 +47,10 @@ Anna:
 - Dashboard components
 
 Alyssandra:
-- Dashboard template
 - Creating collections
-- Calendar API template
-- Task Form template
+- Calendar Template
+- Calendar Functionality
+- Dashboard Template
 
 Glen:
 - Creating Collections
@@ -63,28 +63,26 @@ Glen:
 
 Angela:
 - Task Form template
+- Task Form Functionality
 - Creating Collections
 
 ### Current Duties
 
 Anna:
 - Styling 
-- Continue to Implement Dashboard functionality with Allysandra
+- Continue to Implement Dashboard functionality with Alyssandra
 - Functionailty of each page
 
 Alyssandra:
-- Implementing Dashboard functionality
-- Managing Collections
-- Implementing Two-Factor Authentication
-- Implementing Calendar API functionality
-- Implementing Task Form functionality
+- Continue to Implement Dashboard functionality with Anna
+- Dashboard Component: Tomorrow/Today Agenda (Task List Functionality)
+- Default Task Data for Collection
 - Functionailty of each page
 
 Glen:
 - Implement Password Check when user signs up.
 
 Angela:
-- Implementing Task Form functionality
 - Managing Collections
 - Functionailty of each page
 
@@ -93,12 +91,16 @@ Angela:
 Anna:
 
 Alyssandra:
+- Assist with implementing dashboard functionality with Anna
+- Assist Glen with mongoDB Atlas
+- Manage Collections
+- More Default Data: Tasks, User Profiles, etc.
 
 Glen:
 - use mongoDB Atlas for collections.
 - Assist with implementing Calender API 
 - Assist with implementing Task Form
 - Managing collections 
-- Assiting with functionality
+- Assisting with functionality
 
 Angela:
