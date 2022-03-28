@@ -83,6 +83,7 @@ Alyssandra:
 
 Glen:
 - Implement Password Check when user signs up.
+- Assist with implementing Calender API 
 
 Angela:
 - Managing Collections
