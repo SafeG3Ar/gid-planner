@@ -8,12 +8,14 @@ const Landing = () => (
     <Container text textAlign='center'>
       <Grid.Column width={9}>
         <Header as='h1'>Welcome to <p>GID PLANNER</p></Header>
-        <Header as='h3'><i>Have a task in mind?</i></Header>
-        <Header as='h2'>Get it Done with GID!</Header>
+        <Header as='h3'><i>Have a task in mind? Get it Done with GID!</i></Header>
+        <Header as='h2'>Let us GID started</Header>
         <Container textAlign='center'>
-          <Button size="medium" as={Link} to='/Signup'>
-            <i>GID Started</i>
-          </Button>
+          <Button.Group>
+            <Button size="medium" as={Link} to='/login'>Sign In</Button>
+            <Button.Or />
+            <Button size="medium" as={Link} to='/signup'>Register</Button>
+          </Button.Group>
         </Container>
       </Grid.Column>
     </Container>
