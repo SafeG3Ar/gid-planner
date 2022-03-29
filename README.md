@@ -15,7 +15,7 @@ The team has familiarized themselves with the new user interface framework *Mate
 - Task Form
 - Calendar
 - NavBar
-- Template for Two-Factor Authentication
+- Implementation of Two-Factor Authentication
 - All Collections
 
 ## Progress
@@ -29,13 +29,14 @@ From the last README.md update, we have created a "settings" page that enables u
 The link to our current project repository is [here](https://github.com/SafeG3Ar/gid-planner).
 
 ## Pending
-The main part of the app that needs to be finished is the functionality and styling.
+The main part of the app that needs to be finished is full implementation of the Calendar, the Task form, and full implementation of the user's lists.
 The following components and pages will be worked on through the next assignment:
 - Complete functionality of all pages
 - Implement password check when user signs up
 - Additional pages/components we decide to create
 - Use mongoDB Atlas for collections
-- Implement Calendar 
+- Full implementation of Calendar
+- Full implementation of listts
 - Stying Task form
 
 ## Roles and Responsibilities
@@ -85,7 +86,8 @@ Alyssandra:
 
 Glen:
 - Implement Password Check when user signs up.
-- Assist with implementing Calender API 
+- Assist with implementing Calender and Lists
+- Run Iroh dynamic analysis tests
 
 Angela:
 - Managing Collections
@@ -109,10 +111,11 @@ Alyssandra:
 
 Glen:
 - use mongoDB Atlas for collections.
-- Assist with implementing Calender API 
-- Assist with implementing Task Form
+- Assist with implementing Calender API and lists
+- Assist with implementing Task Form 
 - Managing collections 
 - Assisting with functionality
+- Continue to implement Iroh dynamic testing
 
 Angela:
 - Make UI adjustments to forms
