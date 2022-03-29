@@ -36,7 +36,7 @@ The following components and pages will be worked on through the next assignment
 - Additional pages/components we decide to create
 - Use mongoDB Atlas for collections
 - Implement Calendar 
-- Implement Task form
+- Stying Task form
 
 ## Roles and Responsibilities
 
@@ -66,6 +66,7 @@ Glen:
 Angela:
 - Task Form template
 - Task Form Functionality
+- Creating List Component that can be linked to Tasks
 - Creating Collections
 
 ### Current Duties
@@ -108,3 +109,6 @@ Glen:
 - Assisting with functionality
 
 Angela:
+- Make UI adjustments to forms
+- Implement components that allow users to edit and delete information
+- Implement functionalities for Admin
