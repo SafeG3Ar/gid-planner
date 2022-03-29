@@ -94,6 +94,11 @@ Angela:
 ### Next
 
 Anna:
+- Styling 
+- Assist with implementing dashboard functionality with Alyssandra
+- Assist Glen with Backend Development
+- Implement the 'List' side navbar
+- Add categories 
 
 Alyssandra:
 - Assist with implementing dashboard functionality with Anna
