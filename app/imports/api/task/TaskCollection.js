@@ -21,10 +21,7 @@ class TaskCollection {
         optional: true,
       },
       tags: Array,
-      'tags.$': {
-        type: String,
-        optional: true,
-      },
+      'tags.$': String,
       owner: String,
     }, { tracker: Tracker });
     // Attach the schema to the collection, so all attempts to insert a document are checked against schema.
