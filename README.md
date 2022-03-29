@@ -80,6 +80,7 @@ Alyssandra:
 - Dashboard Component: Tomorrow/Today Agenda (Task List Functionality)
 - Default Task Data for Collection
 - Functionailty of each page
+- Updated Footer, Landing, and Signout pages
 
 Glen:
 - Implement Password Check when user signs up.
