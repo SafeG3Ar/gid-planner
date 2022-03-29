@@ -36,7 +36,7 @@ The following components and pages will be worked on through the next assignment
 - Additional pages/components we decide to create
 - Use mongoDB Atlas for collections
 - Full implementation of Calendar
-- Full implementation of listts
+- Full implementation of lists
 - Stying Task form
 
 ## Roles and Responsibilities
@@ -75,23 +75,23 @@ Angela:
 Anna:
 - Styling 
 - Continue to Implement Dashboard functionality with Alyssandra
-- Functionailty of each page
+- Functionality of each page
 
 Alyssandra:
 - Continue to Implement Dashboard functionality with Anna
 - Dashboard Component: Tomorrow/Today Agenda (Task List Functionality)
 - Default Task Data for Collection
-- Functionailty of each page
+- Functionality of each page
 - Updated Footer, Landing, and Signout pages
 
 Glen:
 - Implement Password Check when user signs up.
-- Assist with implementing Calender and Lists
+- Assist with implementing Calendar and Lists
 - Run Iroh dynamic analysis tests
 
 Angela:
 - Managing Collections
-- Functionailty of each page
+- Functionality of each page
 - Page styling
 
 ### Next
