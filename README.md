@@ -90,6 +90,7 @@ Glen:
 Angela:
 - Managing Collections
 - Functionailty of each page
+- Page styling
 
 ### Next
 
