@@ -16,6 +16,10 @@ class TaskCollection {
       task: String,
       listName: Array,
       'listName.$': String,
+      dueDate: {
+        type: String,
+        optional: true,
+      },
       tags: Array,
       'tags.$': String,
       owner: String,

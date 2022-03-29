@@ -1,0 +1,143 @@
+[
+    {
+        "task": "Read Chapter 4",
+        "listName": ["ICS 427"],
+        "dueDate": "2022-03-28",
+        "tags": ["Important"],
+        "owner": "SooFlay"
+
+    },
+    {
+        "task": "Lecture Video #6",
+        "listName": ["WGSS 350"],
+        "dueDate": "2022-03-28",
+        "tags": ["Important"],
+        "owner": "SooFlay"
+
+    },
+    {
+        "task": "Fold Clothes",
+        "listName": ["Home"],
+        "dueDate": "2022-03-28",
+        "tags": ["Important"],
+        "owner": "SooFlay"
+
+    },
+    {
+        "task": "Practice Electric Guitar for 30 minutes",
+        "listName": ["Music"],
+        "dueDate": "2022-03-28",
+        "tags": ["Important"],
+        "owner": "SooFlay"
+
+    },
+    {
+        "task": "Buy Cardstock",
+        "listName": ["Errands"],
+        "dueDate": "2022-03-28",
+        "tags": ["Important"],
+        "owner": "SooFlay"
+
+    },
+    {
+        "task": "Fix Box for Post Office",
+        "listName": ["Errands"],
+        "dueDate": "2022-03-29",
+        "tags": ["Important"],
+        "owner": "SooFlay"
+
+    },
+    {
+        "task": "Buy new strings for guitar",
+        "listName": ["Errands"],
+        "dueDate": "2022-03-29",
+        "tags": ["Important"],
+        "owner": "SooFlay"
+
+    },
+    {
+        "task": "Send manual documents to Obi",
+        "listName": ["Work"],
+        "dueDate": "2022-03-29",
+        "tags": ["Critical"],
+        "owner": "SooFlay"
+
+    },
+    {
+        "task": "Bring Box to Post Office",
+        "listName": ["Errands"],
+        "dueDate": "2022-03-29",
+        "tags": ["Very Important"],
+        "owner": "SooFlay"
+
+    },
+    {
+        "task": "Do Assignment 5",
+        "listName": ["ICS 427"],
+        "dueDate": "2022-04-01",
+        "tags": ["Very Important"],
+        "owner": "SooFlay"
+
+    },
+    {
+        "task": "Do Essay 2",
+        "listName": ["ENG 300"],
+        "dueDate": "2022-04-01",
+        "tags": ["Important"],
+        "owner": "SooFlay"
+
+    },
+    {
+        "task": "Water Plants",
+        "listName": ["Home"],
+        "dueDate": "2022-04-01",
+        "tags": ["Important"],
+        "owner": "SooFlay"
+    },
+    {
+        "task": "Coding Assignment 1",
+        "listName": ["ICS 451"],
+        "dueDate": "2022-04-02",
+        "tags": ["Very Important"],
+        "owner": "SooFlay"
+
+    },
+    {
+        "task": "Do Essay 2",
+        "listName": ["ENG 300"],
+        "dueDate": "2022-04-02",
+        "tags": ["Important"],
+        "owner": "SooFlay"
+
+    },
+    {
+        "task": "Buy Eggs",
+        "listName": ["Home"],
+        "dueDate": "2022-04-02",
+        "tags": ["Important"],
+        "owner": "SooFlay"
+    },
+    {
+        "task": "Women's Health Project",
+        "listName": ["WGSS 350"],
+        "dueDate": "2022-04-03",
+        "tags": ["Critical"],
+        "owner": "SooFlay"
+
+    },
+    {
+        "task": "Midterm Exam",
+        "listName": ["ICS 451"],
+        "dueDate": "2022-04-03",
+        "tags": ["Crtical"],
+        "owner": "SooFlay"
+
+    },
+    {
+        "task": "Do Laundry",
+        "listName": ["Home"],
+        "dueDate": "2022-04-04",
+        "tags": ["Important"],
+        "owner": "SooFlay"
+    }
+]
