@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Checkbox, Header, Icon, List, Segment } from 'semantic-ui-react';
+import { Button, Checkbox, Header, Icon, Label, List, Segment } from 'semantic-ui-react';
 
 const UserAgenda = () => {
   const today = new Date();
@@ -18,22 +18,14 @@ const UserAgenda = () => {
       </Header>
       <List celled verticalAlign='middle'>
         <List.Item>
-          <Checkbox label={{ children: 'List1' }} />
-        </List.Item>
-        <List.Item>
-          <Checkbox label={{ children: 'List1' }} />
-        </List.Item>
-        <List.Item>
-          <Checkbox label={{ children: 'List1' }} />
-        </List.Item>
-        <List.Item>
-          <Checkbox label={{ children: 'List1' }} />
-        </List.Item>
-        <List.Item>
-          <Checkbox label={{ children: 'List1' }} />
-        </List.Item>
-        <List.Item>
-          <Checkbox label={{ children: 'List1' }} />
+          <List.Icon><Checkbox/></List.Icon>
+          <List.Content>
+            <List.Header as='a'>List 2</List.Header>
+            <List.Description as='a'>
+              3-22-2022 <br/>
+              <Label color='red' size='mini'>Important</Label>
+            </List.Description>
+          </List.Content>
         </List.Item>
       </List>
 
