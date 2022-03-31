@@ -4,6 +4,7 @@ import { Profiles } from '../../api/profile/ProfileCollection.js';
 import { Tags } from '../../api/tag/TagCollection.js';
 import { Lists } from '../../api/list/ListCollection.js';
 import { Tasks } from '../../api/task/TaskCollection.js';
+import { Items } from '../../api/item/ItemCollection.js';
 
 /* eslint-disable no-console */
 
@@ -32,6 +33,12 @@ function addTasks(data) {
   console.log(`  Adding: tasks for (${data.owner})`);
   Tasks.collection.insert(data);
 }
+
+// function addItems(data) {
+//   console.log(`  Adding: items for (${data.item})`);
+//   Items.collection.insert({ data });
+// }
+
 
 // Initialize the StuffsCollection if empty.
 if (Stuffs.collection.find().count() === 0) {
@@ -68,3 +75,10 @@ if (Tasks.collection.find().count() === 0) {
     Meteor.settings.defaultTasks.map(data => addTasks(data));
   }
 }
+
+// if (Items.collection.find().count() === 0) {
+//   if (Meteor.settings.defaultItems) {
+//     console.log('Creating default items.');
+//     Meteor.settings.defaultItems.map(data => addItems(data));
+//   }
+// }

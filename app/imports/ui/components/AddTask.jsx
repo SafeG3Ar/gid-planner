@@ -24,36 +24,21 @@ const formSchema = new SimpleSchema({
 
 /** Renders the Page for adding a document. */
 class AddTask extends React.Component {
-    // constructor(props) {
-    //     super(props);
-    //     this.state = {
-    //         open: false,
-    //     };
-    //     this.handleListChange = this.handleListChange.bind(this);
-    //     this.handleTagsChange = this.handleTagsChange.bind(this);
-    // }
 
     /** On submit, insert the data. */
     submit = (data, formRef) => {
         const { task, date, listName, note, tags } = data;
-        const owner = Meteor.user()._id;
+        const owner = Meteor.user().username;
         Tasks.collection.insert({ task, date, listName, note, tags, owner },
             (error) => {
                 if (error) {
                     swal('Error', error.message, 'error');
                 } else {
-                    swal('Success', 'Item added successfully', 'success');
+                    swal('Success', 'Task added successfully', 'success');
                     formRef.reset();
                 }
             });
     }
-
-    /** Render the form. Use Uniforms: https://github.com/vazco/uniforms */
-    // render() {
-    //     return (this.props.ready) ?
-    //         this.addTaskForm()
-    //         : <Loader active>Getting data</Loader>;
-    // }
 
     render() {
         let fRef = null;

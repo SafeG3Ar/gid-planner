@@ -13,9 +13,10 @@ class ItemCollection {
     this.collection = new Mongo.Collection(this.name);
     // Define the structure of each document in the collection.
     this.schema = new SimpleSchema({
-      name: { type: String, optional: true },
-      listID: { type: String },
-      quantity: { type: Number, optional: true },
+      item: { type: String, optional: true },
+      listId: { type: String, optional: true },
+      checked: { type: Boolean, optional: true },
+      createdAt: { type: Date, optional: true },
       owner: { type: String },
     }, { tracker: Tracker });
     // Attach the schema to the collection, so all attempts to insert a document are checked against schema.
@@ -27,7 +28,7 @@ class ItemCollection {
 }
 
 /**
- * The singleton instance of the StuffsCollection.
+ * The singleton instance of the ItemCollection.
  * @type {ItemCollection}
  */
 export const Items = new ItemCollection();

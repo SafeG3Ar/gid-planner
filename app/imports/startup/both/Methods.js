@@ -1,32 +1,36 @@
-import { Meteor } from 'meteor/meteor';
-import { Lists } from '../../api/list/ListCollection';
-import { Tasks } from '../../api/task/TaskCollection';
-import { TaskLists } from '../../api/task/TaskListCollection';
-import { Items } from '../../api/item/ItemCollection';
-import { ListItems } from '../../api/list/ListItemCollection';
+// import { Meteor } from 'meteor/meteor';
+// import { Items } from '../../api/item/ItemCollection';
+// import { check } from 'meteor/check';
+// import { _ } from 'meteor/underscore';
+
+// const addItemMethod = 'Items.add';
+// const removeItemMethod = 'Items.remove';
+// const setCheckedMethod = 'Items.setChecked';
+
+// Meteor.methods({
+//     'items.add'({ item }) {
+//         Items.collection.insert({
+//             item,
+//             checked,
+//             listId,
+//             createdAt: new Date(),
+//             owner: Meteor.user().findOne(this.userId).username,
+//         });
+//     },
+//     'items.remove'(itemId) {
+//         Items.collection.remove({ itemId });
+//     },
+//     'items.setChecked'({ itemId, setChecked }) {
+//         check(itemId, String);
+//         check(setChecked, Boolean);
+//         Items.update(
+//             itemId, { $set: { checked: setChecked } });
+//     },
+
+// });
 
 
-const addListMethod = 'Lists.add';
-/** Creates a new project in the Projects collection, and also updates ProfilesProjects and ProjectsInterests. */
-Meteor.methods({
-    'Lists.add'({ name, type, items, owner }) {
-        Lists.collection.insert({ name, type, items, owner });
-        ListItems.collection.remove({ item: name });
-        if (items) {
-            items.map((item) => ListItems.collection.insert({ list: name, item }));
-        } else {
-            throw new Meteor.Error('At least one item is required.');
-        }
-    },
-});
 
-const addItemMethod = 'Items.add';
-/** Creates a new project in the Projects collection, and also updates ProfilesProjects and ProjectsInterests. */
-Meteor.methods({
-    'Items.add'({ name }) {
-        Items.collection.insert({ name: name });
-    },
-});
 
-export { addListMethod, addItemMethod };
+// export { addItemMethod, removeItemMethod, setCheckedMethod };
 

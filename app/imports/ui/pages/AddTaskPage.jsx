@@ -1,9 +1,10 @@
 import React from 'react';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Modal from '@mui/material/Modal';
-import Container from '@mui/material/Container';
-import { AutoForm, ErrorsField, SubmitField, TextField, DateField, SelectField, LongTextField } from 'uniforms-material';
+// import Box from '@mui/material/Box';
+// import Button from '@mui/material/Button';
+// import Modal from '@mui/material/Modal';
+// import Container from '@mui/material/Container';
+import { Grid, Container, Button, Icon, Input, Modal, Label } from 'semantic-ui-react';
+import { AutoForm, ErrorsField, SubmitField, TextField, DateField, SelectField, LongTextField } from 'uniforms-semantic';
 import swal from 'sweetalert';
 import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
@@ -13,6 +14,8 @@ import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import SimpleSchema from 'simpl-schema';
 import { Tasks } from '../../api/task/TaskCollection';
 import AddTask from '../components/AddTask';
+import AddList from '../components/AddList';
+import AddListItem from '../components/AddListItem';
 
 const style = {
     position: 'absolute',
@@ -21,12 +24,12 @@ const style = {
     transform: 'translate(-50%, -50%)',
     width: 400,
     bgcolor: 'background.paper',
-    border: '2px solid #000',
+    border: '1px solid #000',
     boxShadow: 24,
     pt: 2,
     px: 4,
     pb: 3,
-  };
+};
 
 /** Create a schema to specify the structure of the data to appear in the form. */
 const formSchema = new SimpleSchema({
@@ -44,7 +47,7 @@ const bridge = new SimpleSchema2Bridge(formSchema);
 class AddTaskPage extends React.Component {
     state = {
         modalOpen: false,
-      };
+    };
 
     handleOpen = () => this.setState({ modalOpen: true });
 
@@ -53,13 +56,13 @@ class AddTaskPage extends React.Component {
     /** On submit, insert the data. */
     submit(data, formRef) {
         const { task, date, listName, note, tags } = data;
-        const owner = Meteor.user()._id;
+        const owner = Meteor.user().username;
         Tasks.collection.insert({ task, date, listName, note, tags, owner },
             (error) => {
                 if (error) {
                     swal('Error', error.message, 'error');
                 } else {
-                    swal('Success', 'Item added successfully', 'success');
+                    swal('Success', 'Task added successfully', 'success');
                     formRef.reset();
                 }
             });
@@ -69,9 +72,11 @@ class AddTaskPage extends React.Component {
     render() {
         let fRef = null;
         return (
-            <Container maxWidth='sm'>
-                <AutoForm ref={ref => { fRef = ref; }} schema={bridge} onSubmit={data => this.submit(data, fRef)} >
-                    <Box sx={{ display: 'flex', flexWrap: 'wrap' }}>
+            <Grid container centered>
+                <Grid.Column>
+                    <AutoForm ref={ref => { fRef = ref; }} schema={bridge} onSubmit={data => this.submit(data, fRef)} >
+                        {/* <Box sx={{ display: 'flex', flexWrap: 'wrap' }}> */}
+
                         <TextField id="task-name" name='task' />
                         <DateField id="task-date" name='date' max={new Date(2100, 1, 1)} min={new Date(2000, 1, 1)} />
                         {/* <SelectField id="task-list" name='listName'/> */}
@@ -79,21 +84,35 @@ class AddTaskPage extends React.Component {
                         <SelectField id="task-tags" name='tags' />
                         <ErrorsField />
                         <SubmitField id="task-submit" value='Submit' />
-                    </Box>
-                </AutoForm>
-                <div>
+                        {/* </Box> */}
+                    </AutoForm>
+                    {/* <div>
                     <Button onClick={this.handleOpen}>Add Task</Button>
                     <Modal
                         open={this.state.modalOpen}
                         onClose={this.handleClose}
                     >
-                        <Box sx={{ ...style, width: 300 }}>
+                        <Box sx={{ ...style, width: 400 }}>
                             <AddTask/>
                             <Button onClick={this.handleClose}>Close</Button>
                         </Box>
                     </Modal>
-                </div>
-            </Container>
+                </div> */}
+                    <div>
+                        <Button onClick={this.handleOpen}>Add List Item</Button>
+                        <Modal
+                            open={this.state.modalOpen}
+                            onClose={this.handleClose}
+                            closeIcon
+                        >
+                            <Modal.Content>
+                                <AddListItem />
+                                <Button onClick={this.handleClose}>Close</Button>
+                            </Modal.Content>
+                        </Modal>
+                    </div>
+                </Grid.Column>
+            </Grid>
 
         );
     }

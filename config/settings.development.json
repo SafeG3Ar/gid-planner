@@ -6,8 +6,8 @@
   ],
 
   "defaultLists": [
-    {"name": "Shopping", "type": "Grocery", "items": [{"items": ["Bread", "Strawberries"]}], "owner": "SooFlay"},
-    {"name": "Shopping", "type": "Shopping", "items": [{"items": ["Paper Towels", "Toilet Paper"]}], "owner": "SooFlay"}
+    {"name": "Shopping", "items": [{"items": ["Bread", "Strawberries"]}], "owner": "SooFlay"},
+    {"name": "Todo", "items": [{"items": ["Paper Towels", "Toilet Paper"]}], "owner": "SooFlay"}
   ],
 
   "defaultProfiles": [
@@ -24,6 +24,12 @@
   "defaultTasks": [
     {"task": "Buy Oranges", "date": 1646073461014, "listName": "Shopping", "note": "Remember to buy organic", "tags": "Important", "owner": "SooFlay"},
     {"task": "Buy Beer", "date": 1646073461014, "listName": "Shopping", "note": "Remember, Carol doesn't like IPAs", "tags": "Important", "owner": "ObiWan"}
+  ],
+
+  "defaultItems": [
+    {"item": "Lettuce", "checked": true, "listId": "123456789", "createdAt": 1646073461014, "owner": "SooFlay" },
+    {"item": "Oranges", "checked": true, "listId": "123456789", "createdAt": 1646073461014, "owner": "SooFlay" },
+    {"item": "Apples", "checked": false, "listId": "123456789", "createdAt": 1646073461014, "owner": "SooFlay" }
   ],
 
   "defaultData": [
