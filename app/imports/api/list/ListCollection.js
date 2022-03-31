@@ -14,8 +14,8 @@ class ListCollection {
     // Define the structure of each document in the collection.
     this.schema = new SimpleSchema({
       name: { type: String, optional: true },
-      items: { type: Array, optional: true },
-      'items.$': { type: Object, optional: true },
+      // items: { type: Array, optional: true },
+      // 'items.$': { type: Object, optional: true },
       owner: { type: String },
     }, { tracker: Tracker });
     // Attach the schema to the collection, so all attempts to insert a document are checked against schema.

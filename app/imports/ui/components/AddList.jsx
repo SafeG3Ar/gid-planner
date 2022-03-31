@@ -21,16 +21,16 @@ const formSchema = new SimpleSchema({
 
 /** Renders the Page for adding a document. */
 class AddList extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            items: [],
-            open: false,
-        };
-        this.handleRemove = this.handleRemove.bind(this);
-        this.handleChecked = this.handleChecked.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
-    }
+    // constructor(props) {
+    //     super(props);
+    //     this.state = {
+    //         items: [],
+    //         open: false,
+    //     };
+    //     this.handleRemove = this.handleRemove.bind(this);
+    //     this.handleChecked = this.handleChecked.bind(this);
+    //     this.handleSubmit = this.handleSubmit.bind(this);
+    // }
 
     handleRemove(id) {
         const finalItems = this.state.items.filter((item) => {
@@ -90,7 +90,7 @@ class AddList extends React.Component {
         let fRef = null;
         const bridge = new SimpleSchema2Bridge(formSchema);
         return (
-            <Container>
+            <div>
                 <AutoForm ref={ref => { fRef = ref; }} schema={bridge} onSubmit={data => this.handleSubmit(data, fRef)} >
                         <TextField id='list-name' name='name' />
                         {/* <FormControl>
@@ -102,10 +102,9 @@ class AddList extends React.Component {
                             />
                             <SubmitField id='item-submit' value='Submit' /> 
                         </FormControl> */}
-                        <ErrorsField />
                         <SubmitField id="list-submit" value='Submit' />
                 </AutoForm>
-            </Container>
+            </div>
         );
     }
 };

@@ -16,6 +16,7 @@ import { addItemMethod } from '../../api/item/ItemCollection.methods';
 
 /** Create a schema to specify the structure of the data to appear in the form. */
 const formSchema = new SimpleSchema({
+    name: { type: String, optional: true },
     item: { type: String, optional: true },
     listId: { type: String, optional: true },
     checked: { type: Boolean, optional: true },
@@ -29,7 +30,7 @@ const bridge = new SimpleSchema2Bridge(formSchema);
 class AddListItem extends React.Component {
 
     state = {
-        textInput: '',
+        listId: '',
         show: false,
     }
 
@@ -60,25 +61,44 @@ class AddListItem extends React.Component {
         });
     }
 
-    handleChange = (e, { inputText, value }) => this.setState({ [inputText]: value })
+    handleChange = (e, { listName, value }) => this.setState({ [listName]: value })
+
 
     handleSubmit = (data, formRef) => {
         // const { inputText } = this.state
         // e.preventDefault();
-        const { item, listId, checked } = data;
+        const { name, item, checked } = data;
         // const item = this.state.textInput;
         const createdAt = new Date();
         const owner = Meteor.user().username;
-        Items.collection.insert({ item, listId, checked, createdAt, owner },
+        const listId = Lists.collection.update(_id, {  $set: { name, owner } },
             (error) => {
                 if (error) {
                     swal('Error', error.message, 'error');
                 } else {
-                    swal('Success', 'Item added', 'success');
-                    formRef.reset();
-                    // this.setState({ item: textInput })
-                }
-            });
+                    Items.collection.insert({ item, listId, checked, createdAt, owner },
+                        (error) => {
+                            if (error) {
+                                swal('Error', error.message, 'error');
+                            } else {
+                                // swal('Success', 'Item added', 'success');
+                                formRef.reset('item');
+                            }
+                        });
+                    
+                    
+            }});
+
+        // Items.collection.insert({ item, listId, checked, createdAt, owner },
+        //     (error) => {
+        //         if (error) {
+        //             swal('Error', error.message, 'error');
+        //         } else {
+        //             // swal('Success', 'Item added', 'success');
+        //             formRef.reset();
+        //             // this.setState({ item: textInput })
+        //         }
+        //     });
     }
 
     // renderItems() {
@@ -138,9 +158,12 @@ class AddListItem extends React.Component {
                     schema={bridge}
                     onSubmit={data => this.handleSubmit(data, fRef)}>
                     <TextField
+                        placeholder='Give your list a name'
+                        name='name'
+                    />
+                    <TextField
                         placeholder='Type to add to list'
                         name='item'
-                        // value={this.state.inputText}
                     />
                     <SubmitField value='Submit' />
                 </AutoForm>
@@ -161,10 +184,11 @@ AddListItem.propTypes = {
 
 const AddListItemContainer = withTracker(() => {
     const sub1 = Meteor.subscribe(Items.userPublicationName);
+    const sub2 = Meteor.subscribe(Lists.userPublicationName);
     return {
         items: Items.collection.find({}, { sort: { createdAt: -1 } }).fetch(),
         incompleteCount: Items.collection.find({ checked: { $ne: true } }).count(),
-        ready: sub1.ready(),
+        ready: sub1.ready() && sub2.ready(),
     };
 })(AddListItem);
 
