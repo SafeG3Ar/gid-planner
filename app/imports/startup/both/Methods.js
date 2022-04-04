@@ -37,7 +37,7 @@ Meteor.methods({
 const updateListMethod = 'list.update';
 Meteor.methods({
     'list.update'({ name, _id }) {
-        Lists.collection.update(_id, { $set: {
+        return Lists.collection.update(_id, { $set: {
             name,
             owner: Meteor.user().username,
         }}, { upsert: true });

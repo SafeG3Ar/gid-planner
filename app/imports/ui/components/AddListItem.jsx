@@ -29,7 +29,7 @@ const bridge = new SimpleSchema2Bridge(formSchema);
 /** Renders the Page for adding a document. */
 class AddListItem extends React.Component {
 
-    state = { listID: '', itemName: '' }
+    state = { listID: '', listName: '' }
 
     // constructor(props) {
     //     super(props);
@@ -63,15 +63,16 @@ class AddListItem extends React.Component {
     handleChange = (e, { listID, value }) => this.setState({ [listID]: value })
 
     handleListSubmit= (data) => {
-        const { listID } = this.state;
+        const { listID, listName } = this.state;
         // e.preventDefault();
         const { name } = data;
         const owner = Meteor.user().username;
-        this.setState({ listID: Meteor.call(updateListMethod, data,
+        this.setState({ listID: Lists.collection.insert({ name, owner },
             (error) => {
-                if (error) {
+                if (error, result) {
                     swal('Error', error.message, 'error');
                 } else {
+                    // console.log(this.state.listName);
                     console.log(this.state.listID);
                 }
             }) });
