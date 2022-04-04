@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Button, Input, Modal, Feed } from 'semantic-ui-react';
+import { List, Container, Button, Input, Modal, Feed, Icon, SegmentGroup } from 'semantic-ui-react';
 import { AutoForm, ErrorsField, SubmitField, TextField, DateField, SelectField, LongTextField } from 'uniforms-material';
 import swal from 'sweetalert';
 import { Meteor } from 'meteor/meteor';
@@ -10,7 +10,7 @@ import { _ } from 'meteor/underscore';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import SimpleSchema from 'simpl-schema';
 import { Items } from '../../api/item/ItemCollection';
-import { addItemMethod, removeItemMethod, setCheckedMethod } from '../../api/item/ItemCollection.methods';
+import { Lists } from '../../api/list/ListCollection';
 
 const listElementStyles = {
     color: 'black',
@@ -25,6 +25,14 @@ const listElementCheckedStyles = {
 
 /** Renders the Page for adding a document. */
 class ListItem extends React.Component {
+    state = {
+        open: false,
+    };
+
+    handleOpen = () => this.setState({ open: true });
+
+    handleClose = () => this.setState({ open: false });
+
     // constructor(props) {
     //     super(props);
     //     this.state = {
@@ -48,9 +56,14 @@ class ListItem extends React.Component {
     //     });
     // }
 
-    // removeThisItem() {
-    //     Items.collection.remove(this.props.item._id);
-    // }
+    setOpen(value) {
+        this.setState({ open: value });
+    }
+
+    removeThisItem(docId) {
+        this.props.Items.collection.remove(docId);
+        this.setOpen(false);
+    }
 
     // handleCheck = () => {
     //     Meteor.call(setCheckedMethod, this.props.item._id, !this.props.item.checked);
@@ -58,9 +71,16 @@ class ListItem extends React.Component {
 
     render() {
         // const { item } = this.props;
-        const itemClassName = this.props.item.checked;
+        // const itemClassName = this.props.item.checked;
         // const listStyles = this.props.checked? listElementStyles: listElementCheckedStyles;
         return (
+            // <List divided relaxed>
+            //     <List.Item>
+            //         <List.Content>
+            //             {this.props.item.item}
+            //         </List.Content>
+            //     </List.Item>
+            // </List>
             <Feed.Event>
                 <Feed.Content>
                     <Feed.Summary>

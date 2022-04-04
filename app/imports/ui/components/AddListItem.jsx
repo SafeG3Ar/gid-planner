@@ -1,5 +1,5 @@
 import React from 'react';
-import { Item, Form, Segment, Container, Button, Icon, Input, Modal, Label, Header } from 'semantic-ui-react';
+import { List, Item, Form, Segment, Container, Button, Icon, Input, Modal, Label, Header } from 'semantic-ui-react';
 import { AutoForm, ErrorsField, SubmitField, TextField, DateField, HiddenField } from 'uniforms-material';
 import swal from 'sweetalert';
 import { Meteor } from 'meteor/meteor';
@@ -12,7 +12,7 @@ import SimpleSchema from 'simpl-schema';
 import { Items } from '../../api/item/ItemCollection';
 import { Lists } from '../../api/list/ListCollection';
 import ListItem from './ListItem';
-import { addItemMethod } from '../../api/item/ItemCollection.methods';
+import { updateListMethod } from '../../startup/both/Methods';
 
 /** Create a schema to specify the structure of the data to appear in the form. */
 const formSchema = new SimpleSchema({
@@ -29,23 +29,22 @@ const bridge = new SimpleSchema2Bridge(formSchema);
 /** Renders the Page for adding a document. */
 class AddListItem extends React.Component {
 
-    state = {
-        listId: '',
-        show: false,
-    }
+    state = { listID: '', itemName: '' }
 
     // constructor(props) {
     //     super(props);
     //     this.state = {
     //         hideCompleted: false,
     //         // item: '',
-    //         textInput: '',
+    //         listName: '',
     //         show: false,
     //     };
+    //     this.handleListName = this.handleListName.bind(this);
 
     //     this.toggleHideCompleted = this.toggleHideCompleted.bind(this);
     //     this.handleSubmit = this.handleSubmit.bind(this);
     //     this.handleChange = this.handleChange.bind(this);
+
 
     // }
 
@@ -61,45 +60,76 @@ class AddListItem extends React.Component {
         });
     }
 
-    handleChange = (e, { listName, value }) => this.setState({ [listName]: value })
+    handleChange = (e, { listID, value }) => this.setState({ [listID]: value })
 
-
-    handleSubmit = (data, formRef) => {
-        // const { inputText } = this.state
+    handleListSubmit= (data) => {
+        const { listID } = this.state;
         // e.preventDefault();
-        const { name, item, checked } = data;
-        // const item = this.state.textInput;
-        const createdAt = new Date();
+        const { name } = data;
         const owner = Meteor.user().username;
-        const listId = Lists.collection.update(_id, {  $set: { name, owner } },
+        this.setState({ listID: Meteor.call(updateListMethod, data,
             (error) => {
                 if (error) {
                     swal('Error', error.message, 'error');
                 } else {
-                    Items.collection.insert({ item, listId, checked, createdAt, owner },
-                        (error) => {
-                            if (error) {
-                                swal('Error', error.message, 'error');
-                            } else {
-                                // swal('Success', 'Item added', 'success');
-                                formRef.reset('item');
-                            }
-                        });
-                    
+                    console.log(this.state.listID);
+                }
+            }) });
+    }
+
+    handleSubmit = (data, formRef) => {
+        const { listID } = this.state;
+        const { item, checked } = data;
+        const createdAt = new Date();
+        const owner = Meteor.user().username;
+        // const lists = _.pluck(Lists.collection.find({}).fetch(), '_id');
+        Items.collection.insert({ item, listId: this.state.listID, checked, createdAt, owner },
+            (error) => {
+                if (error) {
+                    swal('Error', error.message, 'error');
+                } else { 
+                    formRef.reset();
                     
             }});
-
-        // Items.collection.insert({ item, listId, checked, createdAt, owner },
-        //     (error) => {
-        //         if (error) {
-        //             swal('Error', error.message, 'error');
-        //         } else {
-        //             // swal('Success', 'Item added', 'success');
-        //             formRef.reset();
-        //             // this.setState({ item: textInput })
-        //         }
-        //     });
     }
+
+    // handleSubmit = (data, formRef) => {
+    //     const { name, item, checked, _id } = data;
+    //     const createdAt = new Date();
+    //     const owner = Meteor.user().username;
+    //     const lists = _.pluck(Lists.collection.find({}).fetch(), '_id');
+
+    //     const listId = Lists.collection.insert({ name, owner },
+    //         (error) => {
+    //             if (error) {
+    //                 swal('Error', error.message, 'error');
+    //             } else {
+    //                 console.log(listId);
+    //                 //  const list = Items.collection.findOne({ _id: listId });
+    //                 // if (listId 
+    //                 Items.collection.insert({ item, listId, checked, createdAt, owner },
+    //                     (error) => {
+    //                         if (error) {
+    //                             swal('Error', error.message, 'error');
+    //                         } else {
+    //                             console.log(listId);
+    //                             // formRef.reset();
+    //                     }});    
+
+    //         }});
+    // }
+
+
+    // Items.collection.insert({ item, listId, checked, createdAt, owner },
+    //     (error) => {
+    //         if (error) {
+    //             swal('Error', error.message, 'error');
+    //         } else {
+    //             // swal('Success', 'Item added', 'success');
+    //             formRef.reset();
+    //             // this.setState({ item: textInput })
+    //         }
+    //     });
 
     // renderItems() {
     //     let filteredItems = this.props.items;
@@ -150,17 +180,25 @@ class AddListItem extends React.Component {
 
     render() {
         let fRef = null;
-        // const { item, inputText } = this.state
         return (
             <div>
-                <AutoForm ref={ref => {
-                    fRef = ref; }}
+                <AutoForm 
+                    // ref={ref => { fRef = ref; }}
                     schema={bridge}
-                    onSubmit={data => this.handleSubmit(data, fRef)}>
+                    onSubmit={data => this.handleListSubmit(data)}
+                    model={this.props.doc}
+                >
                     <TextField
                         placeholder='Give your list a name'
                         name='name'
                     />
+                    <SubmitField value='Submit' />
+                </AutoForm>
+                <AutoForm 
+                    ref={ref => { fRef = ref; }}
+                    schema={bridge}
+                    onSubmit={data => this.handleSubmit(data, fRef)}
+                >
                     <TextField
                         placeholder='Type to add to list'
                         name='item'
@@ -168,6 +206,9 @@ class AddListItem extends React.Component {
                     <SubmitField value='Submit' />
                 </AutoForm>
                 <Segment>
+                    {/* <List>
+                        {this.props.items.map((item) => <ListItem key={item._id} item={item} />)}
+                    </List> */}
                     <ul>
                         {this.props.items.map((item, index) => <ListItem key={index} item={item} />)}
                     </ul>
@@ -178,14 +219,23 @@ class AddListItem extends React.Component {
 };
 
 AddListItem.propTypes = {
+    doc: PropTypes.object,
+    // model: PropTypes.object,
+    // lists: PropTypes.array,
+    // item: PropTypes.object,
     items: PropTypes.array.isRequired,
     ready: PropTypes.bool.isRequired,
 };
 
-const AddListItemContainer = withTracker(() => {
+const AddListItemContainer = withTracker(({ match }) => {
+    const documentId = match.params._id;
+    // const user = Meteor.user().username;
     const sub1 = Meteor.subscribe(Items.userPublicationName);
     const sub2 = Meteor.subscribe(Lists.userPublicationName);
     return {
+        doc: Lists.collection.findOne(documentId),
+        // lists: _.where(Lists.collection.find().fetch(), { owner: user }),
+        // item: Items.collection.find({}).fetch(),
         items: Items.collection.find({}, { sort: { createdAt: -1 } }).fetch(),
         incompleteCount: Items.collection.find({ checked: { $ne: true } }).count(),
         ready: sub1.ready() && sub2.ready(),

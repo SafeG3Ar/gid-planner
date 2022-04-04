@@ -16,8 +16,13 @@ function addData(data) {
 
 function addLists(data) {
   console.log(`  Adding: (${data.owner}) list`);
-  Lists.collection.insert(data);
+  Lists.collection.insert({ name: data.name, owner: data.owner });
 }
+
+// function addItems(data) {
+//   console.log(`  Adding: (${data.owner}) item`);
+//   Lists.collection.allow.insert({ item: data.item, listId: data.listId, checked: data.checked, createdAt: data.createdAt, owner: data.owner });
+// }
 
 function addProfiles(data) {
   console.log(`  Adding:(${data.owner}) profile`);
@@ -33,12 +38,6 @@ function addTasks(data) {
   console.log(`  Adding: tasks for (${data.owner})`);
   Tasks.collection.insert(data);
 }
-
-// function addItems(data) {
-//   console.log(`  Adding: items for (${data.item})`);
-//   Items.collection.insert({ data });
-// }
-
 
 // Initialize the StuffsCollection if empty.
 if (Stuffs.collection.find().count() === 0) {

@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
 import { _ } from 'meteor/underscore';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import SimpleSchema from 'simpl-schema';
-import { addItemMethod, insertListMethod } from '../../startup/both/Methods';
+// import { addItemMethod, insertListMethod } from '../../startup/both/Methods';
 import { Lists } from '../../api/list/ListCollection';
 import { Items } from '../../api/item/ItemCollection';
 

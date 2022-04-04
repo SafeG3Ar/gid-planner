@@ -1,36 +1,48 @@
-// import { Meteor } from 'meteor/meteor';
-// import { Items } from '../../api/item/ItemCollection';
-// import { check } from 'meteor/check';
-// import { _ } from 'meteor/underscore';
+import { Meteor } from 'meteor/meteor';
+import { check } from 'meteor/check';
+import { _ } from 'meteor/underscore';
+import { Items } from '../../api/item/ItemCollection';
+import { Lists } from '../../api/list/ListCollection';
 
-// const addItemMethod = 'Items.add';
-// const removeItemMethod = 'Items.remove';
-// const setCheckedMethod = 'Items.setChecked';
+const addItemMethod = 'items.add';
+Meteor.methods({
+    'items.add'({ item, checked, listId }) {
+        Items.collection.insert({
+            item,
+            checked,
+            listId,
+            createdAt: new Date(),
+            owner: Meteor.user().findOne(this.userId).username,
+        });
+    },
+});
 
-// Meteor.methods({
-//     'items.add'({ item }) {
-//         Items.collection.insert({
-//             item,
-//             checked,
-//             listId,
-//             createdAt: new Date(),
-//             owner: Meteor.user().findOne(this.userId).username,
-//         });
-//     },
-//     'items.remove'(itemId) {
-//         Items.collection.remove({ itemId });
-//     },
-//     'items.setChecked'({ itemId, setChecked }) {
-//         check(itemId, String);
-//         check(setChecked, Boolean);
-//         Items.update(
-//             itemId, { $set: { checked: setChecked } });
-//     },
+const removeItemMethod = 'items.remove';
+Meteor.methods({
+    'items.remove'(itemId) {
+        Items.collection.remove({ itemId });
+    },
+});
 
-// });
+const setCheckedMethod = 'items.setChecked';
+Meteor.methods({
+    'items.setChecked'({ itemId, setChecked }) {
+        check(itemId, String);
+        check(setChecked, Boolean);
+        Items.update(
+            itemId, { $set: { checked: setChecked } });
+    },
+});
 
+const updateListMethod = 'list.update';
+Meteor.methods({
+    'list.update'({ name, _id }) {
+        Lists.collection.update(_id, { $set: {
+            name,
+            owner: Meteor.user().username,
+        }}, { upsert: true });
+    },
+});
 
-
-
-// export { addItemMethod, removeItemMethod, setCheckedMethod };
+export { addItemMethod, removeItemMethod, setCheckedMethod, updateListMethod };
 
