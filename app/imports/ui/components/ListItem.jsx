@@ -1,5 +1,5 @@
 import React from 'react';
-import { List, Container, Button, Input, Modal, Feed, Icon, SegmentGroup } from 'semantic-ui-react';
+import { List, Checkbox, Container, Grid, Button, Input, Modal, Feed, Icon, SegmentGroup } from 'semantic-ui-react';
 import { AutoForm, ErrorsField, SubmitField, TextField, DateField, SelectField, LongTextField } from 'uniforms-material';
 import swal from 'sweetalert';
 import { Meteor } from 'meteor/meteor';
@@ -74,20 +74,25 @@ class ListItem extends React.Component {
         // const itemClassName = this.props.item.checked;
         // const listStyles = this.props.checked? listElementStyles: listElementCheckedStyles;
         return (
-            // <List divided relaxed>
-            //     <List.Item>
-            //         <List.Content>
+            <Container>
+                <List celled fluid>
+                    <List.Item>    
+                        <List.Content floated='left'>
+                            {this.props.item.item}
+                        </List.Content>
+                        <List.Content floated='right'>
+                            <Checkbox />
+                        </List.Content>
+                    </List.Item>
+                </List>
+            </Container>
+            // <Feed.Event>
+            //     <Feed.Content>
+            //         <Feed.Summary>
             //             {this.props.item.item}
-            //         </List.Content>
-            //     </List.Item>
-            // </List>
-            <Feed.Event>
-                <Feed.Content>
-                    <Feed.Summary>
-                        {this.props.item.item}
-                    </Feed.Summary>
-                </Feed.Content>
-            </Feed.Event>
+            //         </Feed.Summary>
+            //     </Feed.Content>
+            // </Feed.Event>
             // <li className={itemClassName}>
             //     <button className='remove' onClick={this.deleteThisItem}>
             //         &times;

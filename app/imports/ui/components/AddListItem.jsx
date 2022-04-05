@@ -29,7 +29,7 @@ const bridge = new SimpleSchema2Bridge(formSchema);
 /** Renders the Page for adding a document. */
 class AddListItem extends React.Component {
 
-    state = { listID: '', listName: '' }
+    state = { listID: '', listName: '', show: false }
 
     // constructor(props) {
     //     super(props);
@@ -62,36 +62,41 @@ class AddListItem extends React.Component {
 
     handleChange = (e, { listID, value }) => this.setState({ [listID]: value })
 
-    handleListSubmit= (data) => {
+    handleListSubmit = (data, formRef) => {
         const { listID, listName } = this.state;
         // e.preventDefault();
-        const { name } = data;
+        const { name, _id } = data;
         const owner = Meteor.user().username;
-        this.setState({ listID: Lists.collection.insert({ name, owner },
-            (error) => {
-                if (error, result) {
-                    swal('Error', error.message, 'error');
-                } else {
-                    // console.log(this.state.listName);
-                    console.log(this.state.listID);
-                }
-            }) });
+        this.setState({
+            listID: Lists.collection.insert({ name, owner },
+                (error) => {
+                    if (error, result) {
+                        swal('Error', error.message, 'error');
+                    } else {
+                        // console.log(this.state.listName);
+                        console.log(this.state.listID);
+                        this.state.show = false;
+                    }
+                })
+
+        });
     }
+
 
     handleSubmit = (data, formRef) => {
         const { listID } = this.state;
-        const { item, checked } = data;
+        const { name, item, checked } = data;
         const createdAt = new Date();
         const owner = Meteor.user().username;
-        // const lists = _.pluck(Lists.collection.find({}).fetch(), '_id');
         Items.collection.insert({ item, listId: this.state.listID, checked, createdAt, owner },
             (error) => {
                 if (error) {
                     swal('Error', error.message, 'error');
-                } else { 
+                } else {
                     formRef.reset();
-                    
-            }});
+
+                }
+            });
     }
 
     // handleSubmit = (data, formRef) => {
@@ -183,19 +188,20 @@ class AddListItem extends React.Component {
         let fRef = null;
         return (
             <div>
-                <AutoForm 
-                    // ref={ref => { fRef = ref; }}
+                <AutoForm
+                    ref={ref => { fRef = ref; }}
                     schema={bridge}
-                    onSubmit={data => this.handleListSubmit(data)}
+                    onSubmit={data => this.handleListSubmit(data, fRef)}
                     model={this.props.doc}
                 >
                     <TextField
                         placeholder='Give your list a name'
                         name='name'
+
                     />
-                    <SubmitField value='Submit' />
+                    <SubmitField label='Update' value='Update' />
                 </AutoForm>
-                <AutoForm 
+                <AutoForm
                     ref={ref => { fRef = ref; }}
                     schema={bridge}
                     onSubmit={data => this.handleSubmit(data, fRef)}
