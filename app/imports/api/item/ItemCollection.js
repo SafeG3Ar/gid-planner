@@ -15,7 +15,7 @@ class ItemCollection {
     this.schema = new SimpleSchema({
       item: { type: String, optional: true },
       listId: { type: String, optional: true },
-      checked: { type: Boolean, optional: true },
+      checked: { type: Boolean, defaultValue: false, optional: true },
       createdAt: { type: Date, optional: true },
       owner: { type: String },
     }, { tracker: Tracker });

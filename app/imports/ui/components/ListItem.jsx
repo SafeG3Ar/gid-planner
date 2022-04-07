@@ -1,5 +1,5 @@
 import React from 'react';
-import { List, Checkbox, Container } from 'semantic-ui-react';
+import { List, Checkbox, Container, Button, Icon } from 'semantic-ui-react';
 import { AutoForm, ErrorsField, SubmitField, TextField, DateField, SelectField, LongTextField } from 'uniforms-material';
 import swal from 'sweetalert';
 import { Meteor } from 'meteor/meteor';
@@ -9,6 +9,7 @@ import PropTypes from 'prop-types';
 import { _ } from 'meteor/underscore';
 import { Items } from '../../api/item/ItemCollection';
 import { Lists } from '../../api/list/ListCollection';
+import { removeItemMethod, setCheckedMethod } from '../../startup/both/Methods';
 
 const listElementStyles = {
     color: 'black',
@@ -48,35 +49,42 @@ class ListItem extends React.Component {
     //     });
     // }
 
-    // toggleChecked() {
-    //     Items.collection.update(this.props.item._id, {
-    //         $set: { checked: !this.props.item.checked }
-    //     });
-    // }
-
     setOpen(value) {
         this.setState({ open: value });
     }
 
-    removeThisItem(docId) {
-        this.props.Items.collection.remove(docId);
-        this.setOpen(false);
+    removeThisItem = () => {
+        Meteor.call(removeItemMethod, this.props.item._id);
     }
 
-    // handleCheck = () => {
-    //     Meteor.call(setCheckedMethod, this.props.item._id, !this.props.item.checked);
-    // }
+    handleChecked = () => {
+        Items.collection.update(
+            this.props.item._id, { $set: { checked: ! this.props.item.checked } });
+    }
 
-    render() {
+    render = () => {
         // const { item } = this.props;
         // const itemClassName = this.props.item.checked;
         // const listStyles = this.props.checked? listElementStyles: listElementCheckedStyles;
         return (
             <Container>
-                <List celled fluid='true'>
+                <List celled verticalAlign='middle' fluid='true'>
                     <List.Item>
+                        <List.Content>
+                            <Button
+                                floated='right'
+                                size='mini'
+                                icon
+                                onClick={this.removeThisItem}
+                            >
+                                <Icon name='remove' color='red' />
+                            </Button>
+                        </List.Content>
                         <List.Content floated='left'>
-                            <Checkbox />
+                            <Checkbox
+                                checked={this.props.item.checked}
+                                onClick={this.handleChecked}
+                            />
                         </List.Content>
                         <List.Content>
                             {this.props.item.item}
@@ -120,7 +128,7 @@ ListItem.propTypes = {
 const ListItemContainer = withTracker(() => {
     const sub1 = Meteor.subscribe(Items.userPublicationName);
     return {
-        // item: Items.collection.find({}).fetch(),
+        // item: Items.collection.findOne({}),
         ready: sub1.ready(),
     };
 })(ListItem);

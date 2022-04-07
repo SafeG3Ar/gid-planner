@@ -21,6 +21,10 @@ Meteor.methods({
 const removeItemMethod = 'items.remove';
 Meteor.methods({
     'items.remove'(itemId) {
+        const item = Items.collection.findOne(itemId);
+        if (item.owner && item.owner !== Meteor.user().username) {
+            throw new Meteor.Error('not-authorized');
+        }
         Items.collection.remove({ itemId });
     },
 });
@@ -30,7 +34,7 @@ Meteor.methods({
     'items.setChecked'({ itemId, setChecked }) {
         check(itemId, String);
         check(setChecked, Boolean);
-        Items.update(
+        Items.collection.update(
             itemId, { $set: { checked: setChecked } });
     },
 });

@@ -41,6 +41,11 @@ Meteor.publish(Items.userPublicationName, function () {
   if (this.userId) {
     const username = Meteor.users.findOne(this.userId).username;
     return Items.collection.find({ owner: username });
+    // const listIds = sortedItems.map(function(x) { return x.listId});
+    // return [
+    //   sortedItems,
+    //   Lists.collection.find({ _id: { $in: listIds }})
+    // ];
   }
   return this.ready();
 });
