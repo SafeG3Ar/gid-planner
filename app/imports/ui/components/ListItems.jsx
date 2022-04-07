@@ -25,12 +25,13 @@ class ListItems extends React.Component {
 
     /** Render the page once subscriptions have been received. */
     renderPage = () => {
-        const { handleListId } = this.props;
-        console.log('listitem renderpage', this.props.items.filter(item => item.listId === this.props.listId))
+        const { handleListId, handleChange } = this.props;
+        const listName = _.pluck(Lists.collection.find({ _id: this.props.listId }).fetch(), 'name');
+        // console.log('listitem renderpage', this.props.items.filter(item => item.listId === this.props.listId))
         return (
             <Container>
                 <Header as='h3'>
-                    List
+                    {listName}
                 </Header>
                 <ul>
                     {this.props.items.filter(item =>
@@ -41,6 +42,7 @@ class ListItems extends React.Component {
                                     item={item}
                                     listId={this.props.listId}
                                     handleListId={handleListId}
+                                    handleChange={handleChange}
                                 />
                             )
                         })
@@ -75,7 +77,7 @@ const ListItemsContainer = withTracker(() => {
     return {
         items: Items.collection.find({}, { sort: { createdAt: -1 } }).fetch(),
         incompleteCount: Items.collection.find({ checked: { $ne: true } }).count(),
-        // list: Lists.collection.find({}).fetch(),
+        lists: Lists.collection.find({}).fetch(),
         ready: sub1.ready() && sub2.ready(),
     };
 })(ListItems);

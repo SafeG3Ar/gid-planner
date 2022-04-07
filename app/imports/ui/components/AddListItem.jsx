@@ -183,7 +183,7 @@ class AddListItem extends React.Component {
                 </AutoForm>
 
                 <Segment>
-                    <ListItems listId={this.state.listId} handleListId={this.handleListId} />
+                    <ListItems listId={this.state.listId} handleListId={this.handleListId} handleChange={this.handleChange} />
                 </Segment>
 
                 {/* <Segment>
