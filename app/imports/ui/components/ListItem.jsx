@@ -75,7 +75,7 @@ class ListItem extends React.Component {
         // const listStyles = this.props.checked? listElementStyles: listElementCheckedStyles;
         return (
             <Container>
-                <List celled fluid>
+                <List celled fluid='true'>
                     <List.Item>    
                         <List.Content floated='left'>
                             {this.props.item.item}

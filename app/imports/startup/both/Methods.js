@@ -6,13 +6,13 @@ import { Lists } from '../../api/list/ListCollection';
 
 const addItemMethod = 'items.add';
 Meteor.methods({
-    'items.add'({ item, checked, listId }) {
+    'items.add'({ item, listId, checked, createdAt, owner }) {
         Items.collection.insert({
             item,
-            checked,
             listId,
-            createdAt: new Date(),
-            owner: Meteor.user().findOne(this.userId).username,
+            checked,
+            createdAt,
+            owner,
         });
     },
 });
@@ -34,15 +34,25 @@ Meteor.methods({
     },
 });
 
-const updateListMethod = 'list.update';
+const addListMethod = 'list.add';
 Meteor.methods({
-    'list.update'({ name, _id }) {
-        return Lists.collection.update(_id, { $set: {
+    'list.add'({ name, owner }) {
+        return Lists.collection.insert({
             name,
-            owner: Meteor.user().username,
-        }}, { upsert: true });
+            owner,
+        });
     },
 });
 
-export { addItemMethod, removeItemMethod, setCheckedMethod, updateListMethod };
+const updateListMethod = 'list.update';
+Meteor.methods({
+    'list.update'({ _id, name, owner }) {
+        Lists.collection.update(_id, { $set: {
+            name,
+            owner,
+        }});
+    },
+});
+
+export { addItemMethod, removeItemMethod, setCheckedMethod, addListMethod, updateListMethod };
 

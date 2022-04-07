@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { List, Item, Form, Segment, Container, Button, Icon, Input, Modal, Label, Header } from 'semantic-ui-react';
-import { AutoForm, ErrorsField, SubmitField, TextField, DateField, HiddenField } from 'uniforms-material';
+import { AutoForm, ErrorsField, SubmitField, TextField, DateField, HiddenField } from 'uniforms-semantic';
 import swal from 'sweetalert';
 import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
@@ -12,7 +12,7 @@ import SimpleSchema from 'simpl-schema';
 import { Items } from '../../api/item/ItemCollection';
 import { Lists } from '../../api/list/ListCollection';
 import ListItem from './ListItem';
-import { updateListMethod } from '../../startup/both/Methods';
+import { addItemMethod, addListMethod, updateListMethod } from '../../startup/both/Methods';
 
 /** Create a schema to specify the structure of the data to appear in the form. */
 const formSchema = new SimpleSchema({
@@ -29,7 +29,7 @@ const bridge = new SimpleSchema2Bridge(formSchema);
 /** Renders the Page for adding a document. */
 class AddListItem extends React.Component {
 
-    state = { listID: '', listName: '', show: false }
+    state = { listID: '', listName: '', disable: false }
 
     // constructor(props) {
     //     super(props);
@@ -60,82 +60,93 @@ class AddListItem extends React.Component {
         });
     }
 
-    handleChange = (e, { listID, value }) => this.setState({ [listID]: value })
+    setDisable = (e) => {
+        if (this.state.disable) {
+            return;
+        }
+        this.setState({
+            disable: true
+        });
+    }
+
+    // handleClick = () => {
+    //     this.setState((prevState) => ({ active: !prevState.active }))
+    // }
+
+    handleChange = (e, { listName, value }) => this.setState({ [listName]: value })
 
     handleListSubmit = (data, formRef) => {
-        const { listID, listName } = this.state;
+        const { listID } = this.state;
         // e.preventDefault();
+        this.handleChange;
         const { name, _id } = data;
+        // const name = this.state.listName;
+        const list = Lists.collection.findOne({ _id: listID });
         const owner = Meteor.user().username;
-        this.setState({
-            listID: Lists.collection.insert({ name, owner },
-                (error) => {
-                    if (error, result) {
+        if (typeof (list) === 'undefined') {
+            Meteor.call(addListMethod, {
+                name: name,
+                owner: owner,
+            },
+                (error, result) => {
+                    if (error) {
                         swal('Error', error.message, 'error');
                     } else {
-                        // console.log(this.state.listName);
-                        console.log(this.state.listID);
-                        this.state.show = false;
+                        console.log('listID', this.state.listID);
+                        this.setState({ listID: result });
+                        console.log('result', result);
+                        console.log(list);
                     }
                 })
-
-        });
+        } else {
+            Meteor.call(updateListMethod, {
+                _id: this.state.listID,
+                name: name,
+                owner: owner,
+            },
+                (error) => {
+                    if (error) {
+                        swal('Error', error.message, 'error');
+                    } else {
+                        // const list = Lists.collection.findOne(this.state.listID);
+                        // console.log(list);
+                    }
+                })
+        }
     }
 
 
     handleSubmit = (data, formRef) => {
-        const { listID } = this.state;
-        const { name, item, checked } = data;
+        const { listName, listID } = this.state;
+        const { item, checked } = data;
         const createdAt = new Date();
         const owner = Meteor.user().username;
-        Items.collection.insert({ item, listId: this.state.listID, checked, createdAt, owner },
+        const list = Lists.collection.findOne(this.state.listID);
+        const getListID = list._id;
+        // Lists.collection.update(getListID, { $set: { name, owner } });
+        // if (list.name) {
+        //     // this.handleChange.bind(this, listName);
+        //     this.handleChange(this);
+        //     this.setState({ listName: list.name });
+        // }
+        Meteor.call(addItemMethod, {
+            item,
+            listId: listID,
+            checked,
+            createdAt: createdAt,
+            owner: owner,
+        },
+            // Items.collection.insert({ item, listId: listID, checked, createdAt, owner },
             (error) => {
                 if (error) {
                     swal('Error', error.message, 'error');
                 } else {
+                    console.log('listID item:', listID);
+                    console.log('listName item:', this.state.listName);
                     formRef.reset();
-
                 }
             });
     }
-
-    // handleSubmit = (data, formRef) => {
-    //     const { name, item, checked, _id } = data;
-    //     const createdAt = new Date();
-    //     const owner = Meteor.user().username;
-    //     const lists = _.pluck(Lists.collection.find({}).fetch(), '_id');
-
-    //     const listId = Lists.collection.insert({ name, owner },
-    //         (error) => {
-    //             if (error) {
-    //                 swal('Error', error.message, 'error');
-    //             } else {
-    //                 console.log(listId);
-    //                 //  const list = Items.collection.findOne({ _id: listId });
-    //                 // if (listId 
-    //                 Items.collection.insert({ item, listId, checked, createdAt, owner },
-    //                     (error) => {
-    //                         if (error) {
-    //                             swal('Error', error.message, 'error');
-    //                         } else {
-    //                             console.log(listId);
-    //                             // formRef.reset();
-    //                     }});    
-
-    //         }});
-    // }
-
-
-    // Items.collection.insert({ item, listId, checked, createdAt, owner },
-    //     (error) => {
-    //         if (error) {
-    //             swal('Error', error.message, 'error');
-    //         } else {
-    //             // swal('Success', 'Item added', 'success');
-    //             formRef.reset();
-    //             // this.setState({ item: textInput })
-    //         }
-    //     });
 
     // renderItems() {
     //     let filteredItems = this.props.items;
@@ -186,24 +197,69 @@ class AddListItem extends React.Component {
 
     render() {
         let fRef = null;
+        const { listName, disable } = this.state;
         return (
             <div>
                 <AutoForm
-                    ref={ref => { fRef = ref; }}
+                    // ref={ref => { fRef = ref; }}
                     schema={bridge}
-                    onSubmit={data => this.handleListSubmit(data, fRef)}
-                    model={this.props.doc}
+                    // onChange={() => {this.handleChange}}
+                    onSubmit={data => this.handleListSubmit(data)}
+                // model={this.props.doc}
                 >
                     <TextField
+                        id='name'
                         placeholder='Give your list a name'
                         name='name'
-
+                        value={this.name}
+                    // onChange={this.handleChange.bind(this, listName)}
                     />
-                    <SubmitField label='Update' value='Update' />
+                    <Button
+                        type='submit'
+                        onChange={this.handleChange}
+                    // onClick={() => { this.setDisable; }}
+                    // onKeyPress={(e) => {
+                    //     if (e.key === 'Enter') this.setDisable;
+                    // }}
+                    // disabled={disable}
+                    // attached='right'
+                    >
+                        Save list name
+                    </Button>
+                    {/* <SubmitField
+                        value='Save list name'
+                    /> */}
                 </AutoForm>
-                <AutoForm
-                    ref={ref => { fRef = ref; }}
+                {/* <Form
+                    // ref={ref => { fRef = ref; }}
                     schema={bridge}
+                    onSubmit={data => this.handleListSubmit(data, fRef)}
+                // model={this.props.doc}
+                >
+                    <Form.Field>
+                        <input
+                            type='text'
+                            id='name'
+                            placeholder='Give your list a name'
+                            name='name'
+                            value={this.props.name}
+                            onChange={this.handleChange}
+                        />
+                        <input
+                            type='submit'
+                            name='submit'
+                            value='Submit'
+                        />
+                    </Form.Field>
+                    {/* <Button type='submit'>Update</Button> */}
+                {/* <SubmitField label='Update' value='Update' /> */}
+                {/* </Form> * /} */}
+
+                < AutoForm
+                    ref={ref => { fRef = ref; }
+                    }
+                    schema={bridge}
+                    // onChange={this.handleChange}
                     onSubmit={data => this.handleSubmit(data, fRef)}
                 >
                     <TextField
@@ -212,6 +268,10 @@ class AddListItem extends React.Component {
                     />
                     <SubmitField value='Submit' />
                 </AutoForm>
+
+                {/* <Segment>
+                    <pre>{JSON.stringify({ listName }, null, 2)}</pre>
+                </Segment> */}
                 <Segment>
                     {/* <List>
                         {this.props.items.map((item) => <ListItem key={item._id} item={item} />)}
@@ -220,13 +280,14 @@ class AddListItem extends React.Component {
                         {this.props.items.map((item, index) => <ListItem key={index} item={item} />)}
                     </ul>
                 </Segment>
-            </div>
+            </div >
         );
     }
 };
 
 AddListItem.propTypes = {
-    doc: PropTypes.object,
+    // doc: PropTypes.object,
+    name: PropTypes.string,
     // model: PropTypes.object,
     // lists: PropTypes.array,
     // item: PropTypes.object,
@@ -234,13 +295,13 @@ AddListItem.propTypes = {
     ready: PropTypes.bool.isRequired,
 };
 
-const AddListItemContainer = withTracker(({ match }) => {
-    const documentId = match.params._id;
+const AddListItemContainer = withTracker(() => {
+    // const documentId = match.params._id;
     // const user = Meteor.user().username;
     const sub1 = Meteor.subscribe(Items.userPublicationName);
     const sub2 = Meteor.subscribe(Lists.userPublicationName);
     return {
-        doc: Lists.collection.findOne(documentId),
+        // doc: Lists.collection.findOne(documentId),
         // lists: _.where(Lists.collection.find().fetch(), { owner: user }),
         // item: Items.collection.find({}).fetch(),
         items: Items.collection.find({}, { sort: { createdAt: -1 } }).fetch(),
