@@ -31,7 +31,6 @@ class ListItems extends React.Component {
             <Container>
                 <Header as='h3'>
                     List
-
                 </Header>
                 <ul>
                     {this.props.items.filter(item =>

@@ -151,11 +151,15 @@ class AddListItem extends React.Component {
                     />
                     <Button
                         type='submit'
+                        size='small'
+                        // floated='right'
+                        icon
+                        labelPosition='left'
                     >
-                        Save list name
+                        <Icon name='save' />
+                        Save
                     </Button>
                 </AutoForm>
-
                 < AutoForm
                     ref={ref => { fRef = ref; }
                     }
@@ -169,8 +173,11 @@ class AddListItem extends React.Component {
                     />
                     <Button
                         type='submit'
+                        size='small'
+                        // floated='left'
+                        icon
                     >
-                        Save list name
+                        <Icon name='plus square' />
                     </Button>
                     {/* <SubmitField value='Submit' /> */}
                 </AutoForm>

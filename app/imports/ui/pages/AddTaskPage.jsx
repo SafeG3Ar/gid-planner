@@ -107,7 +107,7 @@ class AddTaskPage extends React.Component {
                         >
                             <Modal.Content>
                                 <AddListItem />
-                                <Button onClick={this.handleClose}>Close</Button>
+                                {/* <Button onClick={this.handleClose}>Close</Button> */}
                             </Modal.Content>
                         </Modal>
                     </div>
