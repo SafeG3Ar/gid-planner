@@ -73,7 +73,9 @@ class AddListItem extends React.Component {
     //     this.setState((prevState) => ({ active: !prevState.active }))
     // }
 
-    handleChange = (e, { listName, value }) => this.setState({ [listName]: value })
+    handleChange = (e, { listName, value }) => this.setState({ [listName]: value }, () => {
+        console.log('handleChange listName:', this.state.listName);
+    })
 
     handleListSubmit = (data, formRef) => {
         const { listID } = this.state;
@@ -211,12 +213,11 @@ class AddListItem extends React.Component {
                         id='name'
                         placeholder='Give your list a name'
                         name='name'
-                        value={this.name}
-                    // onChange={this.handleChange.bind(this, listName)}
+                        // value={listName}
                     />
                     <Button
                         type='submit'
-                        onChange={this.handleChange}
+                        // onChange={this.handleChange}
                     // onClick={() => { this.setDisable; }}
                     // onKeyPress={(e) => {
                     //     if (e.key === 'Enter') this.setDisable;
