@@ -12,6 +12,7 @@ import SimpleSchema from 'simpl-schema';
 import { Items } from '../../api/item/ItemCollection';
 import { Lists } from '../../api/list/ListCollection';
 import ListItem from './ListItem';
+import ListItems from './ListItems';
 import { addItemMethod, addListMethod, updateListMethod } from '../../startup/both/Methods';
 
 /** Create a schema to specify the structure of the data to appear in the form. */
@@ -79,10 +80,8 @@ class AddListItem extends React.Component {
 
     handleListSubmit = (data, formRef) => {
         const { listID } = this.state;
-        // e.preventDefault();
         this.handleChange;
         const { name, _id } = data;
-        // const name = this.state.listName;
         const list = Lists.collection.findOne({ _id: listID });
         const owner = Meteor.user().username;
         if (typeof (list) === 'undefined') {
@@ -94,10 +93,8 @@ class AddListItem extends React.Component {
                     if (error) {
                         swal('Error', error.message, 'error');
                     } else {
-                        console.log('listID', this.state.listID);
                         this.setState({ listID: result });
                         console.log('result', result);
-                        console.log(list);
                     }
                 })
         } else {
@@ -110,8 +107,8 @@ class AddListItem extends React.Component {
                     if (error) {
                         swal('Error', error.message, 'error');
                     } else {
-                        // const list = Lists.collection.findOne(this.state.listID);
-                        // console.log(list);
+                        const list = Lists.collection.findOne(this.state.listID);
+                        console.log(list);
                     }
                 })
         }
@@ -124,13 +121,7 @@ class AddListItem extends React.Component {
         const createdAt = new Date();
         const owner = Meteor.user().username;
         const list = Lists.collection.findOne(this.state.listID);
-        const getListID = list._id;
-        // Lists.collection.update(getListID, { $set: { name, owner } });
-        // if (list.name) {
-        //     // this.handleChange.bind(this, listName);
-        //     this.handleChange(this);
-        //     this.setState({ listName: list.name });
-        // }
+
         Meteor.call(addItemMethod, {
             item,
             listId: listID,
@@ -138,7 +129,6 @@ class AddListItem extends React.Component {
             createdAt: createdAt,
             owner: owner,
         },
-            // Items.collection.insert({ item, listId: listID, checked, createdAt, owner },
             (error) => {
                 if (error) {
                     swal('Error', error.message, 'error');
@@ -162,52 +152,14 @@ class AddListItem extends React.Component {
     //     });
     // }
 
-    // render() {
-    //     let fRef = null;
-    //     return (
-    //         <div>
-    //             <Header>
-    //                 <h1>List ({this.props.incompleteCount}) </h1>
-    //                 <Container style={{ width: '1000px' }}>
-    //                     <label className='hide-completed'>
-    //                         <input
-    //                             type='checkbox'
-    //                             readOnly={true}
-    //                             checked={this.state.hideCompleted}
-    //                             onClick={this.toggleHideCompleted}
-    //                         />
-    //                         Hide Completed Items
-    //                     </label>
-    //                     <AutoForm ref={ref => { fRef = ref; }} schema={bridge} onSubmit={data => this.handleSubmit(data, fRef)} >
-    //                         <TextField
-    //                             name='item'
-    //                             // onChange={(e) => this.setState({ textInput: e.target.value })}
-    //                             placeholder='Type to add to list'
-    //                         />
-    //                         <HiddenField name='createdAt' value={new Date()} />
-    //                         <SubmitField value='Submit' />
-    //                     </AutoForm>
-    //                     <ul>
-    //                         {this.renderItems()}
-    //                         {/* {this.props.items.map((item) => <ListItem key={item._id} item={item} Items={Items} />)} */}
-    //                     </ul>
-    //                 </Container>
-    //             </Header>
-    //         </div>
-    //     );
-    // }
-
     render() {
         let fRef = null;
-        const { listName, disable } = this.state;
+        // const { listName, disable } = this.state;
         return (
             <div>
                 <AutoForm
-                    // ref={ref => { fRef = ref; }}
                     schema={bridge}
-                    // onChange={() => {this.handleChange}}
                     onSubmit={data => this.handleListSubmit(data)}
-                // model={this.props.doc}
                 >
                     <TextField
                         id='name'
@@ -217,44 +169,10 @@ class AddListItem extends React.Component {
                     />
                     <Button
                         type='submit'
-                        // onChange={this.handleChange}
-                    // onClick={() => { this.setDisable; }}
-                    // onKeyPress={(e) => {
-                    //     if (e.key === 'Enter') this.setDisable;
-                    // }}
-                    // disabled={disable}
-                    // attached='right'
                     >
                         Save list name
                     </Button>
-                    {/* <SubmitField
-                        value='Save list name'
-                    /> */}
                 </AutoForm>
-                {/* <Form
-                    // ref={ref => { fRef = ref; }}
-                    schema={bridge}
-                    onSubmit={data => this.handleListSubmit(data, fRef)}
-                // model={this.props.doc}
-                >
-                    <Form.Field>
-                        <input
-                            type='text'
-                            id='name'
-                            placeholder='Give your list a name'
-                            name='name'
-                            value={this.props.name}
-                            onChange={this.handleChange}
-                        />
-                        <input
-                            type='submit'
-                            name='submit'
-                            value='Submit'
-                        />
-                    </Form.Field>
-                    {/* <Button type='submit'>Update</Button> */}
-                {/* <SubmitField label='Update' value='Update' /> */}
-                {/* </Form> * /} */}
 
                 < AutoForm
                     ref={ref => { fRef = ref; }
@@ -270,17 +188,18 @@ class AddListItem extends React.Component {
                     <SubmitField value='Submit' />
                 </AutoForm>
 
-                {/* <Segment>
-                    <pre>{JSON.stringify({ listName }, null, 2)}</pre>
-                </Segment> */}
                 <Segment>
-                    {/* <List>
-                        {this.props.items.map((item) => <ListItem key={item._id} item={item} />)}
-                    </List> */}
+                    <ListItems />
+                </Segment>
+
+                {/* <Segment>
+                    <Header as='h3'>
+                        List
+                    </Header>
                     <ul>
                         {this.props.items.map((item, index) => <ListItem key={index} item={item} />)}
                     </ul>
-                </Segment>
+                </Segment> */}
             </div >
         );
     }
@@ -288,11 +207,11 @@ class AddListItem extends React.Component {
 
 AddListItem.propTypes = {
     // doc: PropTypes.object,
-    name: PropTypes.string,
-    // model: PropTypes.object,
+    // name: PropTypes.string,
     // lists: PropTypes.array,
-    // item: PropTypes.object,
-    items: PropTypes.array.isRequired,
+    // list: PropTypes.object,
+
+    // items: PropTypes.array.isRequired,
     ready: PropTypes.bool.isRequired,
 };
 
@@ -305,7 +224,7 @@ const AddListItemContainer = withTracker(() => {
         // doc: Lists.collection.findOne(documentId),
         // lists: _.where(Lists.collection.find().fetch(), { owner: user }),
         // item: Items.collection.find({}).fetch(),
-        items: Items.collection.find({}, { sort: { createdAt: -1 } }).fetch(),
+        // items: Items.collection.find({}, { sort: { createdAt: -1 } }).fetch(),
         incompleteCount: Items.collection.find({ checked: { $ne: true } }).count(),
         ready: sub1.ready() && sub2.ready(),
     };

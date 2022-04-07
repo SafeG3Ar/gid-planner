@@ -3,6 +3,7 @@ import { check } from 'meteor/check';
 import { _ } from 'meteor/underscore';
 import { Items } from '../../api/item/ItemCollection';
 import { Lists } from '../../api/list/ListCollection';
+import { ListItems } from '../../api/list/ListItemCollection';
 
 const addItemMethod = 'items.add';
 Meteor.methods({
