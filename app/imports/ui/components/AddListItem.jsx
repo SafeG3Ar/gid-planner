@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { List, Item, Form, Segment, Container, Button, Icon, Input, Modal, Label, Header } from 'semantic-ui-react';
+import React from 'react';
+import { Segment, Container, Button, Icon } from 'semantic-ui-react';
 import { AutoForm, ErrorsField, SubmitField, TextField, DateField, HiddenField } from 'uniforms-semantic';
 import swal from 'sweetalert';
 import { Meteor } from 'meteor/meteor';
@@ -30,24 +30,12 @@ const bridge = new SimpleSchema2Bridge(formSchema);
 /** Renders the Page for adding a document. */
 class AddListItem extends React.Component {
 
-    state = { listId: '', listName: '', inputItem: '' }
+    state = { listId: '', listName: '', inputItem: '', open: true }
 
-    // constructor(props) {
-    //     super(props);
-    //     this.state = {
-    //         hideCompleted: false,
-    //         // item: '',
-    //         listName: '',
-    //         show: false,
-    //     };
-    //     this.handleListName = this.handleListName.bind(this);
+    handleOpen = () => this.setState({ open: true });
 
-    //     this.toggleHideCompleted = this.toggleHideCompleted.bind(this);
-    //     this.handleSubmit = this.handleSubmit.bind(this);
-    //     this.handleChange = this.handleChange.bind(this);
+    handleClose = () => this.setState({ open: false });
 
-
-    // }
     handleListId = (listId) => {
         this.setState({ listId });
         console.log('handleListId', this.state.listId);
@@ -119,26 +107,12 @@ class AddListItem extends React.Component {
             });
     }
 
-
-
-    // renderItems() {
-    //     let filteredItems = this.props.items;
-    //     if (this.state.hideCompleted) {
-    //         filteredItems = filteredItems.filter(item => !item.checked);
-    //     }
-    //     return filteredItems.map((item) => {
-    //         return (
-    //             <ListItem key={item._id} item={item} />
-    //         )
-    //     });
-    // }
-
     render = () => {
         let fRef = null;
         // const { listName, disable } = this.state;
         console.log('listID render', this.state.listId);
         return (
-            <div>
+            <Container>
                 <AutoForm
                     schema={bridge}
                     onSubmit={data => this.handleListSubmit(data)}
@@ -185,16 +159,7 @@ class AddListItem extends React.Component {
                 <Segment>
                     <ListItems listId={this.state.listId} handleListId={this.handleListId} handleChange={this.handleChange} />
                 </Segment>
-
-                {/* <Segment>
-                    <Header as='h3'>
-                        List
-                    </Header>
-                    <ul>
-                        {this.props.items.map((item, index) => <ListItem key={index} item={item} />)}
-                    </ul>
-                </Segment> */}
-            </div >
+            </Container>
         );
     }
 };

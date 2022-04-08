@@ -17,6 +17,7 @@ class ListCollection {
       // items: { type: Array, optional: true },
       // 'items.$': { type: Object, optional: true },
       owner: { type: String },
+      taskId: { type: String, optional: true },
     }, { tracker: Tracker });
     // Attach the schema to the collection, so all attempts to insert a document are checked against schema.
     this.collection.attachSchema(this.schema);
