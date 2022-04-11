@@ -36,8 +36,11 @@ class ListItem extends React.Component {
         this.setState({ open: value });
     }
 
-    removeThisItem = (itemID) => {
-        Meteor.call(removeItemMethod, itemID);
+    // removeThisItem = (itemID) => {
+    //     Meteor.call(removeItemMethod, itemID);
+    // }
+    removeThisItem = (id) => {
+        Items.collection.remove(id);
     }
 
     handleChecked = () => {
