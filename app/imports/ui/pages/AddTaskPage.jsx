@@ -10,6 +10,7 @@ import { _ } from 'meteor/underscore';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import SimpleSchema from 'simpl-schema';
 import { Tasks } from '../../api/task/TaskCollection';
+import { Items } from '../../api/item/ItemCollection';
 import { Lists } from '../../api/list/ListCollection';
 import AddTask from '../components/AddTask';
 import AddList from '../components/AddList';
@@ -94,7 +95,7 @@ class AddTaskPage extends React.Component {
                     <ErrorsField />
                     <SubmitField id="task-submit" value='Submit' />
                 </AutoForm>
-                />
+            
                 {/* <div>
                     <Button onClick={this.handleOpen}>Add Task</Button>
                     <Modal
@@ -115,7 +116,7 @@ class AddTaskPage extends React.Component {
                         closeIcon
                     >
                         <Modal.Content>
-                            <ListItems />
+                            <AddListItem />
                             <br/>
                             <Button
                                 onClick={this.handleClose}
