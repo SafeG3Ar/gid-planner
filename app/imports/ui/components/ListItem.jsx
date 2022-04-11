@@ -49,7 +49,7 @@ class ListItem extends React.Component {
     render = () => {
         // const { item } = this.props;
         // const itemClassName = this.props.item.checked;
-        const listStyles = this.props.item.checked ? listElementStyles : listElementCheckedStyles;
+        const listStyles = this.props.item.checked ? listElementCheckedStyles: listElementStyles;
         return (
             <Container>
                 <List celled verticalAlign='middle' fluid='true'>
