@@ -13,7 +13,7 @@ import { removeItemMethod, setCheckedMethod } from '../../startup/both/Methods';
 
 const listElementStyles = {
     color: 'black',
-    fontSize: 18,
+    fontSize: 16,
     lineHeight: '24px',
 }
 
@@ -26,6 +26,7 @@ const listElementCheckedStyles = {
 class ListItem extends React.Component {
     state = {
         open: false,
+        // checked: false,
     };
 
     handleOpen = () => this.setState({ open: true });
@@ -36,22 +37,19 @@ class ListItem extends React.Component {
         this.setState({ open: value });
     }
 
-    // removeThisItem = (itemID) => {
-    //     Meteor.call(removeItemMethod, itemID);
-    // }
     removeThisItem = (id) => {
         Items.collection.remove(id);
     }
 
-    handleChecked = () => {
+    handleChecked = (id) => {
         Items.collection.update(
-            this.props.item._id, { $set: { checked: ! this.props.item.checked } });
+            id, { $set: { checked: ! this.props.item.checked } });
     }
 
     render = () => {
         // const { item } = this.props;
         // const itemClassName = this.props.item.checked;
-        // const listStyles = this.props.checked? listElementStyles: listElementCheckedStyles;
+        const listStyles = this.props.item.checked ? listElementStyles : listElementCheckedStyles;
         return (
             <Container>
                 <List celled verticalAlign='middle' fluid='true'>
@@ -68,12 +66,16 @@ class ListItem extends React.Component {
                         </List.Content>
                         <List.Content floated='left'>
                             <Checkbox
+                                onClick={() => this.handleChecked(this.props.item._id)}
                                 checked={this.props.item.checked}
-                                onClick={() => this.handleChecked}
+                                defaultChecked={false}
                             />
                         </List.Content>
                         <List.Content>
-                            {this.props.item.item}
+                            <li style={listStyles}>
+                                {this.props.item.item}
+                            </li>
+
                         </List.Content>
                     </List.Item>
                 </List>

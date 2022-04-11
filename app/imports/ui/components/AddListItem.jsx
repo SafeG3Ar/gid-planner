@@ -84,7 +84,7 @@ class AddListItem extends React.Component {
 
     handleSubmit = (data, formRef) => {
         const { listName, listId } = this.state;
-        const { item, checked } = data;
+        const { item} = data;
         const createdAt = new Date();
         const owner = Meteor.user().username;
         const list = Lists.collection.findOne(listId);
@@ -92,7 +92,7 @@ class AddListItem extends React.Component {
         Meteor.call(addItemMethod, {
             item,
             listId: listId,
-            checked,
+            checked: false,
             createdAt: createdAt,
             owner: owner,
         },
