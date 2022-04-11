@@ -94,7 +94,7 @@ class AddTaskPage extends React.Component {
                     <ErrorsField />
                     <SubmitField id="task-submit" value='Submit' />
                 </AutoForm>
-                />
+                
                 {/* <div>
                     <Button onClick={this.handleOpen}>Add Task</Button>
                     <Modal
