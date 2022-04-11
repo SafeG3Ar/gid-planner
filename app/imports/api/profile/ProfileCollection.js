@@ -17,6 +17,7 @@ class ProfileCollection {
       firstName: String,
       lastName: String,
       phone: String,
+      auth: Boolean,
       owner: String,
     }, { tracker: Tracker });
     // Attach the schema to the collection, so all attempts to insert a document are checked against schema.

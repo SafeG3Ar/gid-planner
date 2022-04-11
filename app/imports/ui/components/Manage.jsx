@@ -1,7 +1,7 @@
 import React from 'react';
-import { Container, Segment, Divider } from 'semantic-ui-react';
+import { Container, Segment, Divider, Button } from 'semantic-ui-react';
 // import PropTypes from 'prop-types';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 
 /** Renders a segment for the manage settings See pages/EditProfile.jsx. */
 class Manage extends React.Component {
@@ -11,11 +11,17 @@ class Manage extends React.Component {
         <Container fluid={true} style={{ width: '1000px' }}>
           <Segment className='cardStyle' padded>
             <p id='headers'>Manage</p>
-            <p className='settingsFont'>Tasks</p>
+            <p className='settingsFont'>Tasks
+              <Button as={Link} to={'/tasks/'} size="medium" circular icon='chevron right' inverted style={{ color: '#484F52' }}/>
+            </p>
             <Divider />
-            <p className='settingsFont'>Lists</p>
+            <p className='settingsFont'>Lists
+              <Button as={Link} to={'/lists/'} size="medium" circular icon='chevron right' inverted style={{ color: '#484F52' }}/>
+            </p>
             <Divider />
-            <p className='settingsFont'>Tags</p>
+            <p className='settingsFont'>Tags
+              <Button as={Link} to={'/tags/3 '} size="medium" circular icon='chevron right' inverted style={{ color: '#484F52' }}/>
+            </p>
           </Segment>
         </Container>
       </div>

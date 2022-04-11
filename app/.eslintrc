@@ -55,6 +55,7 @@
   },
   "globals": {
     "Assets": true, // Meteor disallows importing of Assets, see https://docs.meteor.com/api/assets.html
-    "document": false
+    "document": false,
+    "window": false
   }
 }
