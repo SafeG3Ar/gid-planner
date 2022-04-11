@@ -18,7 +18,6 @@ import Signout from '../pages/Signout';
 import EditProfile from '../pages/EditProfile';
 import EditName from '../components/EditName';
 import EditPhone from '../components/EditPhone';
-import Task from '../components/Tasks';
 // import VerifyCopy from '../components/VerifyCopy';
 import UserDashboard from '../pages/UserDashboard';
 import UserCalendar from '../components/UserCalendar';
@@ -42,7 +41,6 @@ class App extends React.Component {
             <ProtectedRoute path="/edit-profile" component={EditProfile}/>
             <ProtectedRoute path="/edit-name/:_id" component={EditName}/>
             <ProtectedRoute path="/edit-phone/:_id" component={EditPhone}/>
-            <ProtectedRoute path="/tasks/" component={Task}/>
             <ProtectedRoute path="/user-dashboard" component={UserDashboard}/>
             <ProtectedRoute path="/user-agenda" component={UserAgenda}/>
             <ProtectedRoute path="/user-calendar" component={UserCalendar}/>

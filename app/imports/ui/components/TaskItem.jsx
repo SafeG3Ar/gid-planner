@@ -1,5 +1,5 @@
 import React from 'react';
-import { Table, Button, Icon } from 'semantic-ui-react';
+import { List, Label, Checkbox } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import { Tasks } from '../../api/task/TaskCollection';
@@ -16,17 +16,23 @@ class TaskItem extends React.Component {
 
   render() {
     return (
-      <Table.Row>
-        <Table.Cell>{this.props.task.task}</Table.Cell>
-        <Table.Cell>{this.props.task.listName}</Table.Cell>
-        <Table.Cell>{this.props.task.tags}</Table.Cell>
-        <Table.Cell>{this.props.task.owner}</Table.Cell>
-        <Table.Cell>
-          <Button icon onClick={() => this.removeItem(this.props.task._id)}>
-            <Icon name = "trash" />
-          </Button>
-        </Table.Cell>
-      </Table.Row>
+      <List.Item>
+        <List.Icon><Checkbox/></List.Icon>
+        <List.Content>
+          <List.Header as='a'>{this.props.task.task}</List.Header>
+          <List horizontal>
+            <List.Item>
+              <Label as='a' size='mini'>
+                {this.props.task.tags}<Label.Detail>{this.props.task.dueDate}</Label.Detail>
+              </Label>
+            </List.Item>
+            <List.Item>
+              <Label as='a' color='black' size='mini'>{this.props.task.listName}</Label>
+            </List.Item>
+          </List>
+        </List.Content>
+      </List.Item>
+
     );
   }
 }
@@ -35,6 +41,7 @@ class TaskItem extends React.Component {
 TaskItem.propTypes = {
   task: PropTypes.shape({
     task: PropTypes.string,
+    dueDate: PropTypes.string,
     listName: PropTypes.array,
     tags: PropTypes.array,
     owner: PropTypes.string,
