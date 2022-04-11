@@ -1,6 +1,6 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
-import { Loader, Container, Header } from 'semantic-ui-react';
+import { Loader, Container, Header, List } from 'semantic-ui-react';
 import { AutoForm, ErrorsField, SubmitField, TextField, DateField, HiddenField } from 'uniforms-semantic';
 import { withTracker } from 'meteor/react-meteor-data';
 import { withRouter } from 'react-router-dom';
@@ -33,7 +33,7 @@ class ListItems extends React.Component {
                 <Header as='h3'>
                     {listName}
                 </Header>
-                <ul>
+                <List>
                     {this.props.items.filter(item =>
                         item.listId === this.props.listId).map((item) => {
                             return (
@@ -47,7 +47,7 @@ class ListItems extends React.Component {
                             )
                         })
                     }
-                </ul>
+                </List>
             </Container>
         );
     }
@@ -68,12 +68,6 @@ const ListItemsContainer = withTracker(() => {
     const sub1 = Meteor.subscribe(Items.userPublicationName);
     const sub2 = Meteor.subscribe(Lists.userPublicationName);
     const user = Meteor.user().username;
-    // const lists = _.where(Lists.collection.find({}).fetch(), { owner: user });
-    // const listItems = lists.filter((list, item) => list._id === item.listId);
-    // let query = {};
-    // if (this.state.hideCompleted) {
-    //     query = { checked: { $ne: true } };
-    // }
     return {
         items: Items.collection.find({}, { sort: { createdAt: -1 } }).fetch(),
         incompleteCount: Items.collection.find({ checked: { $ne: true } }).count(),

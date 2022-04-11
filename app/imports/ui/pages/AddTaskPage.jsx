@@ -90,43 +90,31 @@ class AddTaskPage extends React.Component {
                         onChange={this.handleSelectList}
                         placeholder='Select a list for this task'
                     />
+                    <div>
+                        <Button onClick={this.handleOpen}>Create a list</Button>
+                        <Modal
+                            open={this.state.modalOpen}
+                            onClose={this.handleClose}
+                            closeIcon
+                        >
+                            <Modal.Content>
+                                <AddListItem />
+                                <br />
+                                <Button
+                                    onClick={this.handleClose}
+                                    floated='right'
+                                >
+                                    Save/Close
+                                </Button>
+                            </Modal.Content>
+                        </Modal>
+                    </div>
                     <LongTextField id="task-note" name='note' />
                     <SelectField id="task-tags" name='tags' />
                     <ErrorsField />
                     <SubmitField id="task-submit" value='Submit' />
                 </AutoForm>
-            
-                {/* <div>
-                    <Button onClick={this.handleOpen}>Add Task</Button>
-                    <Modal
-                        open={this.state.modalOpen}
-                        onClose={this.handleClose}
-                    >
-                        <Box sx={{ ...style, width: 400 }}>
-                            <AddTask/>
-                            <Button onClick={this.handleClose}>Close</Button>
-                        </Box>
-                    </Modal>
-                </div> */}
-                <div>
-                    <Button onClick={this.handleOpen}>Create a list</Button>
-                    <Modal
-                        open={this.state.modalOpen}
-                        onClose={this.handleClose}
-                        closeIcon
-                    >
-                        <Modal.Content>
-                            <AddListItem />
-                            <br/>
-                            <Button
-                                onClick={this.handleClose}
-                                floated='right'
-                            >
-                                Save/Close
-                            </Button>
-                        </Modal.Content>
-                    </Modal>
-                </div>
+
             </Container>
 
         );
@@ -149,4 +137,4 @@ const AddTaskPageContainer = withTracker(() => {
     };
 })(AddTaskPage);
 
-export default withRouter (AddTaskPageContainer);
+export default withRouter(AddTaskPageContainer);

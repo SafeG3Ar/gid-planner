@@ -32,29 +32,12 @@ class ListItem extends React.Component {
 
     handleClose = () => this.setState({ open: false });
 
-    // constructor(props) {
-    //     super(props);
-    //     this.state = {
-    //         item: '',
-    //         open: false,
-    //     };
-    //     this.handleChange = this.handleChange.bind(this);
-    //     this.handleRemove = this.handleRemove.bind(this);
-    //     this.handleCheck = this.handleCheck.bind(this);
-    // }
-
-    // handleChange(e) {
-    //     this.setState({
-    //         item: e.target.value,
-    //     });
-    // }
-
     setOpen(value) {
         this.setState({ open: value });
     }
 
-    removeThisItem = () => {
-        Meteor.call(removeItemMethod, this.props.item._id);
+    removeThisItem = (itemID) => {
+        Meteor.call(removeItemMethod, itemID);
     }
 
     handleChecked = () => {
@@ -75,7 +58,7 @@ class ListItem extends React.Component {
                                 floated='right'
                                 size='mini'
                                 icon
-                                onClick={this.removeThisItem}
+                                onClick={() => this.removeThisItem(this.props.item._id)}
                             >
                                 <Icon name='remove' color='red' />
                             </Button>
@@ -83,7 +66,7 @@ class ListItem extends React.Component {
                         <List.Content floated='left'>
                             <Checkbox
                                 checked={this.props.item.checked}
-                                onClick={this.handleChecked}
+                                onClick={() => this.handleChecked}
                             />
                         </List.Content>
                         <List.Content>
@@ -125,12 +108,9 @@ ListItem.propTypes = {
     ready: PropTypes.bool.isRequired,
 };
 
-const ListItemContainer = withTracker(() => {
+export default withTracker(() => {
     const sub1 = Meteor.subscribe(Items.userPublicationName);
     return {
-        // item: Items.collection.findOne({}),
         ready: sub1.ready(),
     };
 })(ListItem);
-
-export default withRouter(ListItemContainer);
