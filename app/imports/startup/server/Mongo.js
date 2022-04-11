@@ -14,6 +14,8 @@ function addData(data) {
   Stuffs.collection.insert(data);
 }
 
+const sampleTasks = JSON.parse(Assets.getText('sample_task.json'));
+
 function addLists(data) {
   console.log(`  Adding: (${data.owner}) list`);
   Lists.collection.insert({ name: data.name, owner: data.owner });
@@ -69,10 +71,8 @@ if (Tags.collection.find().count() === 0) {
 }
 
 if (Tasks.collection.find().count() === 0) {
-  if (Meteor.settings.defaultTasks) {
-    console.log('Creating default tasks.');
-    Meteor.settings.defaultTasks.map(data => addTasks(data));
-  }
+  console.log('Creating default tasks from private/sample_task.json.');
+  sampleTasks.map(data => addTasks(data));
 }
 
 // if (Items.collection.find().count() === 0) {
