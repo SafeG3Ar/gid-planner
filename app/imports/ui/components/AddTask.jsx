@@ -1,15 +1,15 @@
 import React from 'react';
 import { Container, Button, Modal } from 'semantic-ui-react';
 import { AutoForm, ErrorsField, SubmitField, TextField, DateField, SelectField } from 'uniforms-semantic';
-import MultiSelectField from '../form-controllers/MultiSelectField';
 import swal from 'sweetalert';
 import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { _ } from 'meteor/underscore';
+// import { _ } from 'meteor/underscore';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import SimpleSchema from 'simpl-schema';
+import MultiSelectField from '../form-controllers/MultiSelectField';
 import { Tasks } from '../../api/task/TaskCollection';
 import { Items } from '../../api/item/ItemCollection';
 import { Lists } from '../../api/list/ListCollection';

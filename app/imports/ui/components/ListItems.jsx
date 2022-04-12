@@ -50,6 +50,7 @@ class ListItems extends React.Component {
 /** Require an array of Stuff documents in the props. */
 ListItems.propTypes = {
   listId: PropTypes.string,
+  handleChange: PropTypes.func,
   handleListId: PropTypes.func,
   items: PropTypes.array.isRequired,
   lists: PropTypes.array,
@@ -61,7 +62,6 @@ const ListItemsContainer = withTracker(() => {
   // Get access to Items documents.
   const sub1 = Meteor.subscribe(Items.userPublicationName);
   const sub2 = Meteor.subscribe(Lists.userPublicationName);
-  const user = Meteor.user().username;
   return {
     items: Items.collection.find({}, { sort: { createdAt: -1 } }).fetch(),
     incompleteCount: Items.collection.find({ checked: { $ne: true } }).count(),

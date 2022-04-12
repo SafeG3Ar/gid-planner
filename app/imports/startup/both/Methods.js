@@ -1,11 +1,11 @@
 import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
-import { _ } from 'meteor/underscore';
+// import { _ } from 'meteor/underscore';
 import { Tasks } from '../../api/task/TaskCollection';
 import { Items } from '../../api/item/ItemCollection';
 import { Lists } from '../../api/list/ListCollection';
 
-/** Methods to call from the client*/
+/** Methods to call from the client */
 
 const addTaskMethod = 'tasks.add';
 Meteor.methods({
@@ -37,6 +37,7 @@ Meteor.methods({
 const removeItemMethod = 'items.remove';
 Meteor.methods({
   'items.remove'(itemId) {
+    check(itemId, String);
     const item = Items.collection.findOne(itemId);
     if (item.owner && item.owner !== Meteor.user().username) {
       throw new Meteor.Error('not-authorized');
@@ -45,16 +46,16 @@ Meteor.methods({
   },
 });
 
-const setCheckedMethod = 'items.setChecked';
-Meteor.methods({
-  'items.setChecked'({ itemId, setChecked }) {
-    check(itemId, String);
-    check(setChecked, Boolean);
-    Items.collection.update(
-      itemId, { $set: { checked: setChecked } },
-    );
-  },
-});
+// const setCheckedMethod = 'items.setChecked';
+// Meteor.methods({
+//   'items.setChecked'({ itemId, setChecked }) {
+//     // check(itemId, String);
+//     // check(setChecked, Boolean);
+//     Items.collection.update(
+//       itemId, { $set: { checked: setChecked } },
+//     );
+//   },
+// });
 
 const addListMethod = 'list.add';
 Meteor.methods({
@@ -76,4 +77,4 @@ Meteor.methods({
   },
 });
 
-export { addTaskMethod, addItemMethod, removeItemMethod, setCheckedMethod, addListMethod, updateListMethod };
+export { addTaskMethod, addItemMethod, removeItemMethod, addListMethod, updateListMethod };

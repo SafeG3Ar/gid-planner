@@ -1,17 +1,16 @@
 import React from 'react';
 import { Segment, Container, Button, Icon } from 'semantic-ui-react';
-import { AutoForm, ErrorsField, SubmitField, TextField, DateField, HiddenField } from 'uniforms-semantic';
+import { AutoForm, TextField } from 'uniforms-semantic';
 import swal from 'sweetalert';
 import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { _ } from 'meteor/underscore';
+// import { _ } from 'meteor/underscore';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import SimpleSchema from 'simpl-schema';
 import { Items } from '../../api/item/ItemCollection';
 import { Lists } from '../../api/list/ListCollection';
-import ListItem from './ListItem';
 import ListItems from './ListItems';
 import { addItemMethod, addListMethod, updateListMethod } from '../../startup/both/Methods';
 
@@ -45,10 +44,10 @@ class AddListItem extends React.Component {
       console.log('handleChange listName:', this.state.listName);
     })
 
-    handleListSubmit = (data, formRef) => {
-      const { listId, listName } = this.state;
-      this.handleChange;
-      const { name, _id } = data;
+    handleListSubmit = (data) => {
+      const { listId } = this.state;
+      //   this.handleChange;
+      const { name } = data;
       const list = Lists.collection.findOne({ _id: listId });
       const owner = Meteor.user().username;
       if (typeof (list) === 'undefined') {
@@ -74,7 +73,6 @@ class AddListItem extends React.Component {
           if (error) {
             swal('Error', error.message, 'error');
           } else {
-            const list = Lists.collection.findOne(listId);
             console.log(list);
           }
         });
@@ -82,11 +80,11 @@ class AddListItem extends React.Component {
     }
 
     handleSubmit = (data, formRef) => {
-      const { listName, listId } = this.state;
+      const { listId } = this.state;
       const { item } = data;
       const createdAt = new Date();
       const owner = Meteor.user().username;
-      const list = Lists.collection.findOne(listId);
+      //   const list = Lists.collection.findOne(listId);
 
       Meteor.call(addItemMethod, {
         item,
@@ -99,8 +97,8 @@ class AddListItem extends React.Component {
         if (error) {
           swal('Error', error.message, 'error');
         } else {
-          console.log('listID handleSubmit:', listId);
-          console.log('listName item:', listName);
+        //   console.log('listID handleSubmit:', listId);
+        //   console.log('listName item:', listName);
           formRef.reset();
         }
       });
