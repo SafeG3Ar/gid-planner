@@ -65,10 +65,11 @@ Glen:
 - Ran some tests with Iroh.js dynamic analysis
 
 Angela:
+- Creating Collections
 - Task Form template
 - Task Form Functionality
 - Creating List Component that can be linked to Tasks
-- Creating Collections
+- Check-off and delete functionality for List component items
 
 ### Current Duties
 
@@ -93,6 +94,7 @@ Angela:
 - Managing Collections
 - Functionality of each page
 - Page styling
+- Move calls to maintaining collections to server-side
 
 ### Next
 
@@ -118,6 +120,6 @@ Glen:
 - Continue to implement Iroh dynamic testing
 
 Angela:
-- Make UI adjustments to forms
-- Implement components that allow users to edit and delete information
+- Make UI adjustments to forms/components
 - Implement functionalities for Admin
+- Assist Alyssandra with Tasks/Lists functionality
