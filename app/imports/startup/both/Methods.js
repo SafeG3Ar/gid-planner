@@ -5,6 +5,8 @@ import { Tasks } from '../../api/task/TaskCollection';
 import { Items } from '../../api/item/ItemCollection';
 import { Lists } from '../../api/list/ListCollection';
 
+/** Methods to call from the client*/
+
 const addTaskMethod = 'tasks.add';
 Meteor.methods({
   'tasks.add'({ task, listName, dueDate, note, tags, owner }) {

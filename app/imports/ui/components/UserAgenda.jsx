@@ -18,7 +18,7 @@ const UserAgenda = () => {
       {/* This is the TOMORROW List */}
       <Modal
         closeIcon
-        size={small}
+        size='small'
         open={modalOpen}
         onClose={handleClose}
         onOpen={handleOpen}
