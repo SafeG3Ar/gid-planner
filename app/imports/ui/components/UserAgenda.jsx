@@ -1,20 +1,35 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, Header, Icon, List, Loader, Segment } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
+import moment from 'moment';
 import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
 import { Tasks } from '../../api/task/TaskCollection';
 import TaskItem from './TaskItem';
 
-class UserAgenda extends React.Component {
-  render() {
-    return (this.props.ready) ? this.renderPage() : <Loader active>Getting data</Loader>;
-  }
+const today = moment(new Date());
+const UserAgenda = ({ ready, tasks }) => {
+  if (ready) {
+    const [todayTasks, setTodayTasks] = useState([]);
+    useEffect(() => {
+      setTodayTasks(tasks);
+    }, [tasks]);
 
-  renderPage() {
-    const today = new Date();
-    const tomorrow = new Date(today);
-    tomorrow.setDate(tomorrow.getDate() + 1);
+    const [tomorrowTasks, setTomorrowTasks] = useState([]);
+    useEffect(() => {
+      setTomorrowTasks(tasks);
+    }, [tasks]);
+
+    useEffect(() => {
+      let todayFilterTask = JSON.parse(JSON.stringify(tasks));
+      let tomorrowFilterTasks = JSON.parse(JSON.stringify(tasks));
+
+      todayFilterTask = todayFilterTask.filter((task) => task.dueDate === today.format('YYYY-MM-DD'));
+      tomorrowFilterTasks = tomorrowFilterTasks.filter((task) => task.dueDate > today.format('YYYY-MM-DD'));
+
+      setTodayTasks(todayFilterTask);
+      setTomorrowTasks(tomorrowFilterTasks);
+    });
 
     return (
       <Segment id="user-agenda" raised>
@@ -24,25 +39,26 @@ class UserAgenda extends React.Component {
         </Button>
         <Header as='h2' attached='top'>
       Today
-          <Header.Subheader>{today.toDateString()}</Header.Subheader>
+          <Header.Subheader>{today.format('MMMM DD, YYYY')}</Header.Subheader>
         </Header>
         {/* Map List for Today */}
         <List celled verticalAlign='middle'>
-          {this.props.tasks.map((task) => <TaskItem key={task._id} task={task} />)}
+          {todayTasks.map((task) => <TaskItem key={task._id} task={task} />)}
         </List>
 
         {/* This is the TOMORROW List */}
         <Header className='agenda-title' as='h2' attached='top'>
       Tomorrow
-          <Header.Subheader>{tomorrow.toDateString()}</Header.Subheader>
+          <Header.Subheader>{today.format('MMMM DD, YYYY')}</Header.Subheader>
         </Header>
         <List divided verticalAlign='middle'>
-          {this.props.tasks.map((task) => <TaskItem key={task._id} task={task} />)}
+          {tomorrowTasks.map((task) => <TaskItem key={task._id} task={task} />)}
         </List>
       </Segment>
     );
   }
-}
+  return (<Loader active>Getting data</Loader>);
+};
 
 // Require a document to be passed to this component.
 UserAgenda.propTypes = {
