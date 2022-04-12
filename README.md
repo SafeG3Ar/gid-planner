@@ -42,6 +42,7 @@ The following components and pages will be worked on through the next assignment
 - Full implementation of Calendar
 - Full implementation of lists
 - Styling Task form
+- Implement timeout when idle
 
 ## Roles and Responsibilities
 
@@ -102,6 +103,7 @@ Angela:
 - Functionality of each page
 - Page styling
 - Move calls to maintaining collections to server-side
+- Implement timeout when idle
 
 ### Next
 
