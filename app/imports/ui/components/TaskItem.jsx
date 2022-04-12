@@ -1,5 +1,5 @@
 import React from 'react';
-import { List, Label, Checkbox } from 'semantic-ui-react';
+import { Button, Icon, List, Label, Checkbox } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import { Tasks } from '../../api/task/TaskCollection';
@@ -17,7 +17,7 @@ class TaskItem extends React.Component {
   render() {
     return (
       <List.Item>
-        <List.Icon><Checkbox/></List.Icon>
+        <List.Icon><Checkbox /></List.Icon>
         <List.Content>
           <List.Header as='a'>{this.props.task.task}</List.Header>
           <List horizontal>
@@ -31,8 +31,12 @@ class TaskItem extends React.Component {
             </List.Item>
           </List>
         </List.Content>
+        <List.Icon>
+          <Button className = "deleteTask" icon onClick={() => this.removeItem(this.props.task._id)}>
+            <Icon name="trash" />
+          </Button>
+        </List.Icon>
       </List.Item>
-
     );
   }
 }

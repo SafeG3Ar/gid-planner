@@ -40,6 +40,38 @@
     padding: 0em 2em 0em 2em;
 }
 
+#user-agenda .button.deleteTask{
+    min-width: 40px;
+    border-radius: 500rem;
+    padding: 1em 1.5em;
+    background-color: white;
+    color: #3f51b5;
+}
+
+#user-agenda .button.deleteTask:hover{
+    min-width: 40px;
+    border-radius: 500rem;
+    padding: 1em 1.5em;
+    background-color: #DE00AE;
+    color: white;
+}
+
+#user-calendar .button.deleteTask{
+    min-width: 40px;
+    border-radius: 500rem;
+    padding: 1em 1.5em;
+    background-color: white;
+    color: #3f51b5;
+}
+
+#user-calendar .button.deleteTask:hover{
+    min-width: 40px;
+    border-radius: 500rem;
+    padding: 1em 1.5em;
+    background-color: #DE00AE;
+    color: white;
+}
+
 #user-agenda .button {
     min-width: 120px;
     border-radius: 500rem;
@@ -47,8 +79,9 @@
     background-color: white;
     color: #3f51b5;
 }
+
   #user-agenda .button:hover {
     background-color: #3f51b5;
     color: white;
   }
-  
+
