@@ -53,6 +53,7 @@ Anna:
 - Styling 
 - Sign In and Sign Up pages
 - Dashboard components
+- Redirections of pages
 
 Alyssandra:
 - Assisted with Creating Collections (Task, List, etc.)
@@ -86,6 +87,8 @@ Anna:
 - Styling 
 - Continue to Implement Dashboard functionality with Alyssandra
 - Functionality of each page
+- Adding A Refresh Button
+- Implementing the Refresh Component
 
 Alyssandra:
 - Continue to Implement Dashboard functionality with Anna
