@@ -7,7 +7,9 @@ import { withTracker } from 'meteor/react-meteor-data';
 import { Tasks } from '../../api/task/TaskCollection';
 import TaskItem from './TaskItem';
 
-const today = moment(new Date());
+const today = moment();
+const tomorrow = today.clone().add(1, 'days');
+
 const UserAgenda = ({ ready, tasks }) => {
   if (ready) {
     const [todayTasks, setTodayTasks] = useState([]);
@@ -25,7 +27,7 @@ const UserAgenda = ({ ready, tasks }) => {
       let tomorrowFilterTasks = JSON.parse(JSON.stringify(tasks));
 
       todayFilterTask = todayFilterTask.filter((task) => task.dueDate === today.format('YYYY-MM-DD'));
-      tomorrowFilterTasks = tomorrowFilterTasks.filter((task) => task.dueDate > today.format('YYYY-MM-DD'));
+      tomorrowFilterTasks = tomorrowFilterTasks.filter((task) => task.dueDate === tomorrow.format('YYYY-MM-DD'));
 
       setTodayTasks(todayFilterTask);
       setTomorrowTasks(tomorrowFilterTasks);
@@ -49,7 +51,7 @@ const UserAgenda = ({ ready, tasks }) => {
         {/* This is the TOMORROW List */}
         <Header className='agenda-title' as='h2' attached='top'>
       Tomorrow
-          <Header.Subheader>{today.format('MMMM DD, YYYY')}</Header.Subheader>
+          <Header.Subheader>{tomorrow.format('MMMM DD, YYYY')}</Header.Subheader>
         </Header>
         <List divided verticalAlign='middle'>
           {tomorrowTasks.map((task) => <TaskItem key={task._id} task={task} />)}
