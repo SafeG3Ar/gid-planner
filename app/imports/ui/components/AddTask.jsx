@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid, Container, Button, Icon, Input, Modal, Label } from 'semantic-ui-react';
+import { Container, Button, Modal } from 'semantic-ui-react';
 import { AutoForm, ErrorsField, SubmitField, TextField, DateField, SelectField, LongTextField } from 'uniforms-semantic';
 import swal from 'sweetalert';
 import { Meteor } from 'meteor/meteor';
@@ -12,18 +12,18 @@ import SimpleSchema from 'simpl-schema';
 import { Tasks } from '../../api/task/TaskCollection';
 import { Items } from '../../api/item/ItemCollection';
 import { Lists } from '../../api/list/ListCollection';
-import AddList from '../components/AddList';
 import AddListItem from '../components/AddListItem';
-import ListItems from '../components/ListItems';
+
 
 /** Create a schema to specify the structure of the data to appear in the form. */
 const formSchema = new SimpleSchema({
     task: { type: String },
-    date: { type: Date },
-    listName: { type: String, optional: true },
+    listName: { type: Array, optional: true },
+    'listName.$': String,
+    dueDate: { type: String, optional: true },
     note: { type: String, optional: true },
-    tags: { type: String, optional: true, allowedValues: ['Important', 'Critical', 'Personal', 'Work'], },
-    // 'tags.$': String,
+    tags: { type: Array, optional: true },
+    'tags.$': String,
 });
 
 const bridge = new SimpleSchema2Bridge(formSchema);
@@ -52,10 +52,10 @@ class AddTask extends React.Component {
 
     /** On submit, insert the data. */
     submit = (data, formRef) => {
-        const { task, date, note, tags } = data;
+        const { task, dueDate, note, tags } = data;
         const listName = this.state.selectedList;
         const owner = Meteor.user().username;
-        Tasks.collection.insert({ task, date, listName, note, tags, owner },
+        Tasks.collection.insert({ task, dueDate, listName, note, tags, owner },
             (error) => {
                 if (error) {
                     swal('Error', error.message, 'error');
@@ -80,7 +80,7 @@ class AddTask extends React.Component {
             <Container>
                 <AutoForm ref={ref => { fRef = ref; }} schema={bridge} onSubmit={data => this.submit(data, fRef)} >
                     <TextField id="task-name" name='task' placeholder='Task name' />
-                    <DateField id="task-date" name='date' max={new Date(2100, 1, 1)} min={new Date(2000, 1, 1)} />
+                    <DateField id="task-date" name='dueDate' max={new Date(2100, 1, 1)} min={new Date(2000, 1, 1)} />
                     <SelectField
                         id="task-list"
                         name='listName'

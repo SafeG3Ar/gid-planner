@@ -1,9 +1,24 @@
 import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
 import { _ } from 'meteor/underscore';
+import { Tasks } from '../../api/task/TaskCollection';
 import { Items } from '../../api/item/ItemCollection';
 import { Lists } from '../../api/list/ListCollection';
-import { ListItems } from '../../api/list/ListItemCollection';
+
+
+const addTaskMethod = 'tasks.add';
+Meteor.methods({
+    'tasks.add'({ task, listName, dueDate, note, tags, owner  }) {
+        Tasks.collection.insert({
+            task,
+            listName,
+            dueDate,
+            note,
+            tags,
+            owner,
+        });
+    },
+});
 
 const addItemMethod = 'items.add';
 Meteor.methods({
@@ -59,5 +74,5 @@ Meteor.methods({
     },
 });
 
-export { addItemMethod, removeItemMethod, setCheckedMethod, addListMethod, updateListMethod };
+export { addTaskMethod, addItemMethod, removeItemMethod, setCheckedMethod, addListMethod, updateListMethod };
 

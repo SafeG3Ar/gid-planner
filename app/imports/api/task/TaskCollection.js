@@ -13,13 +13,14 @@ class TaskCollection {
     this.collection = new Mongo.Collection(this.name);
     // Define the structure of each document in the collection.
     this.schema = new SimpleSchema({
-      task: { type: String, index: true, unique: true },
-      date: { type: Date },
-      listName: { type: String, optional: true },
+      task: { type: String },
+      listName: { type: Array, optional: true },
+      'listName.$': String,
+      dueDate: { type: String, optional: true },
       note: { type: String, optional: true },
-      tags: { type: String, optional: true, allowedValues: ['Important', 'Critical', 'Personal', 'Work'], },
-      // 'tags.$': String,
-      owner: { type: String } ,
+      tags: { type: Array, optional: true },
+      'tags.$': String,
+      owner: { type: String },
       // task: String,
       // listName: Array,
       // 'listName.$': String,

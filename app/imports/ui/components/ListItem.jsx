@@ -1,15 +1,11 @@
 import React from 'react';
 import { List, Checkbox, Container, Button, Icon } from 'semantic-ui-react';
-import { AutoForm, ErrorsField, SubmitField, TextField, DateField, SelectField, LongTextField } from 'uniforms-material';
-import swal from 'sweetalert';
 import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
-import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { _ } from 'meteor/underscore';
 import { Items } from '../../api/item/ItemCollection';
-import { Lists } from '../../api/list/ListCollection';
-import { removeItemMethod, setCheckedMethod } from '../../startup/both/Methods';
+// import { removeItemMethod, setCheckedMethod } from '../../startup/both/Methods';
 
 const listElementStyles = {
     color: 'black',

@@ -2,6 +2,7 @@ import React from 'react';
 import { Divider, Grid, Header, Icon } from 'semantic-ui-react';
 import UserAgenda from '../components/UserAgenda';
 import UserCalendar from '../components/UserCalendar';
+import AddTask from '../components/AddTask';
 
 /** A simple component to render the components of the user dashboard. */
 const UserDashboard = () => (
