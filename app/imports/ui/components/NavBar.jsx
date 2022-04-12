@@ -3,22 +3,22 @@ import PropTypes from 'prop-types';
 import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
 import { withRouter, NavLink } from 'react-router-dom';
-import { Menu, Dropdown, Header, Input, Icon } from 'semantic-ui-react';
+import { Menu, Dropdown, Header, Input, Icon, Modal } from 'semantic-ui-react';
 import { Roles } from 'meteor/alanning:roles';
+import AddTask from './AddTask';
 
 /** The NavBar appears at the top of every page. Rendered by the App Layout component. */
 class NavBar extends React.Component {
   render() {
     const menuStyle = { marginBottom: '10px' };
+
     return (
-      <Menu style={menuStyle} attached="top" borderless inverted>
+      <Menu id='navbar' style={menuStyle} attached="top" borderless inverted>
         <Menu.Item as={NavLink} activeClassName="" exact to="/">
           <Header inverted as='h1'>GID</Header>
         </Menu.Item>
         {this.props.currentUser ? (
-          [<Menu.Item as={NavLink} activeClassName="active" exact to="/add" key='add'>Add Stuff</Menu.Item>,
-            <Menu.Item as={NavLink} activeClassName="active" exact to="/list" key='list'>List Stuff</Menu.Item>,
-            <Menu.Item as={NavLink} activeClassName="active" exact to="/user-dashboard" key='user-dashboard'>UserDashboard</Menu.Item>]
+          [<Menu.Item as={NavLink} activeClassName="active" exact to="/user-dashboard" key='user-dashboard'>UserDashboard</Menu.Item>]
         ) : ''}
         {Roles.userIsInRole(Meteor.userId(), 'admin') ? (
           <Menu.Item as={NavLink} activeClassName="active" exact to="/admin" key='admin'>Admin</Menu.Item>
@@ -34,7 +34,15 @@ class NavBar extends React.Component {
           ) : (
             [<Menu.Item key='search'> <Input icon='search' placeholder='Search...' /> </Menu.Item>,
               <div key='user-icon-add'>
-                <Icon link size='large' name='add' />
+                <Modal
+                  trigger={
+                    <Icon link size='large' name='add' />
+                  }
+                >
+                  <Modal.Content>
+                    <AddTask />
+                  </Modal.Content>
+                </Modal>
               </div>,
               <div key='user-icon-refresh'>
                 <Icon link size='large' name='refresh' />

@@ -28,3 +28,7 @@
     text-align: center;
     color: #484F52;
 }
+
+.ui.attached.inverted.menu {
+    background: #3f51b5;
+  }
