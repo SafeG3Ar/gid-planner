@@ -5,7 +5,7 @@ import moment from 'moment';
 import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
 import { Tasks } from '../../api/task/TaskCollection';
-import TaskItem from './TaskItem';
+import TaskListItem from './TaskListItem';
 
 const today = moment();
 const tomorrow = today.clone().add(1, 'days');
@@ -45,7 +45,7 @@ const UserAgenda = ({ ready, tasks }) => {
         </Header>
         {/* Map List for Today */}
         <List celled verticalAlign='middle'>
-          {todayTasks.map((task) => <TaskItem key={task._id} task={task} />)}
+          {todayTasks.map((task) => <TaskListItem key={task._id} task={task} />)}
         </List>
 
         {/* This is the TOMORROW List */}
@@ -54,7 +54,7 @@ const UserAgenda = ({ ready, tasks }) => {
           <Header.Subheader>{tomorrow.format('MMMM DD, YYYY')}</Header.Subheader>
         </Header>
         <List divided verticalAlign='middle'>
-          {tomorrowTasks.map((task) => <TaskItem key={task._id} task={task} />)}
+          {tomorrowTasks.map((task) => <TaskListItem key={task._id} task={task} />)}
         </List>
       </Segment>
     );

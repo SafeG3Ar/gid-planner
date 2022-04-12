@@ -5,7 +5,7 @@ import { withRouter } from 'react-router-dom';
 import { Tasks } from '../../api/task/TaskCollection';
 
 /** Renders a single row in the List Stuff table. See pages/ListStuff.jsx. */
-class TaskItem extends React.Component {
+class TaskListItem extends React.Component {
   removeItem(docID) {
     Tasks.collection.remove(docID);
   }
@@ -42,7 +42,7 @@ class TaskItem extends React.Component {
 }
 
 // Require a document to be passed to this component.
-TaskItem.propTypes = {
+TaskListItem.propTypes = {
   task: PropTypes.shape({
     task: PropTypes.string,
     dueDate: PropTypes.string,
@@ -54,4 +54,4 @@ TaskItem.propTypes = {
 };
 
 // Wrap this component in withRouter since we use the <Link> React Router element.
-export default withRouter(TaskItem);
+export default withRouter(TaskListItem);

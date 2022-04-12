@@ -8,7 +8,7 @@ import moment from 'moment';
 import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
 import { Tasks } from '../../api/task/TaskCollection';
-import TaskItem from './TaskItem';
+import TaskListItem from './TaskListItem';
 
 /* date={selectedDate} {date => setSelectedDateFilter(date)} */
 
@@ -40,7 +40,7 @@ const UserCalendar = ({ ready, tasks }) => {
         <Header attached='top'as='h1'>{moment(selectedDate).format('MMMM DD, YYYY')}</Header>
         <Divider />
         <List celled verticalAlign='middle'>
-          {filterTasks.map((task) => <TaskItem key={task._id} task={task} />)}
+          {filterTasks.map((task) => <TaskListItem key={task._id} task={task} />)}
         </List>
       </Segment>
     );
