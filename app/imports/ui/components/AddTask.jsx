@@ -53,7 +53,7 @@ class AddTask extends React.Component {
   handleSelectList = (list) => {
     this.setState({ selectedLists: list }, () => {
       console.log('handle selectedLists: ', this.state.selectedLists);
-    })
+    });
   }
 
   handleAddNewTag = (e, { value }) => {
@@ -65,11 +65,8 @@ class AddTask extends React.Component {
   handleSelectTag = (tag) => {
     this.setState({ selectedTags: tag }, () => {
       console.log('handle selectedTags: ', this.state.selectedTags);
-    })
+    });
   }
-
-  // handleChange = (e, { value }) => this.setState({ selectedTags: value });
-
 
   /** On submit, insert the data. */
   submit = (data, formRef) => {
@@ -77,9 +74,6 @@ class AddTask extends React.Component {
     const listNames = this.state.selectedLists;
     const tags = this.state.selectedTags;
     const owner = Meteor.user().username;
-    // tags.forEach(tag => {
-    //   Tags.collection.insert({ tagName: tag });
-    // });
     tags.forEach(tag => Meteor.call(addTagMethod, {
       _id,
       tagName: tag,
@@ -91,10 +85,10 @@ class AddTask extends React.Component {
         } else {
           console.log('selectedLists: ', this.state.selectedLists);
           console.log('selectedTag: ', this.state.selectedTags);
-          Tasks.collection.update({ _id: taskId }, { $addToSet: { 'listName': { $each: listNames } } });
-          Tasks.collection.update({ _id: taskId }, { $addToSet: { 'tags': { $each: tags } } });
-          swal('Success', 'Task added successfully', 'success');
-          formRef.reset();
+          Tasks.collection.update({ _id: taskId }, { $addToSet: { listName: { $each: listNames } } });
+          Tasks.collection.update({ _id: taskId }, { $addToSet: { tags: { $each: tags } } });
+          swal('Success', 'Task added successfully', 'success').then(() =>
+          formRef.reset());
         }
       });
   }
@@ -128,16 +122,15 @@ class AddTask extends React.Component {
           <MultiSelectField
             id="task-lists"
             name='listName'
-            allowAdditions={false}
+            allowAdditions='false'
             options={listOptions}
             onChange={this.handleSelectList}
             value={this.state.selectedLists || []}
             placeholder={'Select list(s) for this task'}
-            
 
           />
           <div>
-            <Button onClick={this.handleOpen}>Create a list</Button>
+            <Button centered='true' onClick={this.handleOpen}>Create a list</Button>
             <Modal
               open={this.state.modalOpen}
               onClose={this.handleClose}
@@ -161,7 +154,7 @@ class AddTask extends React.Component {
             id="task-tags"
             name='tags'
             options={tagOptions}
-            allowAdditions={true}
+            allowAdditions='true'
             onChange={this.handleSelectTag}
             onAddItem={this.handleAddNewTag}
             value={this.state.selectedTags || []}
@@ -175,8 +168,6 @@ class AddTask extends React.Component {
     );
   }
 }
-
-
 
 AddTask.propTypes = {
   ready: PropTypes.bool.isRequired,

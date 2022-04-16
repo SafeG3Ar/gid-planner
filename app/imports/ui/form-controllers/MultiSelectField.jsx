@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import classnames from 'classnames';
 import { connectField, filterDOMProps } from 'uniforms';
 import { Dropdown } from 'semantic-ui-react';
@@ -39,16 +39,6 @@ const renderDropdown = ({ allowedValues, disabled, placeholder, onChange, onAddI
     text: transform ? transform(val) : val,
     value: val,
   }));
-
-  // const [dropDownOptions, setDropDownOptions] = useState(options);
-
-  // const handleAddition = (e, { value }) => {
-  //   setDropDownOptions((prevOptions) => [
-  //     { text: value, value },
-  //     ...prevOptions,
-  //   ]);
-  //   console.log('dropDownOptions', dropDownOptions);
-  // };
 
   return (
     <Dropdown search closeOnChange allowAdditions={true} fluid={true} multiple={true} placeholder={placeholder} selection={true} disabled={disabled}
