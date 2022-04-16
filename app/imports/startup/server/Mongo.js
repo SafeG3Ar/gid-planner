@@ -31,7 +31,7 @@ function addTags(data) {
 }
 
 function addTasks(data) {
-  console.log(`  Adding: tasks for (${data.owner})`);
+  // console.log(`  Adding: tasks for (${data.owner})`);
   Tasks.collection.insert(data);
 }
 

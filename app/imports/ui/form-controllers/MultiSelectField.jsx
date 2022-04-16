@@ -40,15 +40,16 @@ const renderDropdown = ({ allowedValues, disabled, placeholder, onChange, onAddI
     value: val,
   }));
 
-  const [dropDownOptions, setDropDownOptions] = useState(options);
+  // const [dropDownOptions, setDropDownOptions] = useState(options);
 
-  const handleAddition = (e, { value }) => {
-    setDropDownOptions((prevOptions) => [
-      { text: value, value },
-      ...prevOptions,
-    ]);
-    console.log(dropDownOptions);
-  };
+  // const handleAddition = (e, { value }) => {
+  //   setDropDownOptions((prevOptions) => [
+  //     { text: value, value },
+  //     ...prevOptions,
+  //   ]);
+  //   console.log('dropDownOptions', dropDownOptions);
+  // };
+
   return (
     <Dropdown search closeOnChange allowAdditions={true} fluid={true} multiple={true} placeholder={placeholder} selection={true} disabled={disabled}
       options={options} onChange={(event, data) => onChange(data.value)} onAddItem={(event, data) => onAddItem(data.value)} value={value} />

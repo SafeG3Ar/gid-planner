@@ -64,7 +64,7 @@ class ListItem extends React.Component {
               <List.Content floated='left'>
                 <Checkbox
                   onClick={() => this.handleChecked(this.props.item._id)}
-                  checked={this.props.item.checked}
+                  // checked={this.props.item.checked}
                   defaultChecked={false}
                 />
               </List.Content>

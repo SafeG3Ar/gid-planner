@@ -6,7 +6,7 @@ import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { _ } from 'meteor/underscore';
+// import { _ } from 'meteor/underscore';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import SimpleSchema from 'simpl-schema';
 import MultiSelectField from '../form-controllers/MultiSelectField';
@@ -15,13 +15,14 @@ import { Items } from '../../api/item/ItemCollection';
 import { Lists } from '../../api/list/ListCollection';
 import { Tags } from '../../api/tag/TagCollection';
 import AddListItem from './list-form/AddListItem';
+import { addTagMethod } from '../../startup/both/Methods';
 
 /** Create a schema to specify the structure of the data to appear in the form. */
 const formSchema = new SimpleSchema({
   task: String,
   listName: { type: Array, optional: true },
   'listName.$': String,
-  dueDate: { type: String, optional: true },
+  dueDate: { type: Date, optional: true },
   note: { type: String, optional: true },
   tags: { type: Array, optional: true },
   'tags.$': String,
@@ -72,13 +73,17 @@ class AddTask extends React.Component {
 
   /** On submit, insert the data. */
   submit = (data, formRef) => {
-    const { task, dueDate, note } = data;
+    const { task, dueDate, note, _id } = data;
     const listNames = this.state.selectedLists;
     const tags = this.state.selectedTags;
     const owner = Meteor.user().username;
-    tags.forEach(tag => {
-      Tags.collection.insert({ tagName: tag });
-    });
+    // tags.forEach(tag => {
+    //   Tags.collection.insert({ tagName: tag });
+    // });
+    tags.forEach(tag => Meteor.call(addTagMethod, {
+      _id,
+      tagName: tag,
+    }));
     const taskId = Tasks.collection.insert({ task: task, dueDate: dueDate, note: note, owner: owner },
       (error) => {
         if (error) {
@@ -158,7 +163,7 @@ class AddTask extends React.Component {
             options={tagOptions}
             allowAdditions={true}
             onChange={this.handleSelectTag}
-            onAddItem={(e, data) => this.handleAddNewTag(data.value)}
+            onAddItem={this.handleAddNewTag}
             value={this.state.selectedTags || []}
             placeholder={'Select tag(s) or type to add new tags'}
           />

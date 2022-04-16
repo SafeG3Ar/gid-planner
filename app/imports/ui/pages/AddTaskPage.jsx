@@ -19,7 +19,7 @@ const formSchema = new SimpleSchema({
   task: { type: String },
   listName: { type: Array, optional: true },
   'listName.$': String,
-  dueDate: { type: String, optional: true },
+  dueDate: { type: Date, optional: true },
   note: { type: String, optional: true },
   tags: { type: Array, optional: true },
   'tags.$': String,

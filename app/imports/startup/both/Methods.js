@@ -4,6 +4,7 @@ import { check } from 'meteor/check';
 import { Tasks } from '../../api/task/TaskCollection';
 import { Items } from '../../api/item/ItemCollection';
 import { Lists } from '../../api/list/ListCollection';
+import { Tags } from '../../api/tag/TagCollection';
 
 /** Methods to call from the client */
 
@@ -77,4 +78,13 @@ Meteor.methods({
   },
 });
 
-export { addTaskMethod, addItemMethod, removeItemMethod, addListMethod, updateListMethod };
+const addTagMethod = 'tags.add';
+Meteor.methods({
+  'tags.add'({ tagName, _id }) {
+    Tags.collection.upsert(_id, { $set: {
+      tagName,
+    } });
+  },
+});
+
+export { addTaskMethod, addItemMethod, removeItemMethod, addListMethod, updateListMethod, addTagMethod };

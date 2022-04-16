@@ -68,7 +68,7 @@ Meteor.publish(Profiles.userPublicationName, function () {
 
 Meteor.publish(Tags.userPublicationName, function () {
   if (this.userId) {
-    return Tags.collection.find({ });
+    return Tags.collection.find();
   }
   return this.ready();
 });
