@@ -24,6 +24,7 @@ import Task from '../components/Tasks';
 import UserDashboard from '../pages/UserDashboard';
 import UserCalendar from '../components/UserCalendar';
 import UserAgenda from '../components/UserAgenda';
+// import UserTimeout from '../components/UserTimeout';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 class App extends React.Component {
@@ -48,6 +49,7 @@ class App extends React.Component {
             <ProtectedRoute path="/user-dashboard" component={UserDashboard}/>
             <ProtectedRoute path="/user-agenda" component={UserAgenda}/>
             <ProtectedRoute path="/user-calendar" component={UserCalendar}/>
+            {/* <ProtectedRoute path="/user-timeout" component={UserTimeout}/> */}
             <AdminProtectedRoute path="/admin" component={ListStuffAdmin}/>
             <Route component={NotFound}/>
           </Switch>

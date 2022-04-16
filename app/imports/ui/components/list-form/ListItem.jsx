@@ -4,7 +4,7 @@ import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 // import { _ } from 'meteor/underscore';
-import { Items } from '../../api/item/ItemCollection';
+import { Items } from '../../../api/item/ItemCollection';
 // import { removeItemMethod, setCheckedMethod } from '../../startup/both/Methods';
 
 const listElementStyles = {

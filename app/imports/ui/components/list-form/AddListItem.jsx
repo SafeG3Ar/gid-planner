@@ -9,10 +9,10 @@ import PropTypes from 'prop-types';
 // import { _ } from 'meteor/underscore';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import SimpleSchema from 'simpl-schema';
-import { Items } from '../../api/item/ItemCollection';
-import { Lists } from '../../api/list/ListCollection';
+import { Items } from '../../../api/item/ItemCollection';
+import { Lists } from '../../../api/list/ListCollection';
 import ListItems from './ListItems';
-import { addItemMethod, addListMethod, updateListMethod } from '../../startup/both/Methods';
+import { addItemMethod, addListMethod, updateListMethod } from '../../../startup/both/Methods';
 
 /** Create a schema to specify the structure of the data to appear in the form. */
 const formSchema = new SimpleSchema({

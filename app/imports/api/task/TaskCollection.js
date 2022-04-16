@@ -21,16 +21,6 @@ class TaskCollection {
       tags: { type: Array, optional: true },
       'tags.$': String,
       owner: { type: String },
-      // task: String,
-      // listName: Array,
-      // 'listName.$': String,
-      // dueDate: {
-      //   type: String,
-      //   optional: true,
-      // },
-      // tags: Array,
-      // 'tags.$': String,
-      // owner: String,
     }, { tracker: Tracker });
     // Attach the schema to the collection, so all attempts to insert a document are checked against schema.
     this.collection.attachSchema(this.schema);

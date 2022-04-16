@@ -5,8 +5,8 @@ import { withTracker } from 'meteor/react-meteor-data';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { _ } from 'meteor/underscore';
-import { Items } from '../../api/item/ItemCollection';
-import { Lists } from '../../api/list/ListCollection';
+import { Items } from '../../../api/item/ItemCollection';
+import { Lists } from '../../../api/list/ListCollection';
 import ListItem from './ListItem';
 
 class ListItems extends React.Component {

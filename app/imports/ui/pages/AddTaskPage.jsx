@@ -12,7 +12,7 @@ import SimpleSchema from 'simpl-schema';
 import { Tasks } from '../../api/task/TaskCollection';
 import { Items } from '../../api/item/ItemCollection';
 import { Lists } from '../../api/list/ListCollection';
-import AddListItem from '../components/AddListItem';
+import AddListItem from '../components/list-form/AddListItem';
 
 /** Create a schema to specify the structure of the data to appear in the form. */
 const formSchema = new SimpleSchema({

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import classnames from 'classnames';
 import { connectField, filterDOMProps } from 'uniforms';
 import { Dropdown } from 'semantic-ui-react';
@@ -32,20 +32,31 @@ import { _ } from 'meteor/underscore';
  */
 
 /* eslint react/prop-types: 0 */
-const renderDropdown = ({ allowedValues, disabled, placeholder, onChange, transform, value }) => {
+const renderDropdown = ({ allowedValues, disabled, placeholder, onChange, onAddItem, transform, value }) => {
   // console.log('renderMultiSelect value=%o allowedValues=%o', value, allowedValues);
   const options = _.map(allowedValues, (val, index) => ({
     key: index,
     text: transform ? transform(val) : val,
     value: val,
   }));
+
+  const [dropDownOptions, setDropDownOptions] = useState(options);
+
+  const handleAddition = (e, { value }) => {
+    setDropDownOptions((prevOptions) => [
+      { text: value, value },
+      ...prevOptions,
+    ]);
+    console.log(dropDownOptions);
+  };
   return (
-    <Dropdown fluid={true} multiple={true} placeholder={placeholder} selection={true} disabled={disabled}
-      options={options} onChange={(event, data) => onChange(data.value)} value={value}/>
+    <Dropdown search closeOnChange allowAdditions={true} fluid={true} multiple={true} placeholder={placeholder} selection={true} disabled={disabled}
+      options={options} onChange={(event, data) => onChange(data.value)} onAddItem={(event, data) => onAddItem(data.value)} value={value} />
   );
 };
 
 const MultiSelect = ({
+  allowAdditions,
   allowedValues,
   checkboxes,
   className,
@@ -58,6 +69,7 @@ const MultiSelect = ({
   label,
   name,
   onChange,
+  onAddItem,
   placeholder,
   required,
   showInlineError,
@@ -72,6 +84,7 @@ const MultiSelect = ({
       disabled,
       placeholder,
       onChange,
+      onAddItem,
       transform,
       value,
     })}
