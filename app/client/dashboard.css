@@ -43,15 +43,12 @@
 #user-agenda .button.deleteTask{
     min-width: 40px;
     border-radius: 500rem;
-    padding: 1em 1.5em;
+    padding: 1em 1em;
     background-color: white;
     color: #3f51b5;
 }
 
 #user-agenda .button.deleteTask:hover{
-    min-width: 40px;
-    border-radius: 500rem;
-    padding: 1em 1.5em;
     background-color: #DE00AE;
     color: white;
 }
@@ -59,15 +56,12 @@
 #user-calendar .button.deleteTask{
     min-width: 40px;
     border-radius: 500rem;
-    padding: 1em 1.5em;
+    padding: 1em 1em;
     background-color: white;
     color: #3f51b5;
 }
 
 #user-calendar .button.deleteTask:hover{
-    min-width: 40px;
-    border-radius: 500rem;
-    padding: 1em 1.5em;
     background-color: #DE00AE;
     color: white;
 }

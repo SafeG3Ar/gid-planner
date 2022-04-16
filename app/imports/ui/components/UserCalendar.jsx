@@ -10,8 +10,6 @@ import { withTracker } from 'meteor/react-meteor-data';
 import { Tasks } from '../../api/task/TaskCollection';
 import TaskListItem from './TaskListItem';
 
-/* date={selectedDate} {date => setSelectedDateFilter(date)} */
-
 const UserCalendar = ({ ready, tasks }) => {
   if (ready) {
     const [selectedDate, setSelectedDate] = useState(new Date());
@@ -23,11 +21,9 @@ const UserCalendar = ({ ready, tasks }) => {
     useEffect(() => {
       let filterTask = JSON.parse(JSON.stringify(tasks));
       const filterDate = moment(selectedDate).format('YYYY-MM-DD');
-      filterTask = filterTask.filter((task) => task.dueDate === filterDate);
+      filterTask = filterTask.filter((task) => moment(task.dueDate).format('YYYY-MM-DD') === filterDate);
       setfilterTasks(filterTask);
-    });
-
-    // const handleDateFilter = (event, { value }) => setSelectedDateFilter(value);
+    }, [selectedDate, tasks]);
 
     return (
       <Segment id="user-calendar" padded='very' raised>

@@ -2,6 +2,7 @@ import React from 'react';
 import { Button, Icon, List, Label, Checkbox } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
+import moment from 'moment';
 import { Tasks } from '../../api/task/TaskCollection';
 
 /** Renders a single row in the List Stuff table. See pages/ListStuff.jsx. */
@@ -16,6 +17,7 @@ class TaskListItem extends React.Component {
 
   render() {
     return (
+
       <List.Item>
         <List.Icon><Checkbox /></List.Icon>
         <List.Content>
@@ -23,7 +25,7 @@ class TaskListItem extends React.Component {
           <List horizontal>
             <List.Item>
               <Label as='a' size='mini'>
-                {this.props.task.tags}<Label.Detail>{this.props.task.dueDate}</Label.Detail>
+                {this.props.task.tags}<Label.Detail>{moment(this.props.task.dueDate).format('DD MMMM')}</Label.Detail>
               </Label>
             </List.Item>
             <List.Item>

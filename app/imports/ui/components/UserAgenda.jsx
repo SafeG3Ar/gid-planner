@@ -10,6 +10,8 @@ import TaskListItem from './TaskListItem';
 
 const today = moment();
 const tomorrow = today.clone().add(1, 'days');
+const todayDate = today.format('YYYY-MM-DD');
+const tomDate = tomorrow.format('YYYY-MM-DD');
 
 const UserAgenda = ({ ready, tasks }) => {
   if (ready) {
@@ -30,13 +32,12 @@ const UserAgenda = ({ ready, tasks }) => {
     useEffect(() => {
       let todayFilterTask = JSON.parse(JSON.stringify(tasks));
       let tomorrowFilterTasks = JSON.parse(JSON.stringify(tasks));
-
-      todayFilterTask = todayFilterTask.filter((task) => task.dueDate === today.format('YYYY-MM-DD'));
-      tomorrowFilterTasks = tomorrowFilterTasks.filter((task) => task.dueDate === tomorrow.format('YYYY-MM-DD'));
+      todayFilterTask = todayFilterTask.filter((task) => moment(task.dueDate).format('YYYY-MM-DD') === (todayDate));
+      tomorrowFilterTasks = tomorrowFilterTasks.filter((task) => moment(task.dueDate).format('YYYY-MM-DD') === tomDate);
 
       setTodayTasks(todayFilterTask);
       setTomorrowTasks(tomorrowFilterTasks);
-    });
+    }, [today, tomorrow, tasks]);
 
     return (
       <Segment id="user-agenda" raised>
