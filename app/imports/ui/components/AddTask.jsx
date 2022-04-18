@@ -38,9 +38,15 @@ class AddTask extends React.Component {
 
   };
 
-  handleModalOpen = () => this.setState({ open: true });
+  handleOpen = (e) => {
+    e.preventDefault();
+    this.setState({ open: true });
+  }
 
-  handleModalClose = () => this.setState({ open: false });
+  handleClose = (e) => {
+    e.preventDefault();
+    this.setState({ open: false });
+  }
 
   handleSelectList = (list) => {
     this.setState({ selectedLists: list }, () => {
@@ -50,7 +56,7 @@ class AddTask extends React.Component {
 
   handleAddNewTag = (tag) => {
     this.setState(prevState => ({
-      tagOptions: [...prevState.tagOptions, tag]
+      tagOptions: [...prevState.tagOptions, tag],
     }));
     Meteor.call(addTagMethod, {
       tagName: tag,
@@ -67,7 +73,19 @@ class AddTask extends React.Component {
   handleSelectTag = (value) => {
     this.setState({ selectedTags: value }, () => {
       console.log('handle selectedTags: ', this.state.selectedTags);
+      console.log('tagOptions state', this.state.tagOptions);
     });
+  }
+
+  componentDidMount = () => {
+    const tagOptions = this.props.userTags.map((tag) => ({
+      key: tag._id,
+      label: tag.tagName,
+      text: tag.tagName,
+      value: tag.tagName,
+    }));
+    this.setState({ tagOptions: tagOptions })
+    console.log('componentDidMount', this.state.tagOptions);
   }
 
   /** On submit, insert the data. */
@@ -77,14 +95,14 @@ class AddTask extends React.Component {
     const tags = this.state.selectedTags;
     const owner = Meteor.user().username;
     const taskId = Tasks.collection.insert({ task: task, dueDate: dueDate, note: note, owner: owner },
-      (error) => {
-        if (error) {
-          swal('Error', error.message, 'error');
+      (taskerror) => {
+        if (taskerror) {
+          swal('Error', taskerror.message, 'error');
         } else {
           console.log('selectedLists: ', this.state.selectedLists);
           console.log('selectedTag: ', this.state.selectedTags);
-          Tasks.collection.update({ _id: taskId }, { $addToSet: { 'listName': { $each: listNames } } });
-          Tasks.collection.update({ _id: taskId }, { $addToSet: { 'tags': { $each: tags } } },
+          Tasks.collection.update({ _id: taskId }, { $addToSet: { listName: { $each: listNames } } });
+          Tasks.collection.update({ _id: taskId }, { $addToSet: { tags: { $each: tags } } },
             (error) => {
               if (error) {
                 swal('Error', error.message, 'error');
@@ -108,7 +126,7 @@ class AddTask extends React.Component {
       value: list.name,
     }));
 
-    this.state.tagOptions = this.props.userTags.map((tag) => ({
+    const tagOptions = this.props.userTags.map((tag) => ({
       key: tag._id,
       label: tag.tagName,
       text: tag.tagName,
@@ -136,21 +154,16 @@ class AddTask extends React.Component {
 
           />
           <div>
+            <Button id='create-list' onClick={this.handleOpen}>Create a list</Button>
             <Modal
-              open={this.state.modalOpen}
-              onClose={this.handleModalClose}
-              onOpen={this.handleModalOpen}
+              open={this.state.open}
+              onClose={this.handleClose}
               closeIcon
-              size='small'
-              header='Create a List'
-              trigger={
-                <Button onClick={this.handleModalOpen}>Create a list</Button>
-              }
             >
               <Modal.Content>
-                <AddListItem />
-                <br />
-                <Button
+                <AddListItem handleClose={this.handleClose} />
+
+                <Button marginBotton='1rem'
                   onClick={this.handleClose}
                   floated='right'
                 >
@@ -163,7 +176,7 @@ class AddTask extends React.Component {
           <MultiSelectField
             id="task-tags"
             name='tags'
-            options={this.state.tagOptions}
+            options={tagOptions}
             allowAdditions='true'
             onAddItem={this.handleAddNewTag}
             onChange={this.handleSelectTag}

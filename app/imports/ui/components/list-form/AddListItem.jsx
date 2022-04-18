@@ -4,7 +4,7 @@ import { AutoForm, TextField } from 'uniforms-semantic';
 import swal from 'sweetalert';
 import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
-import { withRouter } from 'react-router-dom';
+// import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 // import { _ } from 'meteor/underscore';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
@@ -152,7 +152,6 @@ class AddListItem extends React.Component {
             </Button>
             {/* <SubmitField value='Submit' /> */}
           </AutoForm>
-
           <Segment>
             <ListItems listId={this.state.listId} handleListId={this.handleListId} handleChange={this.handleChange} />
           </Segment>
@@ -162,27 +161,17 @@ class AddListItem extends React.Component {
 }
 
 AddListItem.propTypes = {
-  // doc: PropTypes.object,
-  // name: PropTypes.string,
-  // lists: PropTypes.array,
-
-  // items: PropTypes.array.isRequired,
   ready: PropTypes.bool.isRequired,
 };
 
-const AddListItemContainer = withTracker(() => {
-  // const documentId = match.params._id;
-  // const user = Meteor.user().username;
+export default withTracker(() => {
   const sub1 = Meteor.subscribe(Items.userPublicationName);
   const sub2 = Meteor.subscribe(Lists.userPublicationName);
   return {
-    // doc: Lists.collection.findOne(documentId),
-    // lists: _.where(Lists.collection.find().fetch(), { owner: user }),
-    // item: Items.collection.find({}).fetch(),
     // items: Items.collection.find({}, { sort: { createdAt: -1 } }).fetch(),
     // incompleteCount: Items.collection.find({ checked: { $ne: true } }).count(),
     ready: sub1.ready() && sub2.ready(),
   };
 })(AddListItem);
 
-export default withRouter(AddListItemContainer);
+// export default withRouter(AddListItemContainer);

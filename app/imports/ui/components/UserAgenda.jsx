@@ -56,7 +56,7 @@ const UserAgenda = ({ ready, tasks }) => {
           }
         >
           <Modal.Content>
-            <AddTask />
+            <AddTask handleClose={handleClose} />
           </Modal.Content>
         </Modal>
         <Header as='h2' attached='top'>
