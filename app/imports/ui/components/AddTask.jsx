@@ -61,13 +61,13 @@ class AddTask extends React.Component {
     Meteor.call(addTagMethod, {
       tagName: tag,
     },
-      (error) => {
-        if (error) {
-          swal('Error', error.message, 'error');
-        } else {
-          console.log('handleAddNewTag', this.state.tagOptions);
-        }
-      });
+    (error) => {
+      if (error) {
+        swal('Error', error.message, 'error');
+      } else {
+        console.log('handleAddNewTag', this.state.tagOptions);
+      }
+    });
   }
 
   handleSelectTag = (value) => {
@@ -75,17 +75,6 @@ class AddTask extends React.Component {
       console.log('handle selectedTags: ', this.state.selectedTags);
       console.log('tagOptions state', this.state.tagOptions);
     });
-  }
-
-  componentDidMount = () => {
-    const tagOptions = this.props.userTags.map((tag) => ({
-      key: tag._id,
-      label: tag.tagName,
-      text: tag.tagName,
-      value: tag.tagName,
-    }));
-    this.setState({ tagOptions: tagOptions })
-    console.log('componentDidMount', this.state.tagOptions);
   }
 
   /** On submit, insert the data. */
