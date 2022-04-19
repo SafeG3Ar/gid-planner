@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Header, Button, Modal } from 'semantic-ui-react';
+import { Container, Header, Segment, Button, Modal } from 'semantic-ui-react';
 import { AutoForm, ErrorsField, SubmitField, TextField, DateField } from 'uniforms-semantic';
 import swal from 'sweetalert';
 import { Meteor } from 'meteor/meteor';
@@ -61,13 +61,13 @@ class AddTask extends React.Component {
     Meteor.call(addTagMethod, {
       tagName: tag,
     },
-    (error) => {
-      if (error) {
-        swal('Error', error.message, 'error');
-      } else {
-        console.log('handleAddNewTag', this.state.tagOptions);
-      }
-    });
+      (error) => {
+        if (error) {
+          swal('Error', error.message, 'error');
+        } else {
+          console.log('handleAddNewTag', this.state.tagOptions);
+        }
+      });
   }
 
   handleSelectTag = (value) => {
@@ -98,6 +98,8 @@ class AddTask extends React.Component {
               } else {
                 swal('Success', 'Task added successfully', 'success');
                 formRef.reset();
+                {this.setState({ selectedLists: ''})};
+                {this.setState({ selectedTags: ''})};
               }
             });
         }
@@ -131,7 +133,6 @@ class AddTask extends React.Component {
           <TextField id="task-name" name='task' placeholder='Task name' />
           <DateField id="task-date" name='dueDate' max={new Date(2100, 1, 1)} min={new Date(2000, 1, 1)} />
           <MultiSelectField
-            id="task-lists"
             name='listName'
             label='List name(s)'
             allowAdditions='false'
@@ -145,25 +146,27 @@ class AddTask extends React.Component {
           <div>
             <Button id='create-list' onClick={this.handleOpen}>Create a list</Button>
             <Modal
+              size='small'
               open={this.state.open}
               onClose={this.handleClose}
               closeIcon
             >
               <Modal.Content>
                 <AddListItem handleClose={this.handleClose} />
-
-                <Button marginBotton='1rem'
+              </Modal.Content>
+              {/* <div>
+                <Button
                   onClick={this.handleClose}
                   floated='right'
                 >
                   Save/Close
                 </Button>
-              </Modal.Content>
+              </div> */}
+              {/* </Modal.Content> */}
             </Modal>
           </div>
           <TextField id="task-note" name='note' />
           <MultiSelectField
-            id="task-tags"
             name='tags'
             options={tagOptions}
             allowAdditions='true'

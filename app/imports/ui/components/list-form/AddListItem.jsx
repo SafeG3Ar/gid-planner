@@ -1,6 +1,6 @@
 import React from 'react';
-import { Segment, Container, Button, Icon } from 'semantic-ui-react';
-import { AutoForm, TextField } from 'uniforms-semantic';
+import { Segment, Header, Container, Button, Icon } from 'semantic-ui-react';
+import { AutoForm, TextField, SubmitField } from 'uniforms-semantic';
 import swal from 'sweetalert';
 import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
@@ -29,138 +29,140 @@ const bridge = new SimpleSchema2Bridge(formSchema);
 /** Renders the Page for adding a document. */
 class AddListItem extends React.Component {
 
-    state = { listId: '', listName: '', inputItem: '', open: true }
+  state = { listId: '', listName: '', inputItem: '', open: true }
 
-    handleOpen = () => this.setState({ open: true });
+  handleOpen = () => this.setState({ open: true });
 
-    handleClose = () => this.setState({ open: false });
+  handleClose = () => this.setState({ open: false });
 
-    handleListId = (listId) => {
-      this.setState({ listId });
-      console.log('handleListId', this.state.listId);
-    }
+  handleListId = (listId) => {
+    this.setState({ listId });
+    console.log('handleListId', this.state.listId);
+  }
 
-    handleChange = (e, { listName, value }) => this.setState({ [listName]: value }, () => {
-      console.log('handleChange listName:', this.state.listName);
-    })
+  handleChange = (e, { listName, value }) => this.setState({ [listName]: value }, () => {
+    console.log('handleChange listName:', this.state.listName);
+  })
 
-    handleListSubmit = (data) => {
-      const { listId } = this.state;
-      //   this.handleChange;
-      const { name } = data;
-      const list = Lists.collection.findOne({ _id: listId });
-      const owner = Meteor.user().username;
-      if (typeof (list) === 'undefined') {
-        Meteor.call(addListMethod, {
-          name,
-          owner: owner,
-        },
+  handleListSubmit = (data) => {
+    const { listId } = this.state;
+    const { name } = data;
+    const list = Lists.collection.findOne({ _id: listId });
+    const owner = Meteor.user().username;
+    if (typeof (list) === 'undefined') {
+      Meteor.call(addListMethod, {
+        name,
+        owner: owner,
+      },
         (error, result) => {
           if (error) {
             swal('Error', error.message, 'error');
           } else {
             this.setState({ listId: result });
+            // this.setState({ show: true });
             console.log('result', result);
           }
         });
-      } else {
-        Meteor.call(updateListMethod, {
-          _id: listId,
-          name,
-          owner: owner,
-        },
+    } else {
+      Meteor.call(updateListMethod, {
+        _id: listId,
+        name,
+        owner: owner,
+      },
         (error) => {
           if (error) {
             swal('Error', error.message, 'error');
           } else {
-            console.log(list);
+            // this.setState({ show: true });
           }
         });
-      }
     }
+  }
 
-    handleSubmit = (data, formRef) => {
-      const { listId } = this.state;
-      const { item } = data;
-      const createdAt = new Date();
-      const owner = Meteor.user().username;
-      //   const list = Lists.collection.findOne(listId);
+  handleSubmit = (data, formRef) => {
+    const { listId } = this.state;
+    const { item } = data;
+    const createdAt = new Date();
+    const owner = Meteor.user().username;
 
-      Meteor.call(addItemMethod, {
-        item,
-        listId: listId,
-        checked: false,
-        createdAt: createdAt,
-        owner: owner,
-      },
+    Meteor.call(addItemMethod, {
+      item,
+      listId: listId,
+      checked: false,
+      createdAt: createdAt,
+      owner: owner,
+    },
       (error) => {
         if (error) {
           swal('Error', error.message, 'error');
         } else {
-        //   console.log('listID handleSubmit:', listId);
-        //   console.log('listName item:', listName);
           formRef.reset();
         }
       });
-    }
+  }
 
-    render = () => {
-      let fRef = null;
-      // const { listName, disable } = this.state;
-      console.log('listID render', this.state.listId);
-      return (
-        <Container>
-          <AutoForm
-            schema={bridge}
-            onSubmit={data => this.handleListSubmit(data)}
+  render = () => {
+    let fRef = null;
+    return (
+      <Container id='add-list-item'>
+        <Header as='h3'>Create a List</Header>
+        <AutoForm
+          schema={bridge}
+          onSubmit={data => this.handleListSubmit(data)}
+        >
+          <TextField
+            className='list-input'
+            id='name'
+            placeholder='Give your list a name'
+            name='name'
+          />
+          <Button
+            className='list-button'
+            type='submit'
+            size='small'
+            icon
           >
-            <TextField
-              id='name'
-              placeholder='Give your list a name'
-              name='name'
-              // value={listName}
-            />
-            <Button
-              type='submit'
-              size='small'
-              // floated='right'
-              icon
-              labelPosition='left'
-            >
-              <Icon name='save' />
-                        Save
-            </Button>
-          </AutoForm>
-          < AutoForm
-            ref={ref => { fRef = ref; }
-            }
-            schema={bridge}
-            // onChange={this.handleChange}
-            onSubmit={data => this.handleSubmit(data, fRef)}
+            <Icon name='save' size='big' />
+          </Button>
+        </AutoForm>
+        < AutoForm
+          ref={ref => { fRef = ref; }
+          }
+          schema={bridge}
+          onSubmit={data => this.handleSubmit(data, fRef)}
+        >
+          <TextField
+            className='list-input'
+            placeholder='Type to add to list'
+            name='item'
+          />
+          <Button
+            className='list-button'
+            type='submit'
+            size='small'
+            icon
           >
-            <TextField
-              placeholder='Type to add to list'
-              name='item'
-            />
-            <Button
-              type='submit'
-              size='small'
-              // floated='left'
-              icon
-            >
-              <Icon name='plus square' />
-            </Button>
-            {/* <SubmitField value='Submit' /> */}
-          </AutoForm>
+            <Icon name='plus square' size='big' />
+          </Button>
+          {/* <SubmitField value='Submit' /> */}
+
           <Segment>
             <ListItems listId={this.state.listId} handleListId={this.handleListId} handleChange={this.handleChange} />
           </Segment>
-        </Container>
-      );
-    }
+          <Button
+            onClick={this.props.handleClose}
+            floated='right'
+          >
+            Save/Close
+          </Button>
+        </AutoForm>
+      </Container>
+    );
+  }
 }
 
 AddListItem.propTypes = {
+  handleClose: PropTypes.func.isRequired,
   ready: PropTypes.bool.isRequired,
 };
 
@@ -168,7 +170,6 @@ export default withTracker(() => {
   const sub1 = Meteor.subscribe(Items.userPublicationName);
   const sub2 = Meteor.subscribe(Lists.userPublicationName);
   return {
-    // items: Items.collection.find({}, { sort: { createdAt: -1 } }).fetch(),
     // incompleteCount: Items.collection.find({ checked: { $ne: true } }).count(),
     ready: sub1.ready() && sub2.ready(),
   };

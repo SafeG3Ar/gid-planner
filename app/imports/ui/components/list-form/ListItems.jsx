@@ -36,7 +36,6 @@ class ListItems extends React.Component {
     return (
       <div>
         <Header as='h3' icon textAlign='center'>
-          <Icon name='list' size='mini' />
           {listName}
         </Header>
         <Divider />
