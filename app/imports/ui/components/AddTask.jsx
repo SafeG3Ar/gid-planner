@@ -128,7 +128,7 @@ class AddTask extends React.Component {
 
     return (
       <Container>
-        <Header as='h3'>Add a Task</Header>
+        <Header as='h3'>Create a Task</Header>
         <AutoForm ref={ref => { fRef = ref; }} schema={bridge} onSubmit={data => this.submit(data, fRef)} >
           <TextField id="task-name" name='task' placeholder='Task name' />
           <DateField id="task-date" name='dueDate' max={new Date(2100, 1, 1)} min={new Date(2000, 1, 1)} />
