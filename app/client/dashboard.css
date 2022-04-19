@@ -79,3 +79,44 @@
     color: white;
   }
 
+#add-list-item {
+    position: relative;
+    height: 100px;
+}
+#add-list-item .textfield.list-input {
+    position: relative;
+    width: 75%;
+    height: 25px;
+    padding-right: 60px;
+}
+
+#add-list-item .button:hover {
+    color: #3f51b5;
+}
+
+#add-list-item .list-button {
+    position: absolute;
+    width: 50px;
+    height: 25px;
+    top: 20px;
+    right: -1px;
+    text-align: center;
+    box-shadow: none;
+    background-color: transparent;
+}
+
+.list-item {
+    padding: 5px, 3px, 3px, 5px;
+}
+
+.delete-item-button {
+    box-shadow: none;
+    background-color: transparent !important;
+    padding: 5px, 3px, 3px, 5px;
+}
+
+#task-submit {
+    float: right;
+}
+
+
