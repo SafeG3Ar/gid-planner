@@ -1,6 +1,6 @@
 import React from 'react';
 import { Segment, Header, Container, Button, Icon } from 'semantic-ui-react';
-import { AutoForm, TextField, SubmitField } from 'uniforms-semantic';
+import { AutoForm, TextField } from 'uniforms-semantic';
 import swal from 'sweetalert';
 import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
@@ -54,28 +54,28 @@ class AddListItem extends React.Component {
         name,
         owner: owner,
       },
-        (error, result) => {
-          if (error) {
-            swal('Error', error.message, 'error');
-          } else {
-            this.setState({ listId: result });
-            // this.setState({ show: true });
-            console.log('result', result);
-          }
-        });
+      (error, result) => {
+        if (error) {
+          swal('Error', error.message, 'error');
+        } else {
+          this.setState({ listId: result });
+          // this.setState({ show: true });
+          console.log('result', result);
+        }
+      });
     } else {
       Meteor.call(updateListMethod, {
         _id: listId,
         name,
         owner: owner,
       },
-        (error) => {
-          if (error) {
-            swal('Error', error.message, 'error');
-          } else {
-            // this.setState({ show: true });
-          }
-        });
+      (error) => {
+        if (error) {
+          swal('Error', error.message, 'error');
+        } else {
+          // this.setState({ show: true });
+        }
+      });
     }
   }
 
@@ -92,13 +92,13 @@ class AddListItem extends React.Component {
       createdAt: createdAt,
       owner: owner,
     },
-      (error) => {
-        if (error) {
-          swal('Error', error.message, 'error');
-        } else {
-          formRef.reset();
-        }
-      });
+    (error) => {
+      if (error) {
+        swal('Error', error.message, 'error');
+      } else {
+        formRef.reset();
+      }
+    });
   }
 
   render = () => {
@@ -144,8 +144,6 @@ class AddListItem extends React.Component {
           >
             <Icon name='plus square' size='big' />
           </Button>
-          {/* <SubmitField value='Submit' /> */}
-
           <Segment>
             <ListItems listId={this.state.listId} handleListId={this.handleListId} handleChange={this.handleChange} />
           </Segment>

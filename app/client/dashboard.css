@@ -105,24 +105,16 @@
     background-color: transparent;
 }
 
-.list-item {
-    /* padding: 5px, 3px, 3px, 5px; */
-}
-
 .delete-item-button {
     box-shadow: none;
     background-color: transparent !important;
-    /* padding: 5px, 3px, 3px, 5px; */
 }
 
 #task-submit {
     float: right;
 }
 
-/* #list-modal .modal {
-    top: unset!important;
-    bottom: unset!important;
-    right: unset!important;
-    left: unset!important;
-} */
+.listitems-header {
+    align-items: center;
+}
 

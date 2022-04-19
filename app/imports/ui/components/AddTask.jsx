@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Header, Segment, Button, Modal } from 'semantic-ui-react';
+import { Container, Header, Button, Modal } from 'semantic-ui-react';
 import { AutoForm, ErrorsField, SubmitField, TextField, DateField } from 'uniforms-semantic';
 import swal from 'sweetalert';
 import { Meteor } from 'meteor/meteor';
@@ -61,13 +61,13 @@ class AddTask extends React.Component {
     Meteor.call(addTagMethod, {
       tagName: tag,
     },
-      (error) => {
-        if (error) {
-          swal('Error', error.message, 'error');
-        } else {
-          console.log('handleAddNewTag', this.state.tagOptions);
-        }
-      });
+    (error) => {
+      if (error) {
+        swal('Error', error.message, 'error');
+      } else {
+        console.log('handleAddNewTag', this.state.tagOptions);
+      }
+    });
   }
 
   handleSelectTag = (value) => {
@@ -98,8 +98,8 @@ class AddTask extends React.Component {
               } else {
                 swal('Success', 'Task added successfully', 'success');
                 formRef.reset();
-                {this.setState({ selectedLists: ''})};
-                {this.setState({ selectedTags: ''})};
+                this.setState({ selectedLists: '' }, () => console.log(this.state.selectedLists));
+                this.setState({ selectedTags: '' }, () => console.log(this.state.selectedTags));
               }
             });
         }
@@ -139,7 +139,7 @@ class AddTask extends React.Component {
             options={listOptions}
             onChange={this.handleSelectList}
             value={this.state.selectedLists || []}
-            placeholder={'Select list(s) for this task'}
+            placeholder={'Select list(s) for this task or create a new one below'}
             inputRef={fRef}
 
           />
@@ -154,18 +154,9 @@ class AddTask extends React.Component {
               <Modal.Content>
                 <AddListItem handleClose={this.handleClose} />
               </Modal.Content>
-              {/* <div>
-                <Button
-                  onClick={this.handleClose}
-                  floated='right'
-                >
-                  Save/Close
-                </Button>
-              </div> */}
-              {/* </Modal.Content> */}
             </Modal>
           </div>
-          <TextField id="task-note" name='note' />
+          <TextField id="task-note" name='note'/>
           <MultiSelectField
             name='tags'
             options={tagOptions}

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
-import { Loader, Container, Header, List, Icon, Divider } from 'semantic-ui-react';
+import { Loader, Header, List } from 'semantic-ui-react';
 import { withTracker } from 'meteor/react-meteor-data';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
@@ -10,17 +10,6 @@ import { Lists } from '../../../api/list/ListCollection';
 import ListItem from './ListItem';
 
 class ListItems extends React.Component {
-
-  // state = { show: false }
-
-  // showCompleted = () => {
-  //   if (this.props.checkedItems.length == 0) {
-  //     this.setState({ show: false })
-  //   }
-  //   else {
-  //     this.setState({ show: true }, () => console.log('showComplete', this.props.checkedItems))
-  //   }
-  // }
 
   // hideCompleted = () => {
   //     this.setState({ hideCompleted: ! this.state.hideCompleted });
@@ -35,10 +24,9 @@ class ListItems extends React.Component {
     const listName = _.pluck(Lists.collection.find({ _id: this.props.listId }).fetch(), 'name');
     return (
       <div>
-        <Header as='h3' icon textAlign='center'>
+        <Header as='h3' dividing textAlign='center'>
           {listName}
         </Header>
-        <Divider />
         <List>
           {this.props.items.filter(item => item.listId === this.props.listId).map((item) => (
             <ListItem
