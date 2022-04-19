@@ -29,11 +29,11 @@ const bridge = new SimpleSchema2Bridge(formSchema);
 /** Renders the Page for adding a document. */
 class AddListItem extends React.Component {
 
-  state = { listId: '', listName: '', inputItem: '', open: true }
+  state = { listId: '', listName: '', inputItem: '', }
 
-  handleOpen = () => this.setState({ open: true });
+  // handleOpen = () => this.setState({ open: true });
 
-  handleClose = () => this.setState({ open: false });
+  // handleClose = () => this.setState({ open: false });
 
   handleListId = (listId) => {
     this.setState({ listId });
@@ -54,28 +54,29 @@ class AddListItem extends React.Component {
         name,
         owner: owner,
       },
-      (error, result) => {
-        if (error) {
-          swal('Error', error.message, 'error');
-        } else {
-          this.setState({ listId: result });
-          // this.setState({ show: true });
-          console.log('result', result);
-        }
-      });
+        (error, result) => {
+          if (error) {
+            swal('Error', error.message, 'error');
+          } else {
+            this.setState({ listId: result });
+            // this.setState({ show: true, });
+            console.log('result', result);
+          }
+        });
     } else {
       Meteor.call(updateListMethod, {
         _id: listId,
         name,
         owner: owner,
       },
-      (error) => {
-        if (error) {
-          swal('Error', error.message, 'error');
-        } else {
-          // this.setState({ show: true });
-        }
-      });
+        (error) => {
+          if (error, result) {
+            swal('Error', error.message, 'error');
+          } else {
+            // this.setState({ show: true, });
+            console.log(result);
+          }
+        });
     }
   }
 
@@ -92,13 +93,13 @@ class AddListItem extends React.Component {
       createdAt: createdAt,
       owner: owner,
     },
-    (error) => {
-      if (error) {
-        swal('Error', error.message, 'error');
-      } else {
-        formRef.reset();
-      }
-    });
+      (error) => {
+        if (error) {
+          swal('Error', error.message, 'error');
+        } else {
+          formRef.reset();
+        }
+      });
   }
 
   render = () => {
@@ -147,6 +148,7 @@ class AddListItem extends React.Component {
           <Segment>
             <ListItems listId={this.state.listId} handleListId={this.handleListId} handleChange={this.handleChange} />
           </Segment>
+
           <Button
             onClick={this.props.handleClose}
             floated='right'

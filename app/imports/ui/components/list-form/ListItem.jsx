@@ -67,7 +67,6 @@ class ListItem extends React.Component {
                 size='small'
                 onClick={() => this.handleChecked(this.props.item._id)}
                 defaultChecked={false}
-                // value={this.props.item.item}
               />
             </List.Content>
             <List.Content style={listStyles}>
