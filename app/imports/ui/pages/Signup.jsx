@@ -4,6 +4,7 @@ import { Link, Redirect } from 'react-router-dom';
 import swal from 'sweetalert';
 import { Container, Form, Grid, Header, Message, Segment } from 'semantic-ui-react';
 import { Accounts } from 'meteor/accounts-base';
+import { Profiles } from '../../api/profile/ProfileCollection';
 
 /**
  * Signup component is similar to signin component, but we create a new user instead.
@@ -12,7 +13,7 @@ class Signup extends React.Component {
   /* Initialize state fields. */
   constructor(props) {
     super(props);
-    this.state = { email: '', password: '', firstname: '', lastname: '', username: '', phone: '', error: '', redirectToReferer: false };
+    this.state = { email: '', password: '', firstName: '', lastName: '', owner: '', phone: '', error: '', redirectToReferer: false };
   }
 
   /* Update the form controls each time the user interacts with them. */
@@ -20,20 +21,35 @@ class Signup extends React.Component {
     this.setState({ [name]: value });
   }
 
+  isUpper(str) {
+    return !/[a-z]/.test(str) && /[A-Z]/.test(str);
+  }
+
   /* Handle Signup submission. Create user account and a profile entry, then redirect to the home page. */
   submit = () => {
-    const { firstname, lastname, username, phone, email, password } = this.state;
+    const { firstName, lastName, owner, phone, email, password } = this.state;
+    const auth = false;
     if (!(password.includes('!') || password.includes('#') || password.includes('*') || password.includes('$'))) {
       swal('Your password is missing a special character', 'Please try again.');
     } else if (!(password.includes(1) || password.includes(2) || password.includes(3) || password.includes(4) || password.includes(5) ||
       password.includes(6) || password.includes(7) || password.includes(8) || password.includes(9))) {
       swal('Your password is missing a number', 'Please try again.');
+    } else if (!this.isUpper(password)) {
+      swal('Your password needs a capital letter', 'Please try again.');
     } else {
-      Accounts.createUser({ username, email, password, profile: { firstName: firstname, lastName: lastname, phone: phone, auth: false } }, (err) => {
+      // Need to insert info into new profile and create a user account.
+      Accounts.createUser({ username: owner, email, password, profile: { firstName: firstName, lastName: lastName, phone: phone, auth: false } }, (err) => {
         if (err) {
           this.setState({ error: err.reason });
         } else {
-          this.setState({ error: '', redirectToReferer: true });
+          Profiles.collection.insert({ email, firstName, lastName, phone, auth, owner },
+            (error) => {
+              if (error) {
+                swal('Error', error.message, 'error');
+              } else {
+                this.setState({ error: '', redirectToReferer: true });
+              }
+            });
         }
       });
     }
@@ -58,21 +74,21 @@ class Signup extends React.Component {
                 <Form.Input
                   label="First name"
                   id="signup-form-first-name"
-                  name="firstname"
+                  name="firstName"
                   placeholder="First name"
                   onChange={this.handleChange}
                 />
                 <Form.Input
                   label="Last Name"
                   id="signup-form-last-name"
-                  name="lastname"
+                  name="lastName"
                   placeholder="Last name"
                   onChange={this.handleChange}
                 />
                 <Form.Input
                   label="Username"
                   id="signup-form-username"
-                  name="username"
+                  name="owner"
                   placeholder="Enter username"
                   onChange={this.handleChange}
                 />
