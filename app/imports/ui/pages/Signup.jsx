@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link, Redirect } from 'react-router-dom';
+import swal from 'sweetalert';
 import { Container, Form, Grid, Header, Message, Segment } from 'semantic-ui-react';
 import { Accounts } from 'meteor/accounts-base';
 
@@ -11,7 +12,7 @@ class Signup extends React.Component {
   /* Initialize state fields. */
   constructor(props) {
     super(props);
-    this.state = { email: '', password: '', error: '', redirectToReferer: false };
+    this.state = { email: '', password: '', firstname: '', lastname: '', username: '', phone: '', error: '', redirectToReferer: false };
   }
 
   /* Update the form controls each time the user interacts with them. */
@@ -21,22 +22,29 @@ class Signup extends React.Component {
 
   /* Handle Signup submission. Create user account and a profile entry, then redirect to the home page. */
   submit = () => {
-    const { email, password } = this.state;
-    Accounts.createUser({ email, username: email, password }, (err) => {
-      if (err) {
-        this.setState({ error: err.reason });
-      } else {
-        this.setState({ error: '', redirectToReferer: true });
-      }
-    });
+    const { firstname, lastname, username, phone, email, password } = this.state;
+    if (!(password.includes('!') || password.includes('#') || password.includes('*') || password.includes('$'))) {
+      swal('Your password is missing a special character', 'Please try again.');
+    } else if (!(password.includes(1) || password.includes(2) || password.includes(3) || password.includes(4) || password.includes(5) ||
+      password.includes(6) || password.includes(7) || password.includes(8) || password.includes(9))) {
+      swal('Your password is missing a number', 'Please try again.');
+    } else {
+      Accounts.createUser({ username, email, password, profile: { firstName: firstname, lastName: lastname, phone: phone, auth: false } }, (err) => {
+        if (err) {
+          this.setState({ error: err.reason });
+        } else {
+          this.setState({ error: '', redirectToReferer: true });
+        }
+      });
+    }
   }
 
   /* Display the signup form. Redirect to add page after successful registration and login. */
   render() {
-    const { from } = this.props.location.state || { from: { pathname: '/add' } };
+    const { from } = this.props.location.state || { from: { pathname: '/user-dashboard' } };
     // if correct authentication, redirect to from: page instead of signup screen
     if (this.state.redirectToReferer) {
-      return <Redirect to={from}/>;
+      return <Redirect to={from} />;
     }
     return (
       <Container id="signup-page">
@@ -47,6 +55,36 @@ class Signup extends React.Component {
             </Header>
             <Form onSubmit={this.submit}>
               <Segment stacked>
+                <Form.Input
+                  label="First name"
+                  id="signup-form-first-name"
+                  name="firstname"
+                  placeholder="First name"
+                  onChange={this.handleChange}
+                />
+                <Form.Input
+                  label="Last Name"
+                  id="signup-form-last-name"
+                  name="lastname"
+                  placeholder="Last name"
+                  onChange={this.handleChange}
+                />
+                <Form.Input
+                  label="Username"
+                  id="signup-form-username"
+                  name="username"
+                  placeholder="Enter username"
+                  onChange={this.handleChange}
+                />
+                <Form.Input
+                  label="Phone Number"
+                  id="signup-form-phone"
+                  icon="phone"
+                  iconPosition="left"
+                  name="phone"
+                  placeholder="Phone number"
+                  onChange={this.handleChange}
+                />
                 <Form.Input
                   label="Email"
                   id="signup-form-email"
@@ -67,7 +105,7 @@ class Signup extends React.Component {
                   type="password"
                   onChange={this.handleChange}
                 />
-                <Form.Button id="signup-form-submit" content="Submit"/>
+                <Form.Button id="signup-form-submit" content="Submit" />
               </Segment>
             </Form>
             <Message>
