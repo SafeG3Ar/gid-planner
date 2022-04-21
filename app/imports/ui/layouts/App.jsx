@@ -8,7 +8,7 @@ import NavBar from '../components/NavBar';
 import Footer from '../components/Footer';
 import Landing from '../pages/Landing';
 import ListStuff from '../pages/ListStuff';
-import ListStuffAdmin from '../pages/ListStuffAdmin';
+// import ListStuffAdmin from '../pages/ListStuffAdmin';
 import AddStuff from '../pages/AddStuff';
 import AddTaskPage from '../pages/AddTaskPage';
 import EditStuff from '../pages/EditStuff';
@@ -23,6 +23,7 @@ import EditPhone from '../components/EditPhone';
 import UserDashboard from '../pages/UserDashboard';
 import UserCalendar from '../components/UserCalendar';
 import UserAgenda from '../components/UserAgenda';
+import ListUserAdmin from '../pages/ListUserAdmin';
 // import UserTimeout from '../components/UserTimeout';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
@@ -48,7 +49,7 @@ class App extends React.Component {
             <ProtectedRoute path="/user-agenda" component={UserAgenda}/>
             <ProtectedRoute path="/user-calendar" component={UserCalendar}/>
             {/* <ProtectedRoute path="/user-timeout" component={UserTimeout}/> */}
-            <AdminProtectedRoute path="/admin" component={ListStuffAdmin}/>
+            <AdminProtectedRoute path="/admin" component={ListUserAdmin}/>
             <Route component={NotFound}/>
           </Switch>
           <Footer/>
