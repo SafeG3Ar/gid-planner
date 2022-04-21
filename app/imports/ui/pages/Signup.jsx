@@ -22,7 +22,7 @@ class Signup extends React.Component {
   }
 
   isUpper(str) {
-    return !/[a-z]/.test(str) && /[A-Z]/.test(str);
+    return /[a-z]/.test(str) && /[A-Z]/.test(str);
   }
 
   /* Handle Signup submission. Create user account and a profile entry, then redirect to the home page. */
