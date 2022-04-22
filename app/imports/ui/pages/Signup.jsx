@@ -21,7 +21,10 @@ class Signup extends React.Component {
     this.setState({ [name]: value });
   }
 
-  isUpper(str) {
+  // Idea sourced from https://www.codegrepper.com/code-examples/javascript/javascript+check+if+string+contains+capital+letter
+  // function that checks the string parameter to see if it has both uppercase and lowercase letters.
+  // Returns true if yes, and false if no.
+  hasCapitalLetter(str) {
     return /[a-z]/.test(str) && /[A-Z]/.test(str);
   }
 
@@ -34,7 +37,7 @@ class Signup extends React.Component {
     } else if (!(password.includes(1) || password.includes(2) || password.includes(3) || password.includes(4) || password.includes(5) ||
       password.includes(6) || password.includes(7) || password.includes(8) || password.includes(9))) {
       swal('Your password is missing a number', 'Please try again.');
-    } else if (!this.isUpper(password)) {
+    } else if (!this.hasCapitalLetter(password)) {
       swal('Your password needs a capital letter', 'Please try again.');
     } else {
       // Need to insert info into new profile and create a user account.

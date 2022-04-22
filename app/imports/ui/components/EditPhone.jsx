@@ -13,7 +13,7 @@ import { Profiles } from '../../api/profile/ProfileCollection';
 
 const bridge = new SimpleSchema2Bridge(Profiles.schema);
 
-/** Renders a single row in the List Stuff table. See pages/ListStuff.jsx. */
+/** Loads a page that allows user to edit their phone information */
 class EditPhone extends React.Component {
 
   // On successful submit, insert the data.
@@ -77,7 +77,7 @@ EditPhone.propTypes = {
 export default withTracker(({ match }) => {
   // Get the documentID from the URL field. See imports/ui/layouts/App.jsx for the route containing :_id.
   const documentId = match.params._id;
-  // Get access to Stuff documents.
+  // Get access to Profiles documents.
   const subscription = Meteor.subscribe(Profiles.userPublicationName);
   // Determine if the subscription is ready
   const ready = subscription.ready();

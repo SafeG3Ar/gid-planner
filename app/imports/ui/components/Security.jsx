@@ -79,7 +79,6 @@ class Security extends React.Component {
 
   // handle change in input from user.
   handleChange = (e, { name, value }) => {
-    // console.log(name, value);
     this.setState({ [name]: value });
   }
 
@@ -93,26 +92,6 @@ class Security extends React.Component {
     if (this.state.refresh) {
       window.location.reload(false);
     }
-    // console.log(this.user);
-
-    // Check if user already has 2FA set up (will need to work on later).
-    /*
-    const checkStatus = () => {
-      Accounts.has2faEnabled(Meteor.user().username, (err, isEnabled) => {
-        if (err) {
-          console.error('Error verifying if user has 2fa enabled', err);
-          this.setState({ check: false });
-          return;
-        }
-        console.log(isEnabled);
-        if (isEnabled) {
-          this.setState({ check: isEnabled });
-          return;
-        }
-        this.setState({ check: false });
-      });
-    };
-    */
 
     // Submit method that will lead to another page that will allow two-factor authentication
     return (
