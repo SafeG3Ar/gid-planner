@@ -70,9 +70,11 @@ Glen:
 - Implemented Two-Factor Authentication
 - Implemented functionality of Settings/Edit Profile page
 - Style Settings page and Login pages for two-factor authentication 
-- Ran some tests with Iroh.js dynamic analysis
+- Ran tests with Iroh.js dynamic analysis
 - Implement testing to try and hack our application
 - Implement the use of John the Ripper password cracker
+- Implement a password checker for new user sign up
+- Implemented the ability for admin users to view all users in the application
 
 Angela:
 - Creating Collections
@@ -81,7 +83,7 @@ Angela:
 - Creating List Component that can be linked to Tasks
 - Check-off and delete functionality for List component items
 
-### Current Duties
+### Last Part of Project
 
 Anna:
 - Styling 
@@ -98,8 +100,8 @@ Alyssandra:
 
 Glen:
 - Continue working on implementing Password Check when user signs up.
-- Assist with implementing Calendar and Lists if needed
 - Continue to run Iroh dynamic analysis tests
+- Implement ability for admin users to view all users on application. 
 
 Angela:
 - Managing Collections
@@ -121,14 +123,6 @@ Alyssandra:
 - Assist with implementing dashboard functionality with Anna
 - Manage Collections
 - More Default Data: Tasks, User Profiles, etc.
-
-Glen:
-- Assist with implementing Calender API and lists if needed
-- Assist with implementing Task Form if needed
-- Managing collections 
-- Assisting with functionality if needed
-- Continue to implement Iroh dynamic testing
-- Make sure Admin is able to view all users in the application. 
 
 Angela:
 - Make UI adjustments to forms/components
