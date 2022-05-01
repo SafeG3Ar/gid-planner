@@ -1,17 +1,11 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
 import { Divider, Segment, Loader, Button } from 'semantic-ui-react';
-// import { _ } from 'meteor/underscore';
 import { Container } from '@mui/material';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-// import NameModal from '../components/NameModal';
-// import { withRouter } from 'react-router-dom';
 import { Profiles } from '../../api/profile/ProfileCollection';
-// import NameModal from '../components/NameModal';
-
-// const userProfile = Profile.findOne({});
 
 /** Renders a segment for the personal information settings See pages/EditProfile.jsx. */
 class PersonalInfo extends React.Component {
