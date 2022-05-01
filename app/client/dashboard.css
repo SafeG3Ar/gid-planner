@@ -90,8 +90,18 @@
     padding-right: 60px;
 }
 
-#add-list-item .button:hover {
+#add-list-item .button {
     color: #3f51b5;
+}
+
+#add-list-item .button.save-button:hover {
+    background-color: #3f51b5;
+    color: white;
+}
+
+#add-task .button:hover {
+    background-color: #3f51b5;
+    color: white;
 }
 
 #add-list-item .list-button {

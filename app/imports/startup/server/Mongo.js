@@ -14,10 +14,11 @@ function addData(data) {
 }
 
 const sampleTasks = JSON.parse(Assets.getText('sample_task.json'));
+const sampleLists = JSON.parse(Assets.getText('sample_list.json'));
 
 function addLists(data) {
-  console.log(`  Adding: (${data.owner}) list`);
-  Lists.collection.insert({ name: data.name, owner: data.owner });
+  // console.log(`  Adding: (${data.owner}) list`);
+  Lists.collection.insert(data);
 }
 
 function addProfiles(data) {
@@ -45,8 +46,8 @@ if (Stuffs.collection.find().count() === 0) {
 
 if (Lists.collection.find().count() === 0) {
   if (Meteor.settings.defaultLists) {
-    console.log('Creating default lists.');
-    Meteor.settings.defaultLists.map(data => addLists(data));
+    console.log('Creating default lists from private/sample_list.json.');
+    sampleLists.map(data => addLists(data));
   }
 }
 

@@ -4,16 +4,18 @@ import PropTypes from 'prop-types';
 import moment from 'moment';
 import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
-import AddTask from './AddTask';
 import { Tasks } from '../../api/task/TaskCollection';
+import { Lists } from '../../api/list/ListCollection';
+import { Items } from '../../api/item/ItemCollection';
 import TaskListItem from './TaskListItem';
+import AddListItem from './list-form/AddListItem';
 
 const today = moment();
 const tomorrow = today.clone().add(1, 'days');
 const todayDate = today.format('YYYY-MM-DD');
 const tomDate = tomorrow.format('YYYY-MM-DD');
 
-const UserAgenda = ({ ready, tasks }) => {
+const UserLists= ({ ready, tasks }) => {
   if (ready) {
     const [modalOpen, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
@@ -41,8 +43,6 @@ const UserAgenda = ({ ready, tasks }) => {
 
     return (
       <Segment id="user-agenda" raised>
-        {/* This is the TODAY List */}
-        {/* This is the TOMORROW List */}
         <Modal
           closeIcon
           size='small'
@@ -51,30 +51,20 @@ const UserAgenda = ({ ready, tasks }) => {
           onOpen={handleOpen}
           trigger={
             <Button circular icon attached="top" inverted onClick={handleOpen}>
-              <Icon name='add circle' /> Add Task
+              <Icon name='add circle' /> Add List
             </Button>
           }
         >
           <Modal.Content>
-            <AddTask />
+            <AddListItem />
           </Modal.Content>
         </Modal>
         <Header as='h2' attached='top'>
-      Today
-          <Header.Subheader>{today.format('MMMM DD, YYYY')}</Header.Subheader>
+      Lists
         </Header>
         {/* Map List for Today */}
         <List celled verticalAlign='middle'>
           {todayTasks.map((task) => <TaskListItem key={task._id} task={task} />)}
-        </List>
-
-        {/* This is the TOMORROW List */}
-        <Header className='agenda-title' as='h2' attached='top'>
-      Tomorrow
-          <Header.Subheader>{tomorrow.format('MMMM DD, YYYY')}</Header.Subheader>
-        </Header>
-        <List divided verticalAlign='middle'>
-          {tomorrowTasks.map((task) => <TaskListItem key={task._id} task={task} />)}
         </List>
       </Segment>
     );
@@ -83,22 +73,30 @@ const UserAgenda = ({ ready, tasks }) => {
 };
 
 // Require a document to be passed to this component.
-UserAgenda.propTypes = {
+UserLists.propTypes = {
   tasks: PropTypes.array.isRequired,
+  lists: PropTypes.array,
+  items: PropTypes.array,
   ready: PropTypes.bool.isRequired,
 };
 
 // Wrap this component in withRouter since we use the <Link> React Router element.
 export default withTracker(() => {
   // Get access to Stuff documents.
-  const subscription = Meteor.subscribe(Tasks.userPublicationName);
-
+  const sub1 = Meteor.subscribe(Tasks.userPublicationName);
+  const sub2 = Meteor.subscribe(Lists.userPublicationName);
+  const sub3 = Meteor.subscribe(Items.userPublicationName);
   // Determine if the subscription is ready
-  const ready = subscription.ready();
+  const ready = sub1.ready() && sub2.ready() && sub3.ready();
   // Get the document
   const tasks = Tasks.collection.find({}).fetch();
+  const lists = Lists.collection.find({}).fetch();
+  const items = Items.collection.find({}).fetch();
+
   return {
     tasks,
+    lists,
+    items,
     ready,
   };
-})(UserAgenda);
+})(UserLists);

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Divider, Grid, Header, Icon } from 'semantic-ui-react';
 import UserAgenda from '../components/UserAgenda';
+import UserLists from '../components/UserLists';
 import UserCalendar from '../components/UserCalendar';
 
 /** A simple component to render the components of the user dashboard. */
@@ -17,9 +18,10 @@ const UserDashboard = () => (
       </Header>
     </Grid.Row>
     <Divider/>
-    <Grid.Row>
+    <Grid.Row stretched>
       <Grid.Column>
         <UserAgenda/>
+        <UserLists/>
       </Grid.Column>
       <Grid.Column>
         <UserCalendar/>

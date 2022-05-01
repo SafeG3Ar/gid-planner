@@ -5,7 +5,6 @@ import { Tasks } from '../../api/task/TaskCollection';
 import { Lists } from '../../api/list/ListCollection';
 import { Tags } from '../../api/tag/TagCollection';
 import { Profiles } from '../../api/profile/ProfileCollection';
-import { ListItems } from '../../api/list/ListItemCollection';
 import { Items } from '../../api/item/ItemCollection';
 
 /** Publish Tasks Collection you need. */
@@ -41,19 +40,6 @@ Meteor.publish(Items.userPublicationName, function () {
   if (this.userId) {
     const username = Meteor.users.findOne(this.userId).username;
     return Items.collection.find({ owner: username });
-    // const listIds = sortedItems.map(function(x) { return x.listId});
-    // return [
-    //   sortedItems,
-    //   Lists.collection.find({ _id: { $in: listIds }})
-    // ];
-  }
-  return this.ready();
-});
-
-Meteor.publish(ListItems.userPublicationName, function () {
-  if (this.userId) {
-    const username = Meteor.users.findOne(this.userId).username;
-    return ListItems.collection.find({ owner: username });
   }
   return this.ready();
 });
@@ -99,13 +85,6 @@ Meteor.publish(Lists.adminPublicationName, function () {
 Meteor.publish(Items.adminPublicationName, function () {
   if (this.userId && Roles.userIsInRole(this.userId, 'admin')) {
     return Items.collection.find();
-  }
-  return this.ready();
-});
-
-Meteor.publish(ListItems.adminPublicationName, function () {
-  if (this.userId && Roles.userIsInRole(this.userId, 'admin')) {
-    return ListItems.collection.find();
   }
   return this.ready();
 });

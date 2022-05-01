@@ -31,7 +31,7 @@ class TaskCollection {
 }
 
 /**
- * The singleton instance of the StuffsCollection.
+ * The singleton instance of the TaskCollection.
  * @type {TaskCollection}
  */
 export const Tasks = new TaskCollection();
