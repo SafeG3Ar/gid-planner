@@ -32,11 +32,14 @@ class Signup extends React.Component {
   submit = () => {
     const { firstName, lastName, owner, phone, email, password } = this.state;
     const auth = false;
-    if (!(password.includes('!') || password.includes('#') || password.includes('*') || password.includes('$'))) {
+    if (!(password.includes('!') || password.includes('#') || password.includes('*') || password.includes('$') || password.includes('%') || password.includes('@') || password.includes('^')
+    || password.includes('(') || password.includes(')') || password.includes('&'))) {
       swal('Your password is missing a special character', 'Please try again.');
     } else if (!(password.includes(1) || password.includes(2) || password.includes(3) || password.includes(4) || password.includes(5) ||
       password.includes(6) || password.includes(7) || password.includes(8) || password.includes(9))) {
       swal('Your password is missing a number', 'Please try again.');
+    } else if (password.length < 9) {
+      swal('Your password is too short.', 'Please create a password with 8 characters or more.');
     } else if (!this.hasCapitalLetter(password)) {
       swal('Your password needs a capital letter', 'Please try again.');
     } else {
