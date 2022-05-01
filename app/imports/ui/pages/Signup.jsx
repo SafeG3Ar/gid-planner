@@ -60,11 +60,34 @@ class Signup extends React.Component {
 
   /* Display the signup form. Redirect to add page after successful registration and login. */
   render() {
+    // Iroh Dynamic Analysis testing to check if function to check capitalization in password is functioning correctly.
+    const code = 'let secure = this.hasCapitalLetter("abc")';
+    const code2 = 'let secure = this.hasCapitalLetter("ABC")';
+    const code3 = 'let secure = this.hasCapitalLetter("AbC")';
+    let stage = new Iroh.Stage(code);
+    stage.addListener(Iroh.VAR).on('after', (e) => {
+      console.log('is password abc', e.name, '=>', e.value);
+    });
+    eval(stage.script);
+
+    stage = new Iroh.Stage(code2);
+    stage.addListener(Iroh.VAR).on('after', (e) => {
+      console.log('is password ABC', e.name, '=>', e.value);
+    });
+    eval(stage.script);
+
+    stage = new Iroh.Stage(code3);
+    stage.addListener(Iroh.VAR).on('after', (e) => {
+      console.log('is password AbC', e.name, '=>', e.value);
+    });
+    eval(stage.script);
+
     const { from } = this.props.location.state || { from: { pathname: '/user-dashboard' } };
     // if correct authentication, redirect to from: page instead of signup screen
     if (this.state.redirectToReferer) {
       return <Redirect to={from} />;
     }
+
     return (
       <Container id="signup-page">
         <Grid textAlign="center" verticalAlign="middle" centered columns={2}>
