@@ -162,7 +162,7 @@ class AddListItem extends React.Component {
 }
 
 AddListItem.propTypes = {
-  handleClose: PropTypes.func.isRequired,
+  handleClose: PropTypes.func,
   ready: PropTypes.bool.isRequired,
 };
 
@@ -174,5 +174,3 @@ export default withTracker(() => {
     ready: sub1.ready() && sub2.ready(),
   };
 })(AddListItem);
-
-// export default withRouter(AddListItemContainer);

@@ -144,11 +144,10 @@ class AddTask extends React.Component {
 
           />
           <div>
-            <Button id='create-list' onClick={this.handleOpen}>Create a list</Button>
             <Modal
               size='small'
-              open={this.state.open}
               onClose={this.handleClose}
+              trigger={ <Button id='create-list' onClick={this.handleOpen}>Create a list</Button>}
               closeIcon
             >
               <Modal.Content>
