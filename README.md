@@ -35,7 +35,7 @@ meteor update --release 2.7-rc.4
 npm install @mui/material @emotion/react @emotion/styled @mui/lab
 
 ## Running the Application
-Once the libraries are installed, you can run the application by invoking the "start" script in the ![package.json](https://github.com/athleticheck/athleticheck/blob/master/app/package.json) file:
+Once the libraries are installed, you can run the application by invoking the "start" script in the [package.json](https://github.com/athleticheck/athleticheck/blob/master/app/package.json) file:
 ```
 meteor npm run start
 ```
@@ -77,7 +77,7 @@ I20220501-11:23:16.214(-10)? Monti APM: completed instrumenting the app
 => App running at: http://localhost:3000/
 ```
 
-For more information please see ![User Guide](https://github.com/SafeG3Ar/gid-planner/wiki/User-Guide).
+For more information please see [User Guide](https://github.com/SafeG3Ar/gid-planner/wiki/User-Guide).
 
 ## Completed
 GID the Planner will run on the following tech stack:
