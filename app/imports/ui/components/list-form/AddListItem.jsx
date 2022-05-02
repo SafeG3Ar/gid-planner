@@ -4,7 +4,7 @@ import { AutoForm, TextField } from 'uniforms-semantic';
 import swal from 'sweetalert';
 import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
-// import { withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 // import { _ } from 'meteor/underscore';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
@@ -54,29 +54,29 @@ class AddListItem extends React.Component {
         name,
         owner: owner,
       },
-      (error, result) => {
-        if (error) {
-          swal('Error', error.message, 'error');
-        } else {
-          this.setState({ listId: result });
-          // this.setState({ show: true, });
-          console.log('result', result);
-        }
-      });
+        (error, result) => {
+          if (error) {
+            swal('Error', error.message, 'error');
+          } else {
+            this.setState({ listId: result });
+            // this.setState({ show: true, });
+            console.log('result', result);
+          }
+        });
     } else {
       Meteor.call(updateListMethod, {
         _id: listId,
         name,
         owner: owner,
       },
-      (error, result) => {
-        if (error) {
-          swal('Error', error.message, 'error');
-        } else {
-          // this.setState({ show: true, });
-          console.log(result);
-        }
-      });
+        (error, result) => {
+          if (error) {
+            swal('Error', error.message, 'error');
+          } else {
+            // this.setState({ show: true, });
+            console.log(result);
+          }
+        });
     }
   }
 
@@ -93,13 +93,13 @@ class AddListItem extends React.Component {
       createdAt: createdAt,
       owner: owner,
     },
-    (error) => {
-      if (error) {
-        swal('Error', error.message, 'error');
-      } else {
-        formRef.reset();
-      }
-    });
+      (error) => {
+        if (error) {
+          swal('Error', error.message, 'error');
+        } else {
+          formRef.reset();
+        }
+      });
   }
 
   render = () => {
@@ -162,11 +162,11 @@ class AddListItem extends React.Component {
 }
 
 AddListItem.propTypes = {
-  handleClose: PropTypes.func,
+  handleClose: PropTypes.func.isRequired,
   ready: PropTypes.bool.isRequired,
 };
 
-export default withTracker(() => {
+const AddListItemContainer = withTracker(() => {
   const sub1 = Meteor.subscribe(Items.userPublicationName);
   const sub2 = Meteor.subscribe(Lists.userPublicationName);
   return {
@@ -174,3 +174,5 @@ export default withTracker(() => {
     ready: sub1.ready() && sub2.ready(),
   };
 })(AddListItem);
+
+export default withRouter(AddListItemContainer);

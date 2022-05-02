@@ -18,7 +18,7 @@ const UserDashboard = () => (
       </Header>
     </Grid.Row>
     <Divider/>
-    <Grid.Row stretched>
+    <Grid.Row>
       <Grid.Column>
         <UserAgenda/>
         <UserLists/>

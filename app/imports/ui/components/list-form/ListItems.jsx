@@ -2,7 +2,7 @@ import React from 'react';
 import { Meteor } from 'meteor/meteor';
 import { Loader, Header, List } from 'semantic-ui-react';
 import { withTracker } from 'meteor/react-meteor-data';
-import { withRouter } from 'react-router-dom';
+// import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { _ } from 'meteor/underscore';
 import { Items } from '../../../api/item/ItemCollection';
@@ -70,7 +70,7 @@ ListItems.propTypes = {
 };
 
 /** withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker */
-const ListItemsContainer = withTracker(() => {
+export default withTracker(() => {
   // Get access to Items documents.
   const sub1 = Meteor.subscribe(Items.userPublicationName);
   const sub2 = Meteor.subscribe(Lists.userPublicationName);
@@ -83,4 +83,4 @@ const ListItemsContainer = withTracker(() => {
   };
 })(ListItems);
 
-export default withRouter(ListItemsContainer);
+// export default withRouter(ListItemsContainer);

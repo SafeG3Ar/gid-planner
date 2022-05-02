@@ -1,10 +1,9 @@
 import React from 'react';
-import { Container, Header, Button, Modal } from 'semantic-ui-react';
+import { Container, Header, Button, Modal, Loader } from 'semantic-ui-react';
 import { AutoForm, ErrorsField, SubmitField, TextField, DateField } from 'uniforms-semantic';
 import swal from 'sweetalert';
 import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
-import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 // import { _ } from 'meteor/underscore';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
@@ -106,8 +105,11 @@ class AddTask extends React.Component {
       });
   }
 
-  /** Render the form. Use Uniforms: https://github.com/vazco/uniforms */
   render = () => {
+    return (this.props.ready) ? this.renderPage() : <Loader active>Getting data</Loader>;
+  }
+
+  renderPage = () => {
     let fRef = null;
 
     const listOptions = this.props.userLists.map((list) => ({
@@ -146,6 +148,7 @@ class AddTask extends React.Component {
           <div>
             <Modal
               size='small'
+              open={this.state.open}
               onClose={this.handleClose}
               trigger={ <Button id='create-list' onClick={this.handleOpen}>Create a list</Button>}
               closeIcon
@@ -180,7 +183,7 @@ AddTask.propTypes = {
   userTags: PropTypes.array,
 };
 
-const AddTaskContainer = withTracker(() => {
+export default withTracker(() => {
   const sub1 = Meteor.subscribe(Tasks.userPublicationName);
   const sub2 = Meteor.subscribe(Lists.userPublicationName);
   const sub3 = Meteor.subscribe(Items.userPublicationName);
@@ -192,5 +195,3 @@ const AddTaskContainer = withTracker(() => {
     ready: sub1.ready() && sub2.ready() && sub3.ready() && sub4.ready(),
   };
 })(AddTask);
-
-export default withRouter(AddTaskContainer);

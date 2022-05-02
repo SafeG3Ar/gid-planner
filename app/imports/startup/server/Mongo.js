@@ -4,6 +4,7 @@ import { Profiles } from '../../api/profile/ProfileCollection.js';
 import { Tags } from '../../api/tag/TagCollection.js';
 import { Lists } from '../../api/list/ListCollection.js';
 import { Tasks } from '../../api/task/TaskCollection.js';
+import { Items } from '../../api/item/ItemCollection.js';
 
 /* eslint-disable no-console */
 
@@ -18,7 +19,7 @@ const sampleLists = JSON.parse(Assets.getText('sample_list.json'));
 
 function addLists(data) {
   // console.log(`  Adding: (${data.owner}) list`);
-  Lists.collection.insert(data);
+  Lists.collection.insert( { name: data.name, owner: data.owner });
 }
 
 function addProfiles(data) {
@@ -29,6 +30,11 @@ function addProfiles(data) {
 function addTags(data) {
   console.log(`  Adding: (${data.tagName}) tag`);
   Tags.collection.insert(data);
+}
+
+function addItems(data) {
+  console.log(`  Adding: (${data.item}) item`);
+  Items.collection.insert(data);
 }
 
 function addTasks(data) {
@@ -45,11 +51,11 @@ if (Stuffs.collection.find().count() === 0) {
 }
 
 if (Lists.collection.find().count() === 0) {
-  if (Meteor.settings.defaultLists) {
+  // if (Meteor.settings.defaultLists) {
     console.log('Creating default lists from private/sample_list.json.');
     sampleLists.map(data => addLists(data));
   }
-}
+// }
 
 if (Profiles.collection.find().count() === 0) {
   if (Meteor.settings.defaultProfiles) {
@@ -62,6 +68,13 @@ if (Tags.collection.find().count() === 0) {
   if (Meteor.settings.defaultTags) {
     console.log('Creating default tags.');
     Meteor.settings.defaultTags.map(data => addTags(data));
+  }
+}
+
+if (Items.collection.find().count() === 0) {
+  if (Meteor.settings.defaultItems) {
+    console.log('Creating default items.');
+    Meteor.settings.defaultItems.map(data => addItems(data));
   }
 }
 

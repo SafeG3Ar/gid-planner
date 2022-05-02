@@ -6,6 +6,8 @@ import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
 import AddTask from './AddTask';
 import { Tasks } from '../../api/task/TaskCollection';
+import { Items } from '../../api/item/ItemCollection';
+import { Lists } from '../../api/list/ListCollection';
 import TaskListItem from './TaskListItem';
 
 const today = moment();
@@ -89,10 +91,11 @@ UserAgenda.propTypes = {
 };
 
 // Wrap this component in withRouter since we use the <Link> React Router element.
-export default withTracker(() => {
+// export default withTracker(() => {
+ export default withTracker(() => {
+
   // Get access to Stuff documents.
   const subscription = Meteor.subscribe(Tasks.userPublicationName);
-
   // Determine if the subscription is ready
   const ready = subscription.ready();
   // Get the document

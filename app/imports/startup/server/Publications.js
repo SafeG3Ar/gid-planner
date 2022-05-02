@@ -8,7 +8,6 @@ import { Profiles } from '../../api/profile/ProfileCollection';
 import { Items } from '../../api/item/ItemCollection';
 
 /** Publish Tasks Collection you need. */
-// Tasks.publish();
 
 // User-level publication.
 // If logged in, then publish documents owned by this user. Otherwise publish nothing.

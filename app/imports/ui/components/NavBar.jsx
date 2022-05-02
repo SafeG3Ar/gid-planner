@@ -57,6 +57,7 @@ class NavBar extends React.Component {
                     </Modal.Content>
                   </Modal>
                   <Modal
+                    // open={this.state.open}
                     onClick={e => e.stopPropagation()}
                     trigger={
                       <Dropdown.Item icon={'tasks'} text='Add List' /> }

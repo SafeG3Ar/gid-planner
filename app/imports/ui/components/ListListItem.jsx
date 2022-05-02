@@ -5,7 +5,7 @@ import { withRouter } from 'react-router-dom';
 import moment from 'moment';
 import { Lists } from '../../api/list/ListCollection';
 import { Items } from '../../api/item/ItemCollection';
-
+import Item from './Item';
 
 /** Renders a single row in the List Stuff table. See pages/ListStuff.jsx. */
 class ListListItem extends React.Component {
@@ -21,22 +21,19 @@ class ListListItem extends React.Component {
     return (
 
       <List.Item>
-        <List.Icon name='tasks' />
+        <Icon name='tasks' />
         <List.Content>
-          <List.Header as='a'>{this.props.task.task}</List.Header>
+          <List.Header as='a'>{this.props.list.name}</List.Header>
           <List horizontal>
             <List.Item>
-              <Label as='a' size='mini'>
-                {this.props.task.tags}<Label.Detail>{moment(this.props.task.dueDate).format('DD MMMM')}</Label.Detail>
-              </Label>
-            </List.Item>
-            <List.Item>
-              <Label as='a' color='black' size='mini'>{this.props.task.listName}</Label>
+              <Label.Group as='a' size='mini'>
+                {this.props.items.map((item, index ) => <Item key={index} item={item}/>)}
+              </Label.Group>
             </List.Item>
           </List>
         </List.Content>
         <List.Icon>
-          <Button className = "deleteTask" icon onClick={() => this.removeItem(this.props.task._id)}>
+          <Button className="deleteTask" icon onClick={() => this.removeItem(this.props.list._id)}>
             <Icon name="trash" />
           </Button>
         </List.Icon>
@@ -47,19 +44,8 @@ class ListListItem extends React.Component {
 
 // Require a document to be passed to this component.
 ListListItem.propTypes = {
-  list: PropTypes.shape({
-    name: PropTypes.string,
-    items: PropTypes.array,
-    owner: PropTypes.string,
-  }).isRequired,
-  task: PropTypes.shape({
-    task: PropTypes.string,
-    dueDate: PropTypes.string,
-    listName: PropTypes.array,
-    tags: PropTypes.array,
-    owner: PropTypes.string,
-    _id: PropTypes.string,
-  }).isRequired,
+  list: PropTypes.object.isRequired,
+  items: PropTypes.array.isRequired,
 };
 
 // Wrap this component in withRouter since we use the <Link> React Router element.

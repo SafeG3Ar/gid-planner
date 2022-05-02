@@ -22,6 +22,7 @@ import EditPhone from '../components/EditPhone';
 // import VerifyCopy from '../components/VerifyCopy';
 import UserDashboard from '../pages/UserDashboard';
 import UserCalendar from '../components/UserCalendar';
+import AddListItem from '../components/list-form/AddListItem';
 import UserAgenda from '../components/UserAgenda';
 import ListUserAdmin from '../pages/ListUserAdmin';
 // import UserTimeout from '../components/UserTimeout';
@@ -48,6 +49,7 @@ class App extends React.Component {
             <ProtectedRoute path="/user-dashboard" component={UserDashboard}/>
             <ProtectedRoute path="/user-agenda" component={UserAgenda}/>
             <ProtectedRoute path="/user-calendar" component={UserCalendar}/>
+            <ProtectedRoute path="/add-list-item" component={AddListItem}/>
             {/* <ProtectedRoute path="/user-timeout" component={UserTimeout}/> */}
             <AdminProtectedRoute path="/admin" component={ListUserAdmin}/>
             <Route component={NotFound}/>
