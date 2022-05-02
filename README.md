@@ -112,9 +112,9 @@ The link to [Release Version v1.0.0 of GID the Planner](https://github.com/SafeG
 
 
 
-## Pending
-The main part of the app that needs to be finished is full implementation of the Calendar, the Task form, and full implementation of the user's lists.
-The following components and pages will be worked on through the next assignment:
+## GID the Planner: Components
+The main part of the app includes full implementation of the Calendar, the Task form, and full implementation of the user's lists.
+The following components and pages were worked on throughout the project assignment:
 - Complete functionality of all pages
 - Implement password check when user signs up
 - Additional pages/components we decide to create
@@ -125,7 +125,6 @@ The following components and pages will be worked on through the next assignment
 
 ## Roles and Responsibilities
 
-### Completed
 Completed assigned duties:
 
 Anna:
