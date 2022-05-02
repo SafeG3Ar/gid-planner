@@ -6,6 +6,7 @@ import { withRouter, NavLink } from 'react-router-dom';
 import { Menu, Dropdown, Header, Input, Icon, Modal } from 'semantic-ui-react';
 import { Roles } from 'meteor/alanning:roles';
 import AddTask from './AddTask';
+// import UserSideBar from './UserSideBar';
 
 /** The NavBar appears at the top of every page. Rendered by the App Layout component. */
 class NavBar extends React.Component {
@@ -13,7 +14,8 @@ class NavBar extends React.Component {
     const menuStyle = { marginBottom: '10px' };
 
     return (
-      <Menu id='navbar' style={menuStyle} attached="top" borderless inverted>
+
+      <Menu key='top-menu' id='navbar' style={menuStyle} attached="top" borderless inverted>
         <Menu.Item as={NavLink} activeClassName="" exact to="/">
           <Header inverted as='h1'>GID</Header>
         </Menu.Item>

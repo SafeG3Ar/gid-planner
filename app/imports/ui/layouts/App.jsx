@@ -24,6 +24,7 @@ import UserDashboard from '../pages/UserDashboard';
 import UserCalendar from '../components/UserCalendar';
 import UserAgenda from '../components/UserAgenda';
 import ListUserAdmin from '../pages/ListUserAdmin';
+import UserSideBar from '../components/UserSideBar';
 // import UserTimeout from '../components/UserTimeout';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
@@ -32,7 +33,9 @@ class App extends React.Component {
     return (
       <Router>
         <div>
-          <NavBar/>
+          <div className='navbar'>
+            <NavBar/>
+          </div>
           <Switch>
             <Route exact path="/" component={Landing}/>
             <Route path="/login" component={Login}/>
@@ -48,6 +51,7 @@ class App extends React.Component {
             <ProtectedRoute path="/user-dashboard" component={UserDashboard}/>
             <ProtectedRoute path="/user-agenda" component={UserAgenda}/>
             <ProtectedRoute path="/user-calendar" component={UserCalendar}/>
+            <ProtectedRoute path="/user-side-bar" component={UserSideBar}/>
             {/* <ProtectedRoute path="/user-timeout" component={UserTimeout}/> */}
             <AdminProtectedRoute path="/admin" component={ListUserAdmin}/>
             <Route component={NotFound}/>

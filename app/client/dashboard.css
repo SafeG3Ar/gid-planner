@@ -2,6 +2,11 @@
 #user-dashboard{
     padding: 2em 2em 2em 2em;
 }
+/* UserSideBar Styling*/
+#user-side-bar{
+    padding: 0;
+    height: 760;
+}
 
 /*UserCalendar Styling*/
 #user-calendar{
@@ -118,4 +123,5 @@
 .listitems-header {
     align-items: center;
 }
+
 
