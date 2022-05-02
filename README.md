@@ -105,10 +105,10 @@ From the last README.md update, we implemented the use of John the Ripper to ass
 
 ## Link
 
-The link to our current [Project Repository](https://github.com/SafeG3Ar/gid-planner).
-The link to our Final Project Documentation.
-The link to [GID the Planner Wiki Page](https://github.com/SafeG3Ar/gid-planner/wiki).
-The link to [Release Version v1.0.0 of GID the Planner](https://github.com/SafeG3Ar/gid-planner/releases/tag/v1.0.0).
+- The link to our current [Project Repository](https://github.com/SafeG3Ar/gid-planner).
+- The link to our Final Project Documentation.
+- The link to [GID the Planner Wiki Page](https://github.com/SafeG3Ar/gid-planner/wiki).
+- The link to [Release Version v1.0.0 of GID the Planner](https://github.com/SafeG3Ar/gid-planner/releases/tag/v1.0.0).
 
 
 
