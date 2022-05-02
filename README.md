@@ -28,7 +28,6 @@ From the last README.md update, we have created a "settings" page that enables u
 <br/>
 From the last README.md update, we implemented the use of John the Ripper to assist with cracking the passwords for our default users on the application. This will help give us a sense of how we can improve our application's security. We also made attempts to break into and crash our application by trying to access private URL's from a another logged-in user, as well testing meteor methods in the web applications console. These all  turned out to be unsuccessful thanks to the security of Meteor's packages. We have concluded from the test that we will indeed go forward with implementing the password check when a user creates an account to add a layer of security for application's users. Our team has also made the decision to stop all further implementation of MUI due to the time constraints of this project. We will move forward with out primary UI framework being Semantic UI React.
 
-
 ## Link
 
 The link to our current project repository is [here](https://github.com/SafeG3Ar/gid-planner).
@@ -50,18 +49,21 @@ The following components and pages will be worked on through the next assignment
 Completed assigned duties:
 
 Anna:
-- Styling 
-- Sign In and Sign Up pages
-- Dashboard components
+- Dashboard Components
+- Improved Navbar
+- Landing Page
 - Redirections of pages
+- Sign In and Sign Up pages
+- UI/UX Stylings
 
 Alyssandra:
 - Assisted with Creating Collections (Task, List, etc.)
-- Calendar Template Display
-- Dashboard Template
-- UserAgenda Component: Tomorrow/Today Agenda (Task List Functionality)
-- UserCalendar Component: Tomorrow/Today Agenda (Task List Functionality)
-- Updated Footer, Landing, and Signout pages
+- Created default user data for Task Collections 
+- Dashboard Components & Styling & Calendar Display
+- UserAgenda Components: Tomorrow/Today Agenda (Task List Functionality)
+- UserCalendar Components: Selected Date Agenda (Task List Functionality)
+- Assisted with Updating Footer, Landing, and Signout pages
+- Task List Items: Display Name, Tags, Lists, Note (PopUp), & Delete Component
 
 Glen:
 - Creating Collections
@@ -77,26 +79,24 @@ Glen:
 - Implemented the ability for admin users to view all users in the application
 
 Angela:
-- Creating Collections
-- Task Form template
+- Creating Collections (Task, List, etc.)
+- Task Form Template
 - Task Form Functionality
 - Creating List Component that can be linked to Tasks
-- Check-off and delete functionality for List component items
+- Check-off and Delete functionality for List component items
 
 ### Last Part of Project
 
 Anna:
-- Styling 
+- UI/UX Stylings
 - Continue to Implement Dashboard functionality with Alyssandra
 - Functionality of each page
 - Adding A Refresh Button
 - Implementing the Refresh Component
 
 Alyssandra:
-- Continue to Implement Dashboard functionality with Anna
-- Create more data for Task Collections
-- Create more data for List Collections
-- Functionality of each page
+- Manage Collections
+- Help Anna with UI/UX Stylings
 
 Glen:
 - Continue working on implementing Password Check when user signs up.
@@ -118,11 +118,6 @@ Anna:
 - Assist Glen with Backend Development
 - Implement the 'List' side navbar
 - Add categories 
-
-Alyssandra:
-- Assist with implementing dashboard functionality with Anna
-- Manage Collections
-- More Default Data: Tasks, User Profiles, etc.
 
 Angela:
 - Make UI adjustments to forms/components
