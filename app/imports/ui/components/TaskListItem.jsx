@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Icon, List, Label, Checkbox } from 'semantic-ui-react';
+import { Button, Checkbox, Icon, List, Label, Popup } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import moment from 'moment';
@@ -31,6 +31,13 @@ class TaskListItem extends React.Component {
             <List.Item>
               <Label as='a' color='black' size='mini'>{this.props.task.listName}</Label>
             </List.Item>
+            <List.Item>
+              <Popup
+                trigger={<Icon name='eye' />}
+                content={this.props.task.note}
+                inverted
+              /> Note
+            </List.Item>
           </List>
         </List.Content>
         <List.Icon>
@@ -48,6 +55,7 @@ TaskListItem.propTypes = {
   task: PropTypes.shape({
     task: PropTypes.string,
     dueDate: PropTypes.string,
+    note: PropTypes.string,
     listName: PropTypes.array,
     tags: PropTypes.array,
     owner: PropTypes.string,
