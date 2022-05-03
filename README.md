@@ -125,7 +125,7 @@ The following components and pages were worked on throughout the project assignm
 - Implement timeout when idle
 
 # Developer Notes 
-Developing GID the Planner was a different experience than other web applications we have developed through undergrad. Overall, the implementation of an online planner was not difficult. Creating this applications varies from other applications because of the Two Factor Authentication(2FA) security feature that Glen implemented. It has not been a requirement to implement extensive security features previous software engineering classes where we developed many applications. Glens implementation of the 2FA is an exemplary feature we have in our application.
+Developing GID the Planner was a different experience than other web applications we have developed through undergrad. Overall, the implementation of an online planner was not difficult. Creating this applications varies from other applications because of the Two Factor Authentication(2FA) security feature that Glen implemented. It has not been a requirement to implement extensive security features previous software engineering classes where we developed many applications. Glen's implementation of the 2FA is an exemplary feature we have in our application.
 The team started using Material User Interface for the UI design, but soon discovered how difficult it was to navigate. MUI had many deprecated packages that took the team a while to understand. We decided as a team to not use MUI and switch to Semantics UI.
 Overall, we had a good experience creating GID the Planner.
 
