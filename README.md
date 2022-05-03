@@ -32,8 +32,9 @@ meteor update --release 2.7-rc.4
 ```
 
 ### Material UI
+```
 npm install @mui/material @emotion/react @emotion/styled @mui/lab
-
+```
 ## Running the Application
 Once the libraries are installed, you can run the application by invoking the "start" script in the [package.json](https://github.com/athleticheck/athleticheck/blob/master/app/package.json) file:
 ```
