@@ -123,6 +123,9 @@ The following components and pages were worked on throughout the project assignm
 - Styling Task form
 - Implement timeout when idle
 
+# Developer Notes 
+Developing GID the Planner was a different experience than other web applications we have developed through undergrad.Overall, the implementation of an online planner was not difficult. Creating this applications varies from other applications because of the Two Factor Authentication(2FA) security feature that Glenn implemented.  
+
 ## Roles and Responsibilities
 
 Completed assigned duties:
