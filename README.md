@@ -161,8 +161,9 @@ Angela:
 - Creating Collections (Task, List, etc.)
 - Task Form Template
 - Task Form Functionality
-- Creating List Component that can be linked to Tasks
-- Check-off and Delete functionality for List component items
+- Creating List Component & List Form Functionality
+- Implemented the joining of Task and List Components
+- Implemented User Timeout for stale sessions
 
 ### Last Part of Project
 
